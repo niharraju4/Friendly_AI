@@ -19,6 +19,7 @@ bcrypt = Bcrypt(app)
 client = MongoClient('mongodb+srv://niharmuniraju4:wfhK2TVsJiOCMgcs@goku.jrdvw1f.mongodb.net/')
 db = client['GokuDB']
 users_collection = db['users']
+conversations_collection = db['conversations']
 app.secret_key = 'your_secret_key_here'
   # or ('localhost.pem', 'localhost-key.pem')
 @app.route('/signup', methods=['POST'])
@@ -43,32 +44,48 @@ def signup():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.before_request
+def verify_jwt():
+    print("Hi",request.endpoint)
+    if request.endpoint == 'signin':
+        return  # Skip JWT verification for login route
+
+    token = request.cookies.get('token')
+    if not token:
+        return "Missing token", 401
+
+    try:
+        data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+        
+    except jwt.ExpiredSignatureError:
+        return "Token has expired", 401
+    except jwt.InvalidTokenError:
+        return "Invalid token", 401
+
+
 @app.route('/chat', methods=['GET'])
 def chat():
     return render_template('reply.html')
 
 
-@app.route('/converse', methods=['POST'])
-def converse():
+@app.route('/converse1', methods=['POST'])
+def converse1():
         try:
-            print("hi")
-            response_text = get_gpt_response(request.args.get('user_message'))
-            print(response_text)
-            return jsonify({"message": response_text}), 200
-        # Get data from the incoming POST request
-            # data = request.get_json()
-            # print("hi")
-            # user_message =request.args.get('user_message')
+            token = request.cookies.get('token')
+            question = request.args.get('user_message')
+            response_text = get_gpt_response1(question)
+            data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+            email = data['user']
+            # Current date and time
+            updated_at = datetime.datetime.now()
 
-            # try:
-            #     print(f"You said: {user_message}")
-            #     response_text = get_gpt_response(user_message)
-            #     print("ai said",response_text)
-            #     return response_text
-            # except Exception as e:
-            #     app.logger.error("Failed to get response from GPT-3: %s", str(e))
-            #     abort(500, 'Failed to get response from GPT-3.')
-            # return "error 1"
+            record = {
+                'email':email,
+                'questions': question,
+                'updated_time': updated_at
+            }
+            conversations_collection.insert_one(record)
+            return jsonify({"message": response_text}), 200
 
         except Exception as e:
 
@@ -76,8 +93,71 @@ def converse():
             error_message = str(e)
             return "error 1"+error_message
 
+@app.route('/converse2', methods=['POST'])
+def converse2():
+        try:
+            token = request.cookies.get('token')
+            question = request.args.get('user_message')
+            response_text = get_gpt_response2(question)
+            data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+            email = data['user']
+            # Current date and time
+            updated_at = datetime.datetime.now()
 
-def get_gpt_response(prompt):
+            record = {
+                'email':email,
+                'questions': question,
+                'updated_time': updated_at
+            }
+            conversations_collection.insert_one(record)
+            return jsonify({"message": response_text}), 200
+
+        except Exception as e:
+
+            # Handle errors and return an error response
+            error_message = str(e)
+            return "error 1"+error_message
+
+@app.route('/converse3', methods=['POST'])
+def converse3():
+        try:
+            token = request.cookies.get('token')
+            question = request.args.get('user_message')
+            response_text = get_gpt_response2(question)
+            data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+            email = data['user']
+            # Current date and time
+            updated_at = datetime.datetime.now()
+
+            record = {
+                'email':email,
+                'questions': question,
+                'updated_time': updated_at
+            }
+            conversations_collection.insert_one(record)
+            return jsonify({"message": response_text}), 200
+
+        except Exception as e:
+
+            # Handle errors and return an error response
+            error_message = str(e)
+            return "error 1"+error_message
+        
+def get_gpt_response1(prompt):
+    openai.api_key = os.getenv("OPENAI_KEY")
+    prompt = f"Imagine you're an AI therapist named Goku, who loves to help people with counselling on feelings, thoughts, choices, emotions, facing fears and should make them feel good. Respond with humor to: '{prompt}'"
+    response = openai.Completion.create(engine="text-davinci-003", prompt=prompt, max_tokens=80)
+    # Let's add Maple's personal touch to every response
+    return response.choices[0].text.strip()
+        
+def get_gpt_response2(prompt):
+    openai.api_key = os.getenv("OPENAI_KEY")
+    prompt = f"Imagine you're an excited guinea pig named Maple, who loves to eat. Respond with humor to: '{prompt}'"
+    response = openai.Completion.create(engine="text-davinci-003", prompt=prompt, max_tokens=80)
+    # Let's add Maple's personal touch to every response
+    return response.choices[0].text.strip()
+        
+def get_gpt_response3(prompt):
     openai.api_key = os.getenv("OPENAI_KEY")
     prompt = f"Imagine you're an AI therapist named Goku, who loves to help people with counselling on feelings, thoughts, choices, emotions, facing fears and should make them feel good. Respond with humor to: '{prompt}'"
     response = openai.Completion.create(engine="text-davinci-003", prompt=prompt, max_tokens=80)
@@ -89,9 +169,16 @@ def signin():
     if request.method == 'POST':
         print(request.form.get('email') , request.form.get('password'))
         user = users_collection.find_one({'email': request.form.get('email')})
-        print(user)
+        
         if user and bcrypt.check_password_hash(user['password'], request.form.get('password')):
-            return redirect('/dashboard')
+            token = jwt.encode({
+            'user': user['email'],
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=20)
+        }, app.config['SECRET_KEY'])
+
+            resp = make_response(redirect('dashboard'))
+            resp.set_cookie('token', token)
+            return resp
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
 
@@ -99,7 +186,10 @@ def signin():
 
 @app.route('/dashboard')
 def dashboard():
-     return render_template('dashboard.html')
+
+    return render_template('dashboard.html')
+     
+     
 
 @app.route('/reply')
 def reply():

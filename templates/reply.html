@@ -13,10 +13,12 @@
 <p id="output"></p>
 
 <script>
+let timeout;  // Declare timeout variable
+
 document.addEventListener('DOMContentLoaded', function () {
     const output = document.getElementById('output');
     const startButton = document.getElementById("startButton");
-    // Check if the browser supports the Web Speech API
+    
     if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
         const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
         const synth = window.speechSynthesis;
@@ -26,36 +28,39 @@ document.addEventListener('DOMContentLoaded', function () {
         recognition.onstart = function () {
             output.textContent = 'Listening...';
         };
+
         recognition.onresult = async function (event) {
-  const transcript = event.results[event.results.length - 1][0].transcript;
-  output.textContent = 'Text: ' + transcript;
+            const transcript = event.results[event.results.length - 1][0].transcript;
+            output.textContent = 'Text: ' + transcript;
 
-  try {
-    const response = await fetch(`http://localhost:5000/converse?user_message=${encodeURIComponent(transcript)}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
+            try {
+                const response = await fetch(`http://localhost:5000/converse1?user_message=${encodeURIComponent(transcript)}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
 
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
 
-    const data = await response.json();
-    console.log(JSON.stringify(data["message"]));
-    const utterance = new SpeechSynthesisUtterance(JSON.stringify(data["message"]));  // Assuming the response has a property called 'response'
-    synth.speak(utterance);
-  } catch (error) {
-    console.log('There was a problem with the fetch operation:', error.message);
-  }
-};
+                const data = await response.json();
+
+                const utterance = new SpeechSynthesisUtterance(JSON.stringify(data["message"]));
+                synth.speak(utterance);
+                
+            } catch (error) {
+                console.log('There was a problem with the fetch operation:', error.message);
+            }
+        };
 
         recognition.onerror = function (event) {
             output.textContent = 'Error occurred: ' + event.error;
         };
 
         recognition.onend = function () {
+            recognition.start()
             output.textContent = 'Speech recognition stopped.';
         };
 
@@ -88,12 +93,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }); 
             videoElement.srcObject = null;
         }
-    });
+});
 </script>
-
 
   <canvas id="canvas"></canvas>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
   <script src="{{ url_for('static', filename='script.js') }}"></script>
-    </body>
+</body>
 </html>
