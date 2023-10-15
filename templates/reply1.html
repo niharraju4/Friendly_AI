@@ -10,6 +10,7 @@
 <video id="cameraFeed" autoplay></video>
 
 <button id="startButton">Start</button>
+<button id="stopButton">Stop</button>
 <p id="output"></p>
 
 <script>
@@ -18,18 +19,21 @@ let timeout;  // Declare timeout variable
 document.addEventListener('DOMContentLoaded', function () {
     const output = document.getElementById('output');
     const startButton = document.getElementById("startButton");
+    const stopButton = document.getElementById("stopButton");
     
     if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
         const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
         const synth = window.speechSynthesis;
 
-        recognition.continuous = true;
+        recognition.continuous = true;  // Keep it true for continuous listening
 
         recognition.onstart = function () {
             output.textContent = 'Listening...';
         };
 
         recognition.onresult = async function (event) {
+            recognition.stop();  // Stop recognition to process this phrase
+
             const transcript = event.results[event.results.length - 1][0].transcript;
             output.textContent = 'Text: ' + transcript;
 
@@ -49,7 +53,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 const utterance = new SpeechSynthesisUtterance(JSON.stringify(data["message"]));
                 synth.speak(utterance);
-                
+
+                // Wait for 1 minute before next interaction
+                setTimeout(() => {
+                    output.textContent = 'You can speak now.';
+                    recognition.start();  // Restart recognition
+                }, 60000);
+
             } catch (error) {
                 console.log('There was a problem with the fetch operation:', error.message);
             }
@@ -60,7 +70,6 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         recognition.onend = function () {
-            recognition.start()
             output.textContent = 'Speech recognition stopped.';
         };
 
@@ -70,7 +79,8 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         output.textContent = 'Speech recognition is not supported in this browser.';
     }
-});
+
+    // Original camera code
     let videoElement = document.getElementById("cameraFeed");
     let stream;
 
@@ -93,6 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }); 
             videoElement.srcObject = null;
         }
+    });
 });
 </script>
 

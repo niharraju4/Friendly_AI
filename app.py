@@ -7,6 +7,8 @@ import tempfile
 from pymongo import MongoClient
 from flask_bcrypt import Bcrypt
 import datetime
+from datetime import datetime, timedelta
+
 # Set your Azure Speech Service credentials
 speech_key = os.getenv("AZURE_SPEECH_KEY")
 service_region = os.getenv("AZURE_REGION")
@@ -145,21 +147,14 @@ def converse3():
         
 def get_gpt_response1(prompt):
     openai.api_key = os.getenv("OPENAI_KEY")
-    prompt = f"Imagine you're an AI therapist named Goku, who loves to help people with counselling on feelings, thoughts, choices, emotions, facing fears and should make them feel good. Respond with humor to: '{prompt}'"
-    response = openai.Completion.create(engine="text-davinci-003", prompt=prompt, max_tokens=80)
-    # Let's add Maple's personal touch to every response
-    return response.choices[0].text.strip()
-        
-def get_gpt_response2(prompt):
-    openai.api_key = os.getenv("OPENAI_KEY")
-    prompt = f"Imagine you're an excited guinea pig named Maple, who loves to eat. Respond with humor to: '{prompt}'"
+    prompt = f"Imagine you're an AI therapist, who loves to help people with counselling on thought Patterns, Emotional Regulation, Decision-Making, Mood Swings, Facing Fears, Relationships, Self-Esteem, Sleep Issues, Sexuality and Identity, Goal Setting, Academic Stress, Mindfulness, Career Choices, Eating Habits, Breakups, Digital Wellbeing, Imposter Syndrome, Pet Loss, Global Concerns, Communication Skills, Physical Health, Financial Stress, Parenting, Addictions, Grief, loss and you should make them feel good by the end of each converstation. Respond with humor to: '{prompt}'"
     response = openai.Completion.create(engine="text-davinci-003", prompt=prompt, max_tokens=80)
     # Let's add Maple's personal touch to every response
     return response.choices[0].text.strip()
         
 def get_gpt_response3(prompt):
     openai.api_key = os.getenv("OPENAI_KEY")
-    prompt = f"Imagine you're an AI therapist named Goku, who loves to help people with counselling on feelings, thoughts, choices, emotions, facing fears and should make them feel good. Respond with humor to: '{prompt}'"
+    prompt = f"Imagine you're an AI therapist, who loves to help people with counselling on thought Patterns, Emotional Regulation, Decision-Making, Mood Swings, Facing Fears, Relationships, Self-Esteem, Sleep Issues, Sexuality and Identity, Goal Setting, Academic Stress, Mindfulness, Career Choices, Eating Habits, Breakups, Digital Wellbeing, Imposter Syndrome, Pet Loss, Global Concerns, Communication Skills, Physical Health, Financial Stress, Parenting, Addictions, Grief, loss and you should make them feel good by the end of each converstation. Respond with humor to: '{prompt}'"
     response = openai.Completion.create(engine="text-davinci-003", prompt=prompt, max_tokens=80)
     # Let's add Maple's personal touch to every response
     return response.choices[0].text.strip()
@@ -191,10 +186,18 @@ def dashboard():
      
      
 
-@app.route('/reply')
-def reply():
-     return render_template('reply.html')
+@app.route('/reply1')
+def reply1():
+     return render_template('reply1.html')
 
+
+@app.route('/reply2')
+def reply2():
+     return render_template('reply2.html')
+
+@app.route('/reply3')
+def reply3():
+     return render_template('reply3.html')
 @app.route('/home')
 def home():
     return "Welcome to Home"

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice to Text</title>
+</head>
+<body>
+
+<video id="cameraFeed" autoplay></video>
+
+<button id="startButton">Start</button>
+<p id="output"></p>
+
+<script>
+let timeout;  // Declare timeout variable
+
+document.addEventListener('DOMContentLoaded', function () {
+    const output = document.getElementById('output');
+    const startButton = document.getElementById("startButton");
+    
+    if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        const synth = window.speechSynthesis;
+
+        recognition.continuous = true;
+
+        recognition.onstart = function () {
+            output.textContent = 'Listening...';
+        };
+
+        recognition.onresult = async function (event) {
+            const transcript = event.results[event.results.length - 1][0].transcript;
+            output.textContent = 'Text: ' + transcript;
+
+            try {
+                const response = await fetch(`http://localhost:5000/converse2?user_message=${encodeURIComponent(transcript)}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+
+                const utterance = new SpeechSynthesisUtterance(JSON.stringify(data["message"]));
+                synth.speak(utterance);
+                
+            } catch (error) {
+                console.log('There was a problem with the fetch operation:', error.message);
+            }
+        };
+
+        recognition.onerror = function (event) {
+            output.textContent = 'Error occurred: ' + event.error;
+        };
+
+        recognition.onend = function () {
+            recognition.start()
+            output.textContent = 'Speech recognition stopped.';
+        };
+
+        startButton.addEventListener("click", function() {
+            recognition.start();
+        });
+    } else {
+        output.textContent = 'Speech recognition is not supported in this browser.';
+    }
+});
+    let videoElement = document.getElementById("cameraFeed");
+    let stream;
+
+    startButton.addEventListener("click", function() {
+        navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function(mediaStream) {
+            videoElement.srcObject = mediaStream;
+            stream = mediaStream;
+        })
+        .catch(function(err) {
+            console.log("An error occurred: " + err);
+        });
+    });
+
+    stopButton.addEventListener("click", function() {
+        if(stream) {
+            let tracks = stream.getTracks();
+            tracks.forEach(function(track) {
+                track.stop();
+            }); 
+            videoElement.srcObject = null;
+        }
+});
+</script>
+
+  <canvas id="canvas"></canvas>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
