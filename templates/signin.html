@@ -120,7 +120,7 @@
                   <div class="text-gray-500 text-center mb-3 font-bold">
                     <small>Sign in with credentials</small>
                   </div>
-                  <form action="/login" method="POST">
+                  <form action="/signin" method="POST">
                     <div class="relative w-full mb-3">
                       <label
                         class="block uppercase text-gray-700 text-xs font-bold mb-2"
@@ -205,12 +205,6 @@
       </section>
     </main>
   
-  <canvas id="canvas"></canvas>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
-    
-  <canvas id="canvas"></canvas>
-  <script src="{{ url_for('static', filename='complex_script.js') }}"></script>
     </body>
   <script>
     function toggleNavbar(collapseID) {

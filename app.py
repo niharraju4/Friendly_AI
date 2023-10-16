@@ -7,7 +7,7 @@ import tempfile
 from pymongo import MongoClient
 from flask_bcrypt import Bcrypt
 import datetime
-from datetime import datetime, timedelta
+from datetime import datetime,timedelta
 
 # Set your Azure Speech Service credentials
 speech_key = os.getenv("AZURE_SPEECH_KEY")
@@ -58,7 +58,6 @@ def signup():
 
 @app.before_request
 def verify_jwt():
-    print("Hi",request.endpoint)
     if request.endpoint == 'signin':
         return  # Skip JWT verification for login route
 
@@ -70,7 +69,7 @@ def verify_jwt():
         data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
         
     except jwt.ExpiredSignatureError:
-        return "Token has expired", 401
+        return render_template('signin.html')
     except jwt.InvalidTokenError:
         return "Invalid token", 401
 
@@ -169,7 +168,7 @@ def get_gpt_response3(prompt):
     # Let's add Maple's personal touch to every response
     return response.choices[0].text.strip()
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/signin', methods=['GET', 'POST'])
 def signin():
     if request.method == 'POST':
         print(request.form.get('email') , request.form.get('password'))
@@ -178,7 +177,7 @@ def signin():
         if user and bcrypt.check_password_hash(user['password'], request.form.get('password')):
             token = jwt.encode({
             'user': user['email'],
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=20)
+            'exp': datetime.utcnow() + timedelta(minutes=20)
         }, app.config['SECRET_KEY'])
 
             resp = make_response(redirect('dashboard'))
@@ -187,7 +186,7 @@ def signin():
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
 
-    return render_template('login.html')
+    return render_template('signin.html')
 
 @app.route('/dashboard')
 def dashboard():
