@@ -24,14 +24,15 @@ users_collection = db['users']
 conversations_collection = db['conversations']
 app.secret_key = 'your_secret_key_here'
   # or ('localhost.pem', 'localhost-key.pem')
-@app.route('/signup', methods=['POST'])
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    try:
+    if request.method == 'POST':
         # Get user details from request data
         data = request.json
-        username = data["username"]
+        name = data["username"]
         password = data["password"]
         email = data["email"]
+        print(email)
         existing_user = users_collection.find_one({"email": email})
         if existing_user:
             return jsonify({"error": "Username already exists!"}), 400
@@ -40,11 +41,20 @@ def signup():
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
         # Store user in database
-        users_collection.insert_one({"password": hashed_password, "email": email})
+        users_collection.insert_one({"password": hashed_password, "email": email,"UserName":name})
+        user = users_collection.find_one({'email': email})
+        
+        if user and bcrypt.check_password_hash(user['password'], password):
+            token = jwt.encode({
+            'user': user['email'],
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=20)
+        }, app.config['SECRET_KEY'])
 
+            resp = make_response(redirect('dashboard'))
+            resp.set_cookie('token', token)
+            return resp
         return jsonify({"message": "User registered successfully!"}), 201
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    return render_template('signup.html') 
 
 @app.before_request
 def verify_jwt():
@@ -183,8 +193,7 @@ def signin():
 def dashboard():
 
     return render_template('dashboard.html')
-     
-     
+
 
 @app.route('/reply1')
 def reply1():
