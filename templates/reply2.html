@@ -5,7 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voice to Text</title>
 </head>
+<style>
+    
+    #logoutButton {
+            margin: 10px; /* Add margin for spacing */
+            background-color: #ff0000; /* Red color for demonstration */
+            color: #fff; /* White text color */
+            padding: 10px 15px; /* Padding for better visual appearance */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: fixed; /* Fixed position */
+            top: 10px; /* Adjust top position */
+            right: 10px; /* Adjust right position */
+
+        }
+</style>
 <body>
+
+    <button id="logoutButton" onclick="logout()">Logout</button>
 
 <video id="cameraFeed" autoplay></video>
 
@@ -94,10 +112,11 @@ document.addEventListener('DOMContentLoaded', function () {
             videoElement.srcObject = null;
         }
 });
+function logout() {
+            localStorage.removeItem('authToken');
+            window.location.href = '/login'; // Change '/login' to your actual login page URL
+        }
 </script>
 
-  <canvas id="canvas"></canvas>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
