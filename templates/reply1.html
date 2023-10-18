@@ -25,7 +25,7 @@
 
 <button id="logoutButton" onclick="logout()">Logout</button>
 
-<video id="cameraFeed" autoplay></video>
+<video id="cameraFeed" autoplay width="640px" height="480px"></video>
 
 <button id="startButton">Start</button>
 <button id="stopButton">Stop</button>
@@ -54,33 +54,38 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const transcript = event.results[event.results.length - 1][0].transcript;
             output.textContent = 'Text: ' + transcript;
-
             try {
-                const response = await fetch(`http://localhost:5000/converse1?user_message=${encodeURIComponent(transcript)}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
+        const response = await fetch(`http://localhost:5000/converse1?user_message=${encodeURIComponent(transcript)}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+        });
 
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
+        if (!response.ok) {
+            throw new Error(`Server returned status: ${response.status}`);
+        }
 
-                const data = await response.json();
+        const data = await response.json();
 
-                const utterance = new SpeechSynthesisUtterance(JSON.stringify(data["message"]));
-                synth.speak(utterance);
+        if (data && data.message) {
+            const utterance = new SpeechSynthesisUtterance(data.message);
+            synth.speak(utterance);
 
-                // Wait for 1 minute before next interaction
-                setTimeout(() => {
-                    output.textContent = 'You can speak now.';
-                    recognition.start();  // Restart recognition
-                }, 60000);
+            // Wait for 1 minute before next interaction
+            setTimeout(() => {
+                output.textContent = 'You can speak now.';
+                recognition.start();  // Restart recognition
+            }, 60000);
+        } else {
+            throw new Error('Invalid or missing data in the server response.');
+        }
 
-            } catch (error) {
-                console.log('There was a problem with the fetch operation:', error.message);
-            }
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+        // Handle the error gracefully, for example, display an error message to the user.
+    }
         };
 
         recognition.onerror = function (event) {
@@ -127,18 +132,17 @@ function logout() {
             localStorage.removeItem('token');
             const cookies = document.cookie.split(";");
 
-    for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i];
-        let eqPos = cookie.indexOf("=");
-        let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
-    }
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i];
+                let eqPos = cookie.indexOf("=");
+                let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+                
+            }
+            window.location.href('/signin')
 
         }
 </script>
 
-  <canvas id="canvas"></canvas>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

@@ -8,7 +8,7 @@ from pymongo import MongoClient
 from flask_bcrypt import Bcrypt
 import datetime
 from datetime import datetime,timedelta
-
+from flask_cors import CORS
 # Set your Azure Speech Service credentials
 speech_key = os.getenv("AZURE_SPEECH_KEY")
 service_region = os.getenv("AZURE_REGION")
@@ -17,11 +17,13 @@ service_region = os.getenv("AZURE_REGION")
 
 
 app = Flask(__name__)
+CORS(app, supports_credentials=True,origins=["http://localhost:5000"])  # Enable CORS for all routes with support for credentials
+
 bcrypt = Bcrypt(app)
 client = MongoClient('mongodb+srv://niharmuniraju4:wfhK2TVsJiOCMgcs@goku.jrdvw1f.mongodb.net/')
 db = client['GokuDB']
 users_collection = db['users']
-conversations_collection = db['conversations']
+conversations_collection = db['session']
 app.secret_key = 'your_secret_key_here'
   # or ('localhost.pem', 'localhost-key.pem')
 @app.route('/signup', methods=['GET', 'POST'])
@@ -43,6 +45,12 @@ def signup():
         users_collection.insert_one({"password": hashed_password, "email": email,"UserName":name})
         return jsonify({"message": "Data received"}), 200
     return render_template('signup.html') 
+
+# Set Referrer-Policy header for all responses
+@app.after_request
+def set_referrer_policy(response):
+    response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+    return response
 
 @app.before_request
 def verify_jwt():
@@ -68,31 +76,47 @@ def chat():
     return render_template('reply.html')
 
 
-@app.route('/converse1', methods=['POST'])
+@app.route('/converse1', methods=['POST','OPTIONS'])
 def converse1():
-        try:
-            token = request.cookies.get('token')
-            question = request.args.get('user_message')
-            response_text = get_gpt_response1(question)
-            data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
-            email = data['user']
-            # Current date and time
-            updated_at = datetime.now()
-
-            record = {
-                'email':email,
-                'questions': question,
-                'answer': response_text,
-                'updated_time': updated_at
+    try:
+        token = request.cookies.get('token')
+        question = request.args.get('user_message')
+        messages=[
+            {"role": "system", "content": "Imagine you're an AI therapist, who loves to help people with counselling on thought Patterns, Emotional Regulation, Decision-Making, Mood Swings, Facing Fears, Relationships, Self-Esteem, Sleep Issues, Sexuality and Identity, Goal Setting, Academic Stress, Mindfulness, Career Choices, Eating Habits, Breakups, Digital Wellbeing, Imposter Syndrome, Pet Loss, Global Concerns, Communication Skills, Physical Health, Financial Stress, Parenting, Addictions, Grief, loss and you should make them feel good by the end of each converstation.."}
+            ]
+        end_time = datetime.now()
+        start_time = end_time - timedelta(minutes=20)
+        query = {
+            "timestamp": {
+                "$gte": start_time,
+                "$lte": end_time
             }
-            conversations_collection.insert_one(record)
-            return jsonify({"message": response_text}), 200
+        }
+        results = conversations_collection.find(query)
+        for result in results: # Adjust the range as needed
+            
+            messages.append({"role": "user", "content": result.get('questions', 'N/A')})
 
-        except Exception as e:
+            # Simulate the assistant's response (you might replace this with actual logic)
+            messages.append({"role": "assistant", "content": result.get('response', 'N/A')})
+        response_text = get_gpt_response1(messages)
+        print(response_text)
+        data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+        email = data['user']
+        # Current date and time
+        record = {
+            'email':email,
+            'questions': question,
+            'response': response_text,
+            'timestamp': datetime.now()
+        }
+        conversations_collection.insert_one(record)
+        return jsonify({"message": response_text}), 200
 
-            # Handle errors and return an error response
-            error_message = str(e)
-            return "error 1"+error_message
+    except Exception as e:
+        # Handle errors and return an error response
+        error_message = str(e)
+        return "error 1"+error_message
 
 @app.route('/converse2', methods=['POST'])
 def converse2():
@@ -146,18 +170,16 @@ def converse3():
             error_message = str(e)
             return "error 1"+error_message
         
-def get_gpt_response1(prompt,email):
+def get_gpt_response1(prompt):
     openai.api_key = os.getenv("OPENAI_KEY")
-    conversation = [
-    {"role": "system", "content": "Imagine you're an AI therapist, who loves to help people with counselling on thought Patterns, Emotional Regulation, Decision-Making, Mood Swings, Facing Fears, Relationships, Self-Esteem, Sleep Issues, Sexuality and Identity, Goal Setting, Academic Stress, Mindfulness, Career Choices, Eating Habits, Breakups, Digital Wellbeing, Imposter Syndrome, Pet Loss, Global Concerns, Communication Skills, Physical Health, Financial Stress, Parenting, Addictions, Grief, loss and you should make them feel good by the end of each converstation.."}]
-    query = {'email': email}
-    latest_messages = conversations_collection.find(query).sort("", -1).limit(10)
-    print(latest_messages)
-    conversation.append({"role": "user", "content": prompt})
-    prompt = f" Respond with humor to: '{prompt}'"
-    response = openai.Completion.create(engine="text-davinci-003", prompt=prompt, max_tokens=80)
+    print("hi",prompt)
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=prompt
+    )
+    print(response)
     # Let's add Maple's personal touch to every response
-    return response.choices[0].text.strip()
+    return response['choices'][0]['message']['content'].strip()
         
 def get_gpt_response2(prompt):
     openai.api_key = os.getenv("OPENAI_KEY")
