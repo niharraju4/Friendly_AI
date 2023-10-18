@@ -86,23 +86,25 @@ def converse1():
             ]
         end_time = datetime.now()
         start_time = end_time - timedelta(minutes=20)
+        data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+        email = data['user']
         query = {
             "timestamp": {
                 "$gte": start_time,
                 "$lte": end_time
-            }
+            },
+            "email": email
         }
         results = conversations_collection.find(query)
-        for result in results: # Adjust the range as needed
-            
-            messages.append({"role": "user", "content": result.get('questions', 'N/A')})
+        if(results):
+            for result in results: # Adjust the range as needed
+                
+                messages.append({"role": "user", "content": result.get('questions', 'N/A')})
 
-            # Simulate the assistant's response (you might replace this with actual logic)
-            messages.append({"role": "assistant", "content": result.get('response', 'N/A')})
+                # Simulate the assistant's response (you might replace this with actual logic)
+                messages.append({"role": "assistant", "content": result.get('response', 'N/A')})
+        messages.append({"role": "user", "content": question})
         response_text = get_gpt_response1(messages)
-        print(response_text)
-        data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
-        email = data['user']
         # Current date and time
         record = {
             'email':email,
