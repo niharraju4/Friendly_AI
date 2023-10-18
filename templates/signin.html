@@ -168,7 +168,17 @@
                         Sign In
                       </button>
                     </div>
+                    
                   </form>
+                  <div class="text-center mt-6">
+                    <button
+                      class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+                     id="signupBtn"
+                      style="transition: all 0.15s ease 0s;"
+                    >
+                      Sign-Up
+                    </button>
+                  </div>
                 </div>
               </div>
               <div class="flex flex-wrap mt-6">
@@ -177,11 +187,7 @@
                     ><small>Forgot password?</small></a
                   >
                 </div> -->
-                <!-- <div class="w-1/2 text-right">
-                  <a href="#pablo" class="text-gray-300"
-                    ><small>Create new account</small></a
-                  >
-                </div> -->
+                
               </div>
             </div>
           </div>
@@ -211,5 +217,8 @@
       document.getElementById(collapseID).classList.toggle("hidden");
       document.getElementById(collapseID).classList.toggle("block");
     }
+    document.getElementById("signupBtn").addEventListener("click", function() {
+    window.location.href = "/signup";
+});
   </script>
 </html>

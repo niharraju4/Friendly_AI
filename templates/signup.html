@@ -95,11 +95,11 @@
                 },
                 body: JSON.stringify(formData),
             })
-            .then(response => response.json())
-            .then(data => {
-                // Handle the response from the server
-                console.log(data);
-                alert('Signup successful!');
+            .then(response => {
+            if (response.status === 200) {
+                    alert('Signup successful!');
+                    window.location.href = "/signin";
+            }
             })
             .catch((error) => {
                 console.error('Error:', error);

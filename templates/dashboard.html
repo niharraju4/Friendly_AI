@@ -4,108 +4,274 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cards with Icons</title>
-    <!-- Include FontAwesome CSS for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <script src="/replyscript.js"></script>
-    <!-- Some basic styling for the cards -->
     <style>
+        /* Main Background */
+        body {
+            background: #5d5c61;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Canvas style for full-screen background */
+        canvas#neuralCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Container for all cards */
+        .main-container {
+             background: rgba(85, 85, 112, 0.3);
+             padding: 100px;
+             border-radius: 25px;
+             margin: 100px;
+             overflow: auto;
+             height: 200vh; /* Added this line to double the height */
+    }
+
+        /* Card Styling */
         .card {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 20px;
-            margin: 20px;
+            width: 90%;
+            max-height: 600vh;
+            border-radius: 50px;
+            margin: 60px auto;
             text-align: center;
-            display: inline-block;
+            background: rgba(129, 120, 120, 0.399);
+            box-shadow: 0 12px 8px rgba(198, 194, 194, 0.896);
+            transition: all 0.3s ease;
         }
-        .card a {
-            text-decoration: none;
-            color: inherit;
+
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+            height: 600%; /* Increased from 200% to 400% */
         }
+
+        /* Different colors for each card */
+        .card:nth-child(1) { background: #7395ae; }
+        .card:nth-child(2) { background: #7395ae; }
+        .card:nth-child(3) { background: #7395ae; }
+
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+            height: 200%;
+        }
+
+        .flex-item {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            opacity: 0;
+            left: -100%; /* Initially off-screen */
+            position: relative;
+            transition: all 1s ease; /* Transition effect */
+        }
+
+        .flex-item.show {
+            opacity: 1;
+            left: 0;
+        }
+
+        /* Logout Button */
         #logoutButton {
-            margin: 10px; /* Add margin for spacing */
-            background-color: #ff0000; /* Red color for demonstration */
-            color: #fff; /* White text color */
-            padding: 10px 15px; /* Padding for better visual appearance */
+            margin: 10px;
+            background-color: #b1a296;
+            color: white;
+            padding: 10px 15px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            position: fixed; /* Fixed position */
-            top: 10px; /* Adjust top position */
-            right: 10px; /* Adjust right position */
+            position: fixed;
+            top: 10px;
+            right: 10px;
+        }
 
+        #logoutButton:hover {
+            background-color: #617b8f;
         }
     </style>
 </head>
-<body >
+<body>
+    <canvas id="neuralCanvas"></canvas>
+
     <button id="logoutButton" onclick="logout()">Logout</button>
-    <button  onclick="signup()">Sign Up</button>
 
-    <div >
-<div class="card">
-    <a href="/reply1">
-        <img src="https://counseling.northwestern.edu/wp-content/uploads/sites/83/2021/02/AICulturalCompetence-hero.jpg?w=1024" style="height:100px;">
-        <p>AR Char 1</p>
-    </a>
-</div>
+    <div class="main-container">
+        <!-- AI Therapist Card -->
+        <div class="card">
+            <div class="flex-container">
+                <div class="flex-item">
+                    <a href="/reply1">
+                        <img src="https://counseling.northwestern.edu/wp-content/uploads/sites/83/2021/02/AICulturalCompetence-hero.jpg?w=1024" style="height:100px;">
+                        <p>Ai Therapist</p>
+                    </a>
+                </div>
+                <div class="flex-item">
+                    <a>
+                        <p>An AI therapist is a computer program...</p>
+                    </a>
+                </div>
+            </div>
+        </div>
 
-<div class="card">
-    <a href="/reply2">
-        <img src="https://counseling.northwestern.edu/wp-content/uploads/sites/83/2021/02/AICulturalCompetence-hero.jpg?w=1024" style="height:100px;">
-        <p>AR Char 2</p>
-    </a>
-</div>
+        <!-- AI Guinea Pig Card -->
+        <div class="card">
+            <div class="flex-container">
+                <div class="flex-item">
+                    <a href="/reply2">
+                        <img src="https://counseling.northwestern.edu/wp-content/uploads/sites/83/2021/02/AICulturalCompetence-hero.jpg?w=1024" style="height:100px;">
+                        <p>Ai Guinea Pig</p>
+                    </a>
+                </div>
+                <div class="flex-item">
+                    <a>
+                        <p>An AI guinea pig generally refers...</p>
+                    </a>
+                </div>
+            </div>
+        </div>
 
-<div class="card">
-    <a href="/reply3">
-        <img src="https://counseling.northwestern.edu/wp-content/uploads/sites/83/2021/02/AICulturalCompetence-hero.jpg?w=1024" style="height:100px;">
-        <p>AR Char 3</p>
-    </a>
-</div>
-</div>
+        <!-- AI German Tutor Card -->
+        <div class="card">
+            <div class="flex-container">
+                <div class="flex-item">
+                    <a href="/reply3">
+                        <img src="https://counseling.northwestern.edu/wp-content/uploads/sites/83/2021/02/AICulturalCompetence-hero.jpg?w=1024" style="height:100px;">
+                        <p>Ai German Tutor</p>
+                    </a>
+                </div>
+                <div class="flex-item">
+                    <a>
+                        <p>An AI German tutor is a specialized...</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Neural Network Canvas JavaScript
+        const canvas = document.getElementById("neuralCanvas");
+        const ctx = canvas.getContext("2d");
+
+        let nodes = [];
+        const nodesToAddEachSecond = 10;
+
+        class Node {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.dx = (Math.random() - 0.5) * 2;
+                this.dy = (Math.random() - 0.5) * 2;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 2, 0, Math.PI * 2, false);
+                ctx.fillStyle = "white";
+                ctx.fill();
+
+                nodes.forEach(node => {
+                    if (distance(this, node) < 100) {
+                        ctx.beginPath();
+                        ctx.moveTo(this.x, this.y);
+                        ctx.lineTo(node.x, node.y);
+                        ctx.strokeStyle = "white";
+                        ctx.stroke();
+                    }
+                });
+            }
+
+            update() {
+                if (this.x > canvas.width || this.x < 0) {
+                    this.dx = -this.dx;
+                }
+
+                if (this.y > canvas.height || this.y < 0) {
+                    this.dy = -this.dy;
+                }
+
+                this.x += this.dx;
+                this.y += this.dy;
+
+                this.draw();
+            }
+        }
+
+        function distance(node1, node2) {
+            const xDist = node2.x - node1.x;
+            const yDist = node2.y - node1.y;
+
+            return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
+        }
+
+        function addNodes() {
+            for (let i = 0; i < nodesToAddEachSecond; i++) {
+                nodes.push(new Node());
+            }
+        }
+
+        function init() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            nodes = [];
+
+            for (let i = 0; i < 100; i++) {
+                nodes.push(new Node());
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            nodes.forEach(node => {
+                node.update();
+            });
+        }
+
+        init();
+        animate();
+        setInterval(addNodes, 1000000);
+        window.addEventListener('resize', init);
+
+        // Hover Effect JavaScript
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseover', function() {
+                this.querySelectorAll('.flex-item').forEach(item => {
+                    item.classList.add('show');
+                });
+            });
+
+            card.addEventListener('mouseout', function() {
+                this.querySelectorAll('.flex-item').forEach(item => {
+                    item.classList.remove('show');
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>
 
 <script>
-    let videoElement = document.getElementById("cameraFeed");
-    let startButton = document.getElementById("startCamera");
-    let stopButton = document.getElementById("stopCamera");
-    let stream;
-
-    startButton.addEventListener("click", function() {
-        navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function(mediaStream) {
-            videoElement.srcObject = mediaStream;
-            stream = mediaStream;
-        })
-        .catch(function(err) {
-            console.log("An error occurred: " + err);
-        });
+document.addEventListener("DOMContentLoaded", function() {
+  var logoutButton = document.getElementById("logoutButton");
+  logoutButton.addEventListener("click", function() {
+    fetch("/logout", {
+      method: "POST"
+    }).then(function(response) {
+      if (response.ok) {
+        window.location.href = "/signin";
+      }
     });
-
-    stopButton.addEventListener("click", function() {
-        if(stream) {
-            let tracks = stream.getTracks();
-            tracks.forEach(function(track) {
-                track.stop();
-            }); 
-            videoElement.srcObject = null;
-        }
-    });
-    
-    function logout() {
-            localStorage.removeItem('token');
-            const cookies = document.cookie.split(";");
-
-    for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i];
-        let eqPos = cookie.indexOf("=");
-        let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
-    }
-
-            window.location.href = '/signin'; // Change '/login' to your actual login page URL
-        }
-    function signup(){
-        window.location.href = '/signup';
-    }
+  });
+});
 </script>
-</html>

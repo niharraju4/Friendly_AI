@@ -39,28 +39,17 @@ def signup():
 
         # Hash password before storing in the database
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-
         # Store user in database
         users_collection.insert_one({"password": hashed_password, "email": email,"UserName":name})
-        user = users_collection.find_one({'email': email})
-        
-        if user and bcrypt.check_password_hash(user['password'], password):
-            token = jwt.encode({
-            'user': user['email'],
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=20)
-        }, app.config['SECRET_KEY'])
-
-            resp = make_response(redirect('dashboard'))
-            resp.set_cookie('token', token)
-            return resp
-        return jsonify({"message": "User registered successfully!"}), 201
+        return jsonify({"message": "Data received"}), 200
     return render_template('signup.html') 
 
 @app.before_request
 def verify_jwt():
     if request.endpoint == 'signin':
         return  # Skip JWT verification for login route
-
+    if request.endpoint == 'signup':
+        return  # Skip JWT verification for login route
     token = request.cookies.get('token')
     if not token:
         return "Missing token", 401
@@ -88,11 +77,12 @@ def converse1():
             data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
             email = data['user']
             # Current date and time
-            updated_at = datetime.datetime.now()
+            updated_at = datetime.now()
 
             record = {
                 'email':email,
                 'questions': question,
+                'answer': response_text,
                 'updated_time': updated_at
             }
             conversations_collection.insert_one(record)
@@ -113,11 +103,12 @@ def converse2():
             data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
             email = data['user']
             # Current date and time
-            updated_at = datetime.datetime.now()
+            updated_at = datetime.now()
 
             record = {
                 'email':email,
                 'questions': question,
+                'answer': response_text,
                 'updated_time': updated_at
             }
             conversations_collection.insert_one(record)
@@ -138,11 +129,12 @@ def converse3():
             data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
             email = data['user']
             # Current date and time
-            updated_at = datetime.datetime.now()
+            updated_at = datetime.now()
 
             record = {
                 'email':email,
                 'questions': question,
+                'answer': response_text,
                 'updated_time': updated_at
             }
             conversations_collection.insert_one(record)
@@ -154,13 +146,25 @@ def converse3():
             error_message = str(e)
             return "error 1"+error_message
         
-def get_gpt_response1(prompt):
+def get_gpt_response1(prompt,email):
+    openai.api_key = os.getenv("OPENAI_KEY")
+    conversation = [
+    {"role": "system", "content": "Imagine you're an AI therapist, who loves to help people with counselling on thought Patterns, Emotional Regulation, Decision-Making, Mood Swings, Facing Fears, Relationships, Self-Esteem, Sleep Issues, Sexuality and Identity, Goal Setting, Academic Stress, Mindfulness, Career Choices, Eating Habits, Breakups, Digital Wellbeing, Imposter Syndrome, Pet Loss, Global Concerns, Communication Skills, Physical Health, Financial Stress, Parenting, Addictions, Grief, loss and you should make them feel good by the end of each converstation.."}]
+    query = {'email': email}
+    latest_messages = conversations_collection.find(query).sort("", -1).limit(10)
+    print(latest_messages)
+    conversation.append({"role": "user", "content": prompt})
+    prompt = f" Respond with humor to: '{prompt}'"
+    response = openai.Completion.create(engine="text-davinci-003", prompt=prompt, max_tokens=80)
+    # Let's add Maple's personal touch to every response
+    return response.choices[0].text.strip()
+        
+def get_gpt_response2(prompt):
     openai.api_key = os.getenv("OPENAI_KEY")
     prompt = f"Imagine you're an AI therapist, who loves to help people with counselling on thought Patterns, Emotional Regulation, Decision-Making, Mood Swings, Facing Fears, Relationships, Self-Esteem, Sleep Issues, Sexuality and Identity, Goal Setting, Academic Stress, Mindfulness, Career Choices, Eating Habits, Breakups, Digital Wellbeing, Imposter Syndrome, Pet Loss, Global Concerns, Communication Skills, Physical Health, Financial Stress, Parenting, Addictions, Grief, loss and you should make them feel good by the end of each converstation. Respond with humor to: '{prompt}'"
     response = openai.Completion.create(engine="text-davinci-003", prompt=prompt, max_tokens=80)
     # Let's add Maple's personal touch to every response
     return response.choices[0].text.strip()
-        
 def get_gpt_response3(prompt):
     openai.api_key = os.getenv("OPENAI_KEY")
     prompt = f"Imagine you're an AI therapist, who loves to help people with counselling on thought Patterns, Emotional Regulation, Decision-Making, Mood Swings, Facing Fears, Relationships, Self-Esteem, Sleep Issues, Sexuality and Identity, Goal Setting, Academic Stress, Mindfulness, Career Choices, Eating Habits, Breakups, Digital Wellbeing, Imposter Syndrome, Pet Loss, Global Concerns, Communication Skills, Physical Health, Financial Stress, Parenting, Addictions, Grief, loss and you should make them feel good by the end of each converstation. Respond with humor to: '{prompt}'"
@@ -211,3 +215,8 @@ def home():
     return "Welcome to Home"
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
+
+@app.route('/logout', methods=['POST'])
+def logout():
+    # Add your session termination logic here, if needed
+    return jsonify({'status': 'success'})
