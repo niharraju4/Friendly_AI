@@ -79,10 +79,11 @@ def chat():
 @app.route('/converse1', methods=['POST','OPTIONS'])
 def converse1():
     try:
+        prompt01 = os.getenv("PROMPT01")
         token = request.cookies.get('token')
         question = request.args.get('user_message')
         messages=[
-            {"role": "system", "content": "Imagine you're an AI therapist, who loves to help people with counselling on thought Patterns, Emotional Regulation, Decision-Making, Mood Swings, Facing Fears, Relationships, Self-Esteem, Sleep Issues, Sexuality and Identity, Goal Setting, Academic Stress, Mindfulness, Career Choices, Eating Habits, Breakups, Digital Wellbeing, Imposter Syndrome, Pet Loss, Global Concerns, Communication Skills, Physical Health, Financial Stress, Parenting, Addictions, Grief, loss and you should make them feel good by the end of each converstation.."}
+            {"role": "system", "content": prompt01}
             ]
         end_time = datetime.now()
         start_time = end_time - timedelta(minutes=20)
@@ -122,55 +123,94 @@ def converse1():
 
 @app.route('/converse2', methods=['POST'])
 def converse2():
-        try:
-            token = request.cookies.get('token')
-            question = request.args.get('user_message')
-            response_text = get_gpt_response2(question)
-            data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
-            email = data['user']
-            # Current date and time
-            updated_at = datetime.now()
+    try:
+        prompt02 = os.getenv("PROMPT02")
+        token = request.cookies.get('token')
+        question = request.args.get('user_message')
+        messages=[
+            {"role": "system", "content": prompt02}
+            ]
+        end_time = datetime.now()
+        start_time = end_time - timedelta(minutes=20)
+        data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+        email = data['user']
+        query = {
+            "timestamp": {
+                "$gte": start_time,
+                "$lte": end_time
+            },
+            "email": email
+        }
+        results = conversations_collection.find(query)
+        if(results):
+            for result in results: # Adjust the range as needed
+                
+                messages.append({"role": "user", "content": result.get('questions', 'N/A')})
 
-            record = {
-                'email':email,
-                'questions': question,
-                'answer': response_text,
-                'updated_time': updated_at
-            }
-            conversations_collection.insert_one(record)
-            return jsonify({"message": response_text}), 200
+                # Simulate the assistant's response (you might replace this with actual logic)
+                messages.append({"role": "assistant", "content": result.get('response', 'N/A')})
+        messages.append({"role": "user", "content": question})
+        response_text = get_gpt_response2(messages)
+        # Current date and time
+        record = {
+            'email':email,
+            'questions': question,
+            'response': response_text,
+            'timestamp': datetime.now()
+        }
+        conversations_collection.insert_one(record)
+        return jsonify({"message": response_text}), 200
 
-        except Exception as e:
-
-            # Handle errors and return an error response
-            error_message = str(e)
-            return "error 1"+error_message
+    except Exception as e:
+        # Handle errors and return an error response
+        error_message = str(e)
+        return "error 1"+error_message
 
 @app.route('/converse3', methods=['POST'])
 def converse3():
-        try:
-            token = request.cookies.get('token')
-            question = request.args.get('user_message')
-            response_text = get_gpt_response2(question)
-            data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
-            email = data['user']
-            # Current date and time
-            updated_at = datetime.now()
 
-            record = {
-                'email':email,
-                'questions': question,
-                'answer': response_text,
-                'updated_time': updated_at
-            }
-            conversations_collection.insert_one(record)
-            return jsonify({"message": response_text}), 200
+    try:
+        prompt03 = os.getenv("PROMPT03")
+        token = request.cookies.get('token')
+        question = request.args.get('user_message')
+        messages=[
+            {"role": "system", "content": prompt03}
+            ]
+        end_time = datetime.now()
+        start_time = end_time - timedelta(minutes=20)
+        data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+        email = data['user']
+        query = {
+            "timestamp": {
+                "$gte": start_time,
+                "$lte": end_time
+            },
+            "email": email
+        }
+        results = conversations_collection.find(query)
+        if(results):
+            for result in results: # Adjust the range as needed
+                
+                messages.append({"role": "user", "content": result.get('questions', 'N/A')})
 
-        except Exception as e:
+                # Simulate the assistant's response (you might replace this with actual logic)
+                messages.append({"role": "assistant", "content": result.get('response', 'N/A')})
+        messages.append({"role": "user", "content": question})
+        response_text = get_gpt_response3(messages)
+        # Current date and time
+        record = {
+            'email':email,
+            'questions': question,
+            'response': response_text,
+            'timestamp': datetime.now()
+        }
+        conversations_collection.insert_one(record)
+        return jsonify({"message": response_text}), 200
 
-            # Handle errors and return an error response
-            error_message = str(e)
-            return "error 1"+error_message
+    except Exception as e:
+        # Handle errors and return an error response
+        error_message = str(e)
+        return "error 1"+error_message
         
 def get_gpt_response1(prompt):
     openai.api_key = os.getenv("OPENAI_KEY")

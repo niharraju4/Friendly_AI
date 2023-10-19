@@ -20,17 +20,111 @@
             right: 10px; /* Adjust right position */
 
         }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f3f4f6;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card {
+            max-width: 600px;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .video-container {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .output-column {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .output {
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .text-boxes {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .text-box {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
 </style>
-<body>
 
-<button id="logoutButton" onclick="logout()">Logout</button>
+<body class="flex items-center justify-center h-screen bg-gray-100">
+    <button id="logoutButton" onclick="logout()">Logout</button>
+    <div class="card">
+        <h1>Ai Therapist</h1>
+        <p>feel free to talk to me...</p>
 
-<video id="cameraFeed" autoplay width="640px" height="480px"></video>
+        <div class="video-container" id="videoContainer">
+            
+            <video id="videoStream" autoplay></video>
+        </div>
+        <button id="startButton">Start Camera</button>
+        <button id="stopButton">Stop</button>
+        <button id="PauseButton">Pause</button>
+        <div class="text-boxes">
+            <label for="replyTextBox">Reply:</label>
+            <textarea id="replyTextBox" class="text-box"></textarea>
 
-<button id="startButton">Start</button>
-<button id="stopButton">Stop</button>
-<p id="output"></p>
-
+            <label for="infoTextBox">Additional Information:</label>
+            <textarea id="infoTextBox" class="text-box"></textarea>
+        </div>
+        <p id="output"></p>
+    </div>
+    
+    
+</body>
 <script>
 let timeout;  // Declare timeout variable
 
@@ -38,22 +132,28 @@ document.addEventListener('DOMContentLoaded', function () {
     const output = document.getElementById('output');
     const startButton = document.getElementById("startButton");
     const stopButton = document.getElementById("stopButton");
+    const PauseButton = document.getElementById("PauseButton");
+    const replyTextArea = document.getElementById('replyTextBox');
+    const infoTextArea = document.getElementById('infoTextBox');
     
     if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
         const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
         const synth = window.speechSynthesis;
+        document.getElementById('PauseButton').addEventListener('click', () => {
+            synth.cancel();
+        });
 
         recognition.continuous = true;  // Keep it true for continuous listening
 
         recognition.onstart = function () {
-            output.textContent = 'Listening...';
+            infoTextArea.value = 'Listening...';
         };
 
         recognition.onresult = async function (event) {
             recognition.stop();  // Stop recognition to process this phrase
 
             const transcript = event.results[event.results.length - 1][0].transcript;
-            output.textContent = 'Text: ' + transcript;
+            
             try {
         const response = await fetch(`http://localhost:5000/converse1?user_message=${encodeURIComponent(transcript)}`, {
             method: 'POST',
@@ -68,17 +168,18 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         const data = await response.json();
-
         if (data && data.message) {
+            replyTextArea.value = data.message;
             const utterance = new SpeechSynthesisUtterance(data.message);
-            synth.speak(utterance);
-
-            // Wait for 1 minute before next interaction
-            setTimeout(() => {
-                output.textContent = 'You can speak now.';
+            utterance.onend = function () {
+                infoTextArea.value = 'You can speak now.';
                 recognition.start();  // Restart recognition
-            }, 60000);
+};
+            synth.speak(utterance);
+            
+            // Wait for 1 minute before next interaction
         } else {
+            infoTextArea.value ="Can u please ask me again";
             throw new Error('Invalid or missing data in the server response.');
         }
 
@@ -89,22 +190,22 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         recognition.onerror = function (event) {
-            output.textContent = 'Error occurred: ' + event.error;
+            infoTextArea.value = 'Error occurred: ' + event.error;
         };
 
         recognition.onend = function () {
-            output.textContent = 'Speech recognition stopped.';
+            infoTextArea.value = 'Please wait....';
         };
 
         startButton.addEventListener("click", function() {
             recognition.start();
         });
     } else {
-        output.textContent = 'Speech recognition is not supported in this browser.';
+        infoTextArea.value = 'Speech recognition is not supported in this browser.';
     }
 
     // Original camera code
-    let videoElement = document.getElementById("cameraFeed");
+    let videoElement = document.getElementById("videoStream");
     let stream;
 
     startButton.addEventListener("click", function() {
@@ -125,6 +226,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 track.stop();
             }); 
             videoElement.srcObject = null;
+            location.reload();
+
         }
     });
 });
@@ -144,5 +247,4 @@ function logout() {
         }
 </script>
 
-</body>
 </html>
