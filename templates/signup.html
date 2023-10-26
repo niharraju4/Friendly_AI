@@ -5,107 +5,158 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup Page</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0; /* Remove default margin */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
         }
-
+        #canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
         .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px; /* Set a fixed width */
-        }
-
-        h2 {
-            color: #333;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            width: 400px;
+            font-family: "Verdana", sans-serif;
+            box-shadow: 0px 0px 5px 2px black;
+            z-index: 1;
             text-align: center;
         }
-
-        label {
-            margin-bottom: 8px;
-            color: #555;
-            display: block;
+        h2 {
+            color: #333;
+            font-size: 28px;
         }
-
+        label {
+            display: block;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
         input {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 16px;
+            padding: 12px;
+            margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            box-sizing: border-box;
+            font-size: 16px;
         }
-
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(81, 203, 238, 1),
+                        0 0 10px rgba(81, 203, 238, 1),
+                        0 0 20px rgba(81, 203, 238, 1),
+                        0 0 40px rgba(81, 203, 238, 1);
+        }
         button {
             width: 100%;
-            padding: 10px;
-            background-color: #4caf50;
-            color: #fff;
+            padding: 14px;
+            background-color: #007BFF;
+            color: white;
             border: none;
             border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+            font-size: 16px;
         }
-
         button:hover {
-            background-color: #45a049;
+            background-color: #0056b3;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
     </style>
 </head>
 <body>
+    <canvas id="canvas"></canvas>
     <div class="container">
         <h2>Signup</h2>
         <form id="signupForm">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" required>
             <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" required>
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <button type="button" onclick="signup()">Sign Up</button>
+            <input type="password" id="password" required>
+            <button type="submit">Sign Up</button>
         </form>
     </div>
-
     <script>
-        function signup() {
-            // Get form data
-            const email = document.getElementById("email").value;
-            const name = document.getElementById("name").value;
-            const password = document.getElementById("password").value;
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
 
-            // Create an object with the form data
-            const formData = {
-                email: email,
-                username: name,
-                password: password
-            };
+        let particles = [];
 
-            // Make a POST request using the Fetch API
-            fetch('/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            })
-            .then(response => {
-            if (response.status === 200) {
-                    alert('Signup successful!');
-                    window.location.href = "/signin";
-            }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                alert('Signup failed. Please try again.');
-            });
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         }
+
+        function createParticles() {
+            for(let i = 0; i < 100; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 5 + 1,
+                    speedX: Math.random() * 3 - 1.5,
+                    speedY: Math.random() * 3 - 1.5
+                });
+            }
+        }
+
+        function connectParticles(particles) {
+            let opacity = 1;
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a; b < particles.length; b++) {
+                    let dx = particles[a].x - particles[b].x;
+                    let dy = particles[a].y - particles[b].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 100) {
+                        ctx.strokeStyle = 'rgba(128, 128, 128,' + opacity + ')';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for(let i = 0; i < particles.length; i++) {
+                const p = particles[i];
+                ctx.fillStyle = "#808080";
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+
+                p.x += p.speedX;
+                p.y += p.speedY;
+
+                if(p.x < 0) p.x = canvas.width;
+                if(p.x > canvas.width) p.x = 0;
+                if(p.y < 0) p.y = canvas.height;
+                if(p.y > canvas.height) p.y = 0;
+            }
+
+            connectParticles(particles);
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener("resize", resizeCanvas);
+
+        resizeCanvas();
+        createParticles();
+        animateParticles();
     </script>
 </body>
 </html>
