@@ -167,21 +167,13 @@ document.addEventListener('DOMContentLoaded', function () {
             throw new Error(`Server returned status: ${response.status}`);
         }
 
-        const data = await response.json();
-        if (data && data.message) {
-            replyTextArea.value = data.message;
-            const utterance = new SpeechSynthesisUtterance(data.message);
-            utterance.onend = function () {
-                infoTextArea.value = 'You can speak now.';
-                recognition.start();  // Restart recognition
-};
-            synth.speak(utterance);
+        const blob = await response.blob();
+        let audioPlayer = document.getElementById("audioPlayer");
+        audioPlayer.src = URL.createObjectURL(blob);
+        audioPlayer.play();
             
             // Wait for 1 minute before next interaction
-        } else {
-            infoTextArea.value ="Can u please ask me again";
-            throw new Error('Invalid or missing data in the server response.');
-        }
+       
 
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
