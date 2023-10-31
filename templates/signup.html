@@ -1,162 +1,149 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup Page</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-        }
-        #canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
-        .container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(132, 95, 201, 0.8);
-            padding: 30px;
-            border-radius: 10px;
-            width: 400px;
-            font-family: "Verdana", sans-serif;
-            box-shadow: 0px 0px 5px 2px black;
-            z-index: 1;
-            text-align: center;
-        }
-        h2 {
-            color: #333;
-            font-size: 28px;
-        }
-        label {
-            display: block;
-            margin-bottom: 15px;
-            font-size: 16px;
-        }
-        input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        input:focus {
-            outline: none;
-            box-shadow: 0 0 5px rgba(81, 203, 238, 1),
-                        0 0 10px rgba(81, 203, 238, 1),
-                        0 0 20px rgba(81, 203, 238, 1),
-                        0 0 40px rgba(81, 203, 238, 1);
-        }
-        button {
-            width: 100%;
-            padding: 14px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-    </style>
-</head>
-<body>
-    <canvas id="canvas"></canvas>
-    <div class="container">
-        <h2>Signup</h2>
-        <form id="signupForm">
-            <label for="email">Email:</label>
-            <input type="email" id="email" required>
-            <label for="name">Name:</label>
-            <input type="text" id="name" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" required>
-            <button type="submit">Sign Up</button>
-        </form>
-    </div>
-    <script>
-        const canvas = document.getElementById("canvas");
-        const ctx = canvas.getContext("2d");
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#391a73" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css"
+    />
+    <title>Login | FriendlyAI </title>
+  </head>
+  <body class="text-gray-800 antialiased">
 
-        let particles = [];
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-
-        function createParticles() {
-            for(let i = 0; i < 100; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    size: Math.random() * 5 + 1,
-                    speedX: Math.random() * 3 - 1.5,
-                    speedY: Math.random() * 3 - 1.5
-                });
-            }
-        }
-
-        function connectParticles(particles) {
-            let opacity = 1;
-            for (let a = 0; a < particles.length; a++) {
-                for (let b = a; b < particles.length; b++) {
-                    let dx = particles[a].x - particles[b].x;
-                    let dy = particles[a].y - particles[b].y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 100) {
-                        ctx.strokeStyle = 'rgba(128, 128, 128,' + opacity + ')';
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[a].x, particles[a].y);
-                        ctx.lineTo(particles[b].x, particles[b].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for(let i = 0; i < particles.length; i++) {
-                const p = particles[i];
-                ctx.fillStyle = "#808080";
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fill();
-
-                p.x += p.speedX;
-                p.y += p.speedY;
-
-                if(p.x < 0) p.x = canvas.width;
-                if(p.x > canvas.width) p.x = 0;
-                if(p.y < 0) p.y = canvas.height;
-                if(p.y > canvas.height) p.y = 0;
-            }
-
-            connectParticles(particles);
-            requestAnimationFrame(animateParticles);
-        }
-
-        window.addEventListener("resize", resizeCanvas);
-
-        resizeCanvas();
-        createParticles();
-        animateParticles();
-    </script>
-</body>
+    <main>
+      <section class="absolute w-full h-full">
+        <div
+          class="absolute top-0 w-full h-full bg-gray-900"
+          style=" background-size: 100%; background-repeat: no-repeat;background-color: #000000fd;"
+        ></div>
+        <div class="container mx-auto px-4 h-full">
+          <div class="flex content-center items-center justify-center h-full">
+            <div class="w-full lg:w-6/12 px-4">
+              <div
+                class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0"
+              >
+                  <img src="https://muniraju2023.s3.amazonaws.com/signup.png" alt="Smiley face">
+              </div>
+              <div class="flex flex-wrap mt-6">
+                <!-- <div class="w-1/2">
+                  <a href="#pablo" class="text-gray-300"
+                    ><small>Forgot password?</small></a
+                  >
+                </div> -->
+                
+              </div>
+            </div>
+            <div class="w-full lg:w-6/12 px-4">
+              <div
+                class="relative flex flex-col min-w-0 min-h-100 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0"
+              >
+             
+                <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+                  <div class="text-gray-500 text-center mb-3 font-bold">
+                    <h1>Sign up with credentials</h1>
+                  </div>
+                  <form action="/signup" method="POST">
+                    <div class="relative w-full mb-3">
+                      <label
+                        class="block uppercase text-gray-700 text-xs font-bold mb-2"
+                        for="grid-password"
+                        >Email</label
+                      ><input
+                      name ="email"
+                        type="email"
+                        class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                        placeholder="email"
+                        style="transition: all 0.15s ease 0s;"
+                      />
+                    </div>
+                    <div class="relative w-full mb-3">
+                        <label
+                          class="block uppercase text-gray-700 text-xs font-bold mb-2"
+                          for="grid-password"
+                          >Name</label
+                        ><input
+                        name ="Name"
+                          type="text"
+                          class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                          placeholder="email"
+                          style="transition: all 0.15s ease 0s;"
+                        />
+                      </div>
+                    <div class="relative w-full mb-3">
+                      <label
+                        class="block uppercase text-gray-700 text-xs font-bold mb-2"
+                        for="grid-password"
+                        >Password</label
+                      ><input
+                        type="password"
+                        name="password"
+                        class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                        placeholder="password"
+                        style="transition: all 0.15s ease 0s;"
+                      />
+                    </div>
+                    
+                    <div class="text-center mt-6">
+                      <button
+                        class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+                        type="submit"
+                        style="transition: all 0.15s ease 0s;"
+                      >
+                        Sign-Up
+                      </button>
+                    </div>
+                    
+                  </form>
+                  
+                </div>
+              </div>
+              <div class="flex flex-wrap mt-6">
+                <!-- <div class="w-1/2">
+                  <a href="#pablo" class="text-gray-300"
+                    ><small>Forgot password?</small></a
+                  >
+                </div> -->
+                
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <footer class="absolute w-full bottom-0 bg-gray-900 pb-6">
+          <div class="container mx-auto px-4">
+            <hr class="mb-6 border-b-1 border-gray-700" />
+            <div
+              class="flex flex-wrap items-center md:justify-between justify-center"
+            >
+              <div class="w-full md:w-4/12 px-4">
+                <div class="text-sm text-white font-semibold py-1">
+                  Copyright © 2023
+                 
+                </div>
+              </div>
+             
+            </div>
+          </div>
+        </footer>
+      </section>
+    </main>
+  
+    </body>
+  <script>
+    function toggleNavbar(collapseID) {
+      document.getElementById(collapseID).classList.toggle("hidden");
+      document.getElementById(collapseID).classList.toggle("block");
+    }
+    document.getElementById("signupBtn").addEventListener("click", function() {
+    window.location.href = "/signup";
+});
+  </script>
 </html>
