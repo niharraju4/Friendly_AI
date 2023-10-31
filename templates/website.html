@@ -1,50 +1,51 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="dist/img/Hexagon.png" type="image/x-icon" />
-    <link rel="stylesheet" href="dist/output.css" />
-    <script>
-      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-      if (localStorage.theme === "dark" || (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-    </script>
-    <title> FriendlyAIBots</title>
-  </head>
-  <style>
-    /*
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="dist/img/Hexagon.png" type="image/x-icon" />
+  <link rel="stylesheet" href="dist/output.css" />
+  <script>
+    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+    if (localStorage.theme === "dark" || (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  </script>
+  <title> FriendlyAIBots</title>
+</head>
+<style>
+  /*
 ! tailwindcss v3.2.7 | MIT License | https://tailwindcss.com
 */
 
-/*
+  /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
 */
 
-*,
-::before,
-::after {
-  box-sizing: border-box;
-  /* 1 */
-  border-width: 0;
-  /* 2 */
-  border-style: solid;
-  /* 2 */
-  border-color: #e5e7eb;
-  /* 2 */
-}
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+    /* 1 */
+    border-width: 0;
+    /* 2 */
+    border-style: solid;
+    /* 2 */
+    border-color: #e5e7eb;
+    /* 2 */
+  }
 
-::before,
-::after {
-  --tw-content: '';
-}
+  ::before,
+  ::after {
+    --tw-content: '';
+  }
 
-/*
+  /*
 1. Use a consistent sensible line-height in all browsers.
 2. Prevent adjustments of font size after orientation changes in iOS.
 3. Use a more readable tab size.
@@ -52,1927 +53,1860 @@
 5. Use the user's configured `sans` font-feature-settings by default.
 */
 
-html {
-  line-height: 1.5;
-  /* 1 */
-  -webkit-text-size-adjust: 100%;
-  /* 2 */
-  -moz-tab-size: 4;
-  /* 3 */
-  -o-tab-size: 4;
-     tab-size: 4;
-  /* 3 */
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  /* 4 */
-  font-feature-settings: normal;
-  /* 5 */
-}
+  html {
+    line-height: 1.5;
+    /* 1 */
+    -webkit-text-size-adjust: 100%;
+    /* 2 */
+    -moz-tab-size: 4;
+    /* 3 */
+    -o-tab-size: 4;
+    tab-size: 4;
+    /* 3 */
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    /* 4 */
+    font-feature-settings: normal;
+    /* 5 */
+  }
 
-/*
+  /*
 1. Remove the margin in all browsers.
 2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
 */
 
-body {
-  margin: 0;
-  /* 1 */
-  line-height: inherit;
-  /* 2 */
-}
+  body {
+    margin: 0;
+    /* 1 */
+    line-height: inherit;
+    /* 2 */
+  }
 
-/*
+  /*
 1. Add the correct height in Firefox.
 2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
 3. Ensure horizontal rules are visible by default.
 */
 
-hr {
-  height: 0;
-  /* 1 */
-  color: inherit;
-  /* 2 */
-  border-top-width: 1px;
-  /* 3 */
-}
+  hr {
+    height: 0;
+    /* 1 */
+    color: inherit;
+    /* 2 */
+    border-top-width: 1px;
+    /* 3 */
+  }
 
-/*
+  /*
 Add the correct text decoration in Chrome, Edge, and Safari.
 */
 
-abbr:where([title]) {
-  -webkit-text-decoration: underline dotted;
-          text-decoration: underline dotted;
-}
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
 
-/*
+  /*
 Remove the default font size and weight for headings.
 */
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: inherit;
-  font-weight: inherit;
-}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
 
-/*
+  /*
 Reset links to optimize for opt-in styling instead of opt-out.
 */
 
-a {
-  color: inherit;
-  text-decoration: inherit;
-}
+  a {
+    color: inherit;
+    text-decoration: inherit;
+  }
 
-/*
+  /*
 Add the correct font weight in Edge and Safari.
 */
 
-b,
-strong {
-  font-weight: bolder;
-}
+  b,
+  strong {
+    font-weight: bolder;
+  }
 
-/*
+  /*
 1. Use the user's configured `mono` font family by default.
 2. Correct the odd `em` font sizing in all browsers.
 */
 
-code,
-kbd,
-samp,
-pre {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  /* 1 */
-  font-size: 1em;
-  /* 2 */
-}
+  code,
+  kbd,
+  samp,
+  pre {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    /* 1 */
+    font-size: 1em;
+    /* 2 */
+  }
 
-/*
+  /*
 Add the correct font size in all browsers.
 */
 
-small {
-  font-size: 80%;
-}
+  small {
+    font-size: 80%;
+  }
 
-/*
+  /*
 Prevent `sub` and `sup` elements from affecting the line height in all browsers.
 */
 
-sub,
-sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
+  sub,
+  sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
 
-sub {
-  bottom: -0.25em;
-}
+  sub {
+    bottom: -0.25em;
+  }
 
-sup {
-  top: -0.5em;
-}
+  sup {
+    top: -0.5em;
+  }
 
-/*
+  /*
 1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
 2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
 3. Remove gaps between table borders by default.
 */
 
-table {
-  text-indent: 0;
-  /* 1 */
-  border-color: inherit;
-  /* 2 */
-  border-collapse: collapse;
-  /* 3 */
-}
+  table {
+    text-indent: 0;
+    /* 1 */
+    border-color: inherit;
+    /* 2 */
+    border-collapse: collapse;
+    /* 3 */
+  }
 
-/*
+  /*
 1. Change the font styles in all browsers.
 2. Remove the margin in Firefox and Safari.
 3. Remove default padding in all browsers.
 */
 
-button,
-input,
-optgroup,
-select,
-textarea {
-  font-family: inherit;
-  /* 1 */
-  font-size: 100%;
-  /* 1 */
-  font-weight: inherit;
-  /* 1 */
-  line-height: inherit;
-  /* 1 */
-  color: inherit;
-  /* 1 */
-  margin: 0;
-  /* 2 */
-  padding: 0;
-  /* 3 */
-}
+  button,
+  input,
+  optgroup,
+  select,
+  textarea {
+    font-family: inherit;
+    /* 1 */
+    font-size: 100%;
+    /* 1 */
+    font-weight: inherit;
+    /* 1 */
+    line-height: inherit;
+    /* 1 */
+    color: inherit;
+    /* 1 */
+    margin: 0;
+    /* 2 */
+    padding: 0;
+    /* 3 */
+  }
 
-/*
+  /*
 Remove the inheritance of text transform in Edge and Firefox.
 */
 
-button,
-select {
-  text-transform: none;
-}
+  button,
+  select {
+    text-transform: none;
+  }
 
-/*
+  /*
 1. Correct the inability to style clickable types in iOS and Safari.
 2. Remove default button styles.
 */
 
-button,
-[type='button'],
-[type='reset'],
-[type='submit'] {
-  -webkit-appearance: button;
-  /* 1 */
-  background-color: transparent;
-  /* 2 */
-  background-image: none;
-  /* 2 */
-}
+  button,
+  [type='button'],
+  [type='reset'],
+  [type='submit'] {
+    -webkit-appearance: button;
+    /* 1 */
+    background-color: transparent;
+    /* 2 */
+    background-image: none;
+    /* 2 */
+  }
 
-/*
+  /*
 Use the modern Firefox focus style for all focusable elements.
 */
 
-:-moz-focusring {
-  outline: auto;
-}
+  :-moz-focusring {
+    outline: auto;
+  }
 
-/*
+  /*
 Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
 */
 
-:-moz-ui-invalid {
-  box-shadow: none;
-}
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
 
-/*
+  /*
 Add the correct vertical alignment in Chrome and Firefox.
 */
 
-progress {
-  vertical-align: baseline;
-}
+  progress {
+    vertical-align: baseline;
+  }
 
-/*
+  /*
 Correct the cursor style of increment and decrement buttons in Safari.
 */
 
-::-webkit-inner-spin-button,
-::-webkit-outer-spin-button {
-  height: auto;
-}
+  ::-webkit-inner-spin-button,
+  ::-webkit-outer-spin-button {
+    height: auto;
+  }
 
-/*
+  /*
 1. Correct the odd appearance in Chrome and Safari.
 2. Correct the outline style in Safari.
 */
 
-[type='search'] {
-  -webkit-appearance: textfield;
-  /* 1 */
-  outline-offset: -2px;
-  /* 2 */
-}
+  [type='search'] {
+    -webkit-appearance: textfield;
+    /* 1 */
+    outline-offset: -2px;
+    /* 2 */
+  }
 
-/*
+  /*
 Remove the inner padding in Chrome and Safari on macOS.
 */
 
-::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
 
-/*
+  /*
 1. Correct the inability to style clickable types in iOS and Safari.
 2. Change font properties to `inherit` in Safari.
 */
 
-::-webkit-file-upload-button {
-  -webkit-appearance: button;
-  /* 1 */
-  font: inherit;
-  /* 2 */
-}
+  ::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    /* 1 */
+    font: inherit;
+    /* 2 */
+  }
 
-/*
+  /*
 Add the correct display in Chrome and Safari.
 */
 
-summary {
-  display: list-item;
-}
+  summary {
+    display: list-item;
+  }
 
-/*
+  /*
 Removes the default spacing and border for appropriate elements.
 */
 
-blockquote,
-dl,
-dd,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-hr,
-figure,
-p,
-pre {
-  margin: 0;
-}
+  blockquote,
+  dl,
+  dd,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  hr,
+  figure,
+  p,
+  pre {
+    margin: 0;
+  }
 
-fieldset {
-  margin: 0;
-  padding: 0;
-}
+  fieldset {
+    margin: 0;
+    padding: 0;
+  }
 
-legend {
-  padding: 0;
-}
+  legend {
+    padding: 0;
+  }
 
-ol,
-ul,
-menu {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+  ol,
+  ul,
+  menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 
-/*
+  /*
 Prevent resizing textareas horizontally by default.
 */
 
-textarea {
-  resize: vertical;
-}
+  textarea {
+    resize: vertical;
+  }
 
-/*
+  /*
 1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
 2. Set the default placeholder color to the user's configured gray 400 color.
 */
 
-input::-moz-placeholder, textarea::-moz-placeholder {
-  opacity: 1;
-  /* 1 */
-  color: #9ca3af;
-  /* 2 */
-}
+  input::-moz-placeholder,
+  textarea::-moz-placeholder {
+    opacity: 1;
+    /* 1 */
+    color: #9ca3af;
+    /* 2 */
+  }
 
-input::placeholder,
-textarea::placeholder {
-  opacity: 1;
-  /* 1 */
-  color: #9ca3af;
-  /* 2 */
-}
+  input::placeholder,
+  textarea::placeholder {
+    opacity: 1;
+    /* 1 */
+    color: #9ca3af;
+    /* 2 */
+  }
 
-/*
+  /*
 Set the default cursor for buttons.
 */
 
-button,
-[role="button"] {
-  cursor: pointer;
-}
+  button,
+  [role="button"] {
+    cursor: pointer;
+  }
 
-/*
+  /*
 Make sure disabled buttons don't get the pointer cursor.
 */
 
-:disabled {
-  cursor: default;
-}
+  :disabled {
+    cursor: default;
+  }
 
-/*
+  /*
 1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
 2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
    This can trigger a poorly considered lint error in some tools but is included by design.
 */
 
-img,
-svg,
-video,
-canvas,
-audio,
-iframe,
-embed,
-object {
-  display: block;
-  /* 1 */
-  vertical-align: middle;
-  /* 2 */
-}
+  img,
+  svg,
+  video,
+  canvas,
+  audio,
+  iframe,
+  embed,
+  object {
+    display: block;
+    /* 1 */
+    vertical-align: middle;
+    /* 2 */
+  }
 
-/*
+  /*
 Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
 */
 
-img,
-video {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Make elements with the HTML hidden attribute stay hidden by default */
-
-[hidden] {
-  display: none;
-}
-
-*, ::before, ::after {
-  --tw-border-spacing-x: 0;
-  --tw-border-spacing-y: 0;
-  --tw-translate-x: 0;
-  --tw-translate-y: 0;
-  --tw-rotate: 0;
-  --tw-skew-x: 0;
-  --tw-skew-y: 0;
-  --tw-scale-x: 1;
-  --tw-scale-y: 1;
-  --tw-pan-x:  ;
-  --tw-pan-y:  ;
-  --tw-pinch-zoom:  ;
-  --tw-scroll-snap-strictness: proximity;
-  --tw-ordinal:  ;
-  --tw-slashed-zero:  ;
-  --tw-numeric-figure:  ;
-  --tw-numeric-spacing:  ;
-  --tw-numeric-fraction:  ;
-  --tw-ring-inset:  ;
-  --tw-ring-offset-width: 0px;
-  --tw-ring-offset-color: #fff;
-  --tw-ring-color: rgb(59 130 246 / 0.5);
-  --tw-ring-offset-shadow: 0 0 #0000;
-  --tw-ring-shadow: 0 0 #0000;
-  --tw-shadow: 0 0 #0000;
-  --tw-shadow-colored: 0 0 #0000;
-  --tw-blur:  ;
-  --tw-brightness:  ;
-  --tw-contrast:  ;
-  --tw-grayscale:  ;
-  --tw-hue-rotate:  ;
-  --tw-invert:  ;
-  --tw-saturate:  ;
-  --tw-sepia:  ;
-  --tw-drop-shadow:  ;
-  --tw-backdrop-blur:  ;
-  --tw-backdrop-brightness:  ;
-  --tw-backdrop-contrast:  ;
-  --tw-backdrop-grayscale:  ;
-  --tw-backdrop-hue-rotate:  ;
-  --tw-backdrop-invert:  ;
-  --tw-backdrop-opacity:  ;
-  --tw-backdrop-saturate:  ;
-  --tw-backdrop-sepia:  ;
-}
-
-::backdrop {
-  --tw-border-spacing-x: 0;
-  --tw-border-spacing-y: 0;
-  --tw-translate-x: 0;
-  --tw-translate-y: 0;
-  --tw-rotate: 0;
-  --tw-skew-x: 0;
-  --tw-skew-y: 0;
-  --tw-scale-x: 1;
-  --tw-scale-y: 1;
-  --tw-pan-x:  ;
-  --tw-pan-y:  ;
-  --tw-pinch-zoom:  ;
-  --tw-scroll-snap-strictness: proximity;
-  --tw-ordinal:  ;
-  --tw-slashed-zero:  ;
-  --tw-numeric-figure:  ;
-  --tw-numeric-spacing:  ;
-  --tw-numeric-fraction:  ;
-  --tw-ring-inset:  ;
-  --tw-ring-offset-width: 0px;
-  --tw-ring-offset-color: #fff;
-  --tw-ring-color: rgb(59 130 246 / 0.5);
-  --tw-ring-offset-shadow: 0 0 #0000;
-  --tw-ring-shadow: 0 0 #0000;
-  --tw-shadow: 0 0 #0000;
-  --tw-shadow-colored: 0 0 #0000;
-  --tw-blur:  ;
-  --tw-brightness:  ;
-  --tw-contrast:  ;
-  --tw-grayscale:  ;
-  --tw-hue-rotate:  ;
-  --tw-invert:  ;
-  --tw-saturate:  ;
-  --tw-sepia:  ;
-  --tw-drop-shadow:  ;
-  --tw-backdrop-blur:  ;
-  --tw-backdrop-brightness:  ;
-  --tw-backdrop-contrast:  ;
-  --tw-backdrop-grayscale:  ;
-  --tw-backdrop-hue-rotate:  ;
-  --tw-backdrop-invert:  ;
-  --tw-backdrop-opacity:  ;
-  --tw-backdrop-saturate:  ;
-  --tw-backdrop-sepia:  ;
-}
-
-.container {
-  width: 100%;
-  margin-right: auto;
-  margin-left: auto;
-  padding-right: 16px;
-  padding-left: 16px;
-}
-
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px;
-  }
-}
-
-@media (min-width: 1320px) {
-  .container {
-    max-width: 1320px;
-  }
-}
-
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1536px;
-  }
-}
-
-.fixed {
-  position: fixed;
-}
-
-.absolute {
-  position: absolute;
-}
-
-.relative {
-  position: relative;
-}
-
-.inset-x-0 {
-  left: 0px;
-  right: 0px;
-}
-
-.-bottom-0 {
-  bottom: -0px;
-}
-
-.bottom-0 {
-  bottom: 0px;
-}
-
-.bottom-24 {
-  bottom: 6rem;
-}
-
-.left-0 {
-  left: 0px;
-}
-
-.left-1\/2 {
-  left: 50%;
-}
-
-.right-4 {
-  right: 1rem;
-}
-
-.top-0 {
-  top: 0px;
-}
-
-.top-full {
-  top: 100%;
-}
-
-.z-10 {
-  z-index: 10;
-}
-
-.z-\[9999\] {
-  z-index: 9999;
-}
-
-.mx-4 {
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
-
-.mx-8 {
-  margin-left: 2rem;
-  margin-right: 2rem;
-}
-
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.mb-1 {
-  margin-bottom: 0.25rem;
-}
-
-.mb-10 {
-  margin-bottom: 2.5rem;
-}
-
-.mb-12 {
-  margin-bottom: 3rem;
-}
-
-.mb-16 {
-  margin-bottom: 4rem;
-}
-
-.mb-2 {
-  margin-bottom: 0.5rem;
-}
-
-.mb-3 {
-  margin-bottom: 0.75rem;
-}
-
-.mb-4 {
-  margin-bottom: 1rem;
-}
-
-.mb-5 {
-  margin-bottom: 1.25rem;
-}
-
-.mb-6 {
-  margin-bottom: 1.5rem;
-}
-
-.mb-7 {
-  margin-bottom: 1.75rem;
-}
-
-.mb-8 {
-  margin-bottom: 2rem;
-}
-
-.ml-2 {
-  margin-left: 0.5rem;
-}
-
-.mr-2 {
-  margin-right: 0.5rem;
-}
-
-.mt-1 {
-  margin-top: 0.25rem;
-}
-
-.mt-10 {
-  margin-top: 2.5rem;
-}
-
-.mt-2 {
-  margin-top: 0.5rem;
-}
-
-.mt-5 {
-  margin-top: 1.25rem;
-}
-
-.mt-7 {
-  margin-top: 1.75rem;
-}
-
-.block {
-  display: block;
-}
-
-.inline-block {
-  display: inline-block;
-}
-
-.inline {
-  display: inline;
-}
-
-.flex {
-  display: flex;
-}
-
-.hidden {
-  display: none;
-}
-
-.h-11 {
-  height: 2.75rem;
-}
-
-.h-3 {
-  height: 0.75rem;
-}
-
-.h-32 {
-  height: 8rem;
-}
-
-.h-7 {
-  height: 1.75rem;
-}
-
-.h-9 {
-  height: 2.25rem;
-}
-
-.w-11 {
-  width: 2.75rem;
-}
-
-.w-14 {
-  width: 3.5rem;
-}
-
-.w-3 {
-  width: 0.75rem;
-}
-
-.w-7 {
-  width: 1.75rem;
-}
-
-.w-9 {
-  width: 2.25rem;
-}
-
-.w-full {
-  width: 100%;
-}
-
-.max-w-\[120px\] {
-  max-width: 120px;
-}
-
-.max-w-full {
-  max-width: 100%;
-}
-
-.max-w-xl {
-  max-width: 36rem;
-}
-
-.-translate-x-1\/2 {
-  --tw-translate-x: -50%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.rotate-45 {
-  --tw-rotate: 45deg;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.transform {
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.cursor-pointer {
-  cursor: pointer;
-}
-
-.flex-wrap {
-  flex-wrap: wrap;
-}
-
-.items-center {
-  align-items: center;
-}
-
-.justify-center {
-  justify-content: center;
-}
-
-.justify-between {
-  justify-content: space-between;
-}
-
-.self-end {
-  align-self: flex-end;
-}
-
-.self-center {
-  align-self: center;
-}
-
-.overflow-hidden {
-  overflow: hidden;
-}
-
-.scroll-smooth {
-  scroll-behavior: smooth;
-}
-
-.truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.rounded-full {
-  border-radius: 9999px;
-}
-
-.rounded-lg {
-  border-radius: 0.5rem;
-}
-
-.rounded-md {
-  border-radius: 0.375rem;
-}
-
-.rounded-xl {
-  border-radius: 0.75rem;
-}
-
-.border {
-  border-width: 1px;
-}
-
-.border-l-4 {
-  border-left-width: 4px;
-}
-
-.border-t {
-  border-top-width: 1px;
-}
-
-.border-t-4 {
-  border-top-width: 4px;
-}
-
-.border-slate-300 {
-  --tw-border-opacity: 1;
-  border-color: rgb(203 213 225 / var(--tw-border-opacity));
-}
-
-.border-slate-700 {
-  --tw-border-opacity: 1;
-  border-color: rgb(51 65 85 / var(--tw-border-opacity));
-}
-
-.bg-coffee {
-  --tw-bg-opacity: 1;
-  background-color: rgb(217 119 6 / var(--tw-bg-opacity));
-}
-
-.bg-dark {
-  --tw-bg-opacity: 1;
-  background-color: rgb(15 23 42 / var(--tw-bg-opacity));
-}
-
-.bg-github {
-  --tw-bg-opacity: 1;
-  background-color: rgb(87 83 78 / var(--tw-bg-opacity));
-}
-
-.bg-netlify {
-  --tw-bg-opacity: 1;
-  background-color: rgb(37 99 235 / var(--tw-bg-opacity));
-}
-
-.bg-primary {
-  --tw-bg-opacity: 1;
-  background-color: rgb(20 184 166 / var(--tw-bg-opacity));
-}
-
-.bg-slate-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(241 245 249 / var(--tw-bg-opacity));
-}
-
-.bg-slate-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
-}
-
-.bg-slate-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(100 116 139 / var(--tw-bg-opacity));
-}
-
-.bg-slate-800 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(30 41 59 / var(--tw-bg-opacity));
-}
-
-.bg-transparent {
-  background-color: transparent;
-}
-
-.bg-vercel {
-  --tw-bg-opacity: 1;
-  background-color: rgb(2 132 199 / var(--tw-bg-opacity));
-}
-
-.bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-kofi {
-  --tw-bg-opacity: 1;
-  background-color: rgb(219 39 119 / var(--tw-bg-opacity));
-}
-
-.bg-opacity-70 {
-  --tw-bg-opacity: 0.7;
-}
-
-.fill-current {
-  fill: currentColor;
-}
-
-.p-1 {
-  padding: 0.25rem;
-}
-
-.p-3 {
-  padding: 0.75rem;
-}
-
-.p-4 {
-  padding: 1rem;
-}
-
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-.px-6 {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-
-.px-8 {
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
-.py-2 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
-.py-3 {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-}
-
-.py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
-.py-5 {
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
-}
-
-.py-6 {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-}
-
-.py-8 {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-
-.pb-1 {
-  padding-bottom: 0.25rem;
-}
-
-.pb-12 {
-  padding-bottom: 3rem;
-}
-
-.pb-16 {
-  padding-bottom: 4rem;
-}
-
-.pb-32 {
-  padding-bottom: 8rem;
-}
-
-.pl-4 {
-  padding-left: 1rem;
-}
-
-.pt-10 {
-  padding-top: 2.5rem;
-}
-
-.pt-2 {
-  padding-top: 0.5rem;
-}
-
-.pt-24 {
-  padding-top: 6rem;
-}
-
-.pt-36 {
-  padding-top: 9rem;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
-
-.text-4xl {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-}
-
-.text-base {
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
-
-.text-lg {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-}
-
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
-
-.text-xs {
-  font-size: 0.75rem;
-  line-height: 1rem;
-}
-
-.font-bold {
-  font-weight: 700;
-}
-
-.font-medium {
-  font-weight: 500;
-}
-
-.font-semibold {
-  font-weight: 600;
-}
-
-.leading-relaxed {
-  line-height: 1.625;
-}
-
-.text-dark {
-  --tw-text-opacity: 1;
-  color: rgb(15 23 42 / var(--tw-text-opacity));
-}
-
-.text-primary {
-  --tw-text-opacity: 1;
-  color: rgb(20 184 166 / var(--tw-text-opacity));
-}
-
-.text-red-600 {
-  --tw-text-opacity: 1;
-  color: rgb(220 38 38 / var(--tw-text-opacity));
-}
-
-.text-secondary {
-  --tw-text-opacity: 1;
-  color: rgb(100 116 139 / var(--tw-text-opacity));
-}
-
-.text-sky-500 {
-  --tw-text-opacity: 1;
-  color: rgb(14 165 233 / var(--tw-text-opacity));
-}
-
-.text-slate-500 {
-  --tw-text-opacity: 1;
-  color: rgb(100 116 139 / var(--tw-text-opacity));
-}
-
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.opacity-60 {
-  opacity: 0.6;
-}
-
-.shadow {
-  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.shadow-lg {
-  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.shadow-md {
-  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.grayscale {
-  --tw-grayscale: grayscale(100%);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
-.transition {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.duration-200 {
-  transition-duration: 200ms;
-}
-
-.duration-300 {
-  transition-duration: 300ms;
-}
-
-.ease-in-out {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-body {
-  font-family: "Inter", sans-serif;
-}
-
-.navbar-fixed {
-  position: fixed;
-  z-index: 9999;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  --tw-bg-opacity: 0.7;
-  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-  --tw-shadow-color: #000;
-  --tw-shadow: var(--tw-shadow-colored);
-  --tw-backdrop-blur: blur(4px);
-  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
-          backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
-}
-
-.dark .navbar-fixed {
-  background-color: rgb(15 23 42 / var(--tw-bg-opacity));
-  --tw-bg-opacity: 0.5;
-  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-  --tw-shadow-color: #1e293b;
-  --tw-shadow: var(--tw-shadow-colored);
-}
-
-.navbar-fixed {
-  box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.15);
-}
-
-.navbar-bottom {
-  position: fixed;
-  z-index: 9999;
-  --tw-backdrop-blur: blur(4px);
-  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
-          backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
-}
-
-.dark .navbar-bottom {
-  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-  --tw-shadow-color: #f1f5f9;
-  --tw-shadow: var(--tw-shadow-colored);
-}
-
-.navbar-bottom {
-  box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.15);
-}
-
-.hamburger-line {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-  display: block;
-  height: 2px;
-  width: 30px;
-  --tw-bg-opacity: 1;
-  background-color: rgb(15 23 42 / var(--tw-bg-opacity));
-}
-
-.dark .hamburger-line {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.hamburger-active > span:nth-child(1) {
-  --tw-rotate: 45deg;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.hamburger-active > span:nth-child(2) {
-  --tw-scale-x: 0;
-  --tw-scale-y: 0;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.hamburger-active > span:nth-child(3) {
-  --tw-rotate: -45deg;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-#dark-toggle:checked ~ label div.toggle-circle {
-  --tw-translate-x: 1.25rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.visited\:text-primary:visited {
-  color: rgb(20 184 166 );
-}
-
-@keyframes pulse {
-  50% {
-    opacity: .5;
-  }
-}
-
-.hover\:animate-pulse:hover {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-.hover\:border-primary:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(20 184 166 / var(--tw-border-opacity));
-}
-
-.hover\:bg-primary:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(20 184 166 / var(--tw-bg-opacity));
-}
-
-.hover\:text-primary:hover {
-  --tw-text-opacity: 1;
-  color: rgb(20 184 166 / var(--tw-text-opacity));
-}
-
-.hover\:text-white:hover {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.hover\:opacity-100:hover {
-  opacity: 1;
-}
-
-.hover\:opacity-80:hover {
-  opacity: 0.8;
-}
-
-.hover\:shadow-lg:hover {
-  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.hover\:grayscale-0:hover {
-  --tw-grayscale: grayscale(0);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
-.focus\:border-primary:focus {
-  --tw-border-opacity: 1;
-  border-color: rgb(20 184 166 / var(--tw-border-opacity));
-}
-
-.focus\:outline-none:focus {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-}
-
-.focus\:ring-1:focus {
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-}
-
-.focus\:ring-primary:focus {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(20 184 166 / var(--tw-ring-opacity));
-}
-
-.group:hover .group-hover\:text-primary {
-  --tw-text-opacity: 1;
-  color: rgb(20 184 166 / var(--tw-text-opacity));
-}
-
-.dark .dark\:block {
-  display: block;
-}
-
-.dark .dark\:hidden {
-  display: none;
-}
-
-.dark .dark\:bg-dark {
-  --tw-bg-opacity: 1;
-  background-color: rgb(15 23 42 / var(--tw-bg-opacity));
-}
-
-.dark .dark\:bg-slate-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(203 213 225 / var(--tw-bg-opacity));
-}
-
-.dark .dark\:bg-slate-800 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(30 41 59 / var(--tw-bg-opacity));
-}
-
-.dark .dark\:bg-opacity-90 {
-  --tw-bg-opacity: 0.9;
-}
-
-.dark .dark\:text-dark {
-  --tw-text-opacity: 1;
-  color: rgb(15 23 42 / var(--tw-text-opacity));
-}
-
-.dark .dark\:text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.dark .dark\:shadow-slate-500 {
-  --tw-shadow-color: #64748b;
-  --tw-shadow: var(--tw-shadow-colored);
-}
-
-.dark .dark\:visited\:text-primary:visited {
-  color: rgb(20 184 166 );
-}
-
-.dark .dark\:hover\:text-primary:hover {
-  --tw-text-opacity: 1;
-  color: rgb(20 184 166 / var(--tw-text-opacity));
-}
-
-@media (min-width: 640px) {
-  .sm\:pr-5 {
-    padding-right: 1.25rem;
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
   }
 
-  .sm\:text-4xl {
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-  }
-}
+  /* Make elements with the HTML hidden attribute stay hidden by default */
 
-@media (min-width: 768px) {
-  .md\:mb-0 {
-    margin-bottom: 0px;
-  }
-
-  .md\:hidden {
+  [hidden] {
     display: none;
   }
 
-  .md\:w-1\/2 {
-    width: 50%;
+  *,
+  ::before,
+  ::after {
+    --tw-border-spacing-x: 0;
+    --tw-border-spacing-y: 0;
+    --tw-translate-x: 0;
+    --tw-translate-y: 0;
+    --tw-rotate: 0;
+    --tw-skew-x: 0;
+    --tw-skew-y: 0;
+    --tw-scale-x: 1;
+    --tw-scale-y: 1;
+    --tw-pan-x: ;
+    --tw-pan-y: ;
+    --tw-pinch-zoom: ;
+    --tw-scroll-snap-strictness: proximity;
+    --tw-ordinal: ;
+    --tw-slashed-zero: ;
+    --tw-numeric-figure: ;
+    --tw-numeric-spacing: ;
+    --tw-numeric-fraction: ;
+    --tw-ring-inset: ;
+    --tw-ring-offset-width: 0px;
+    --tw-ring-offset-color: #fff;
+    --tw-ring-color: rgb(59 130 246 / 0.5);
+    --tw-ring-offset-shadow: 0 0 #0000;
+    --tw-ring-shadow: 0 0 #0000;
+    --tw-shadow: 0 0 #0000;
+    --tw-shadow-colored: 0 0 #0000;
+    --tw-blur: ;
+    --tw-brightness: ;
+    --tw-contrast: ;
+    --tw-grayscale: ;
+    --tw-hue-rotate: ;
+    --tw-invert: ;
+    --tw-saturate: ;
+    --tw-sepia: ;
+    --tw-drop-shadow: ;
+    --tw-backdrop-blur: ;
+    --tw-backdrop-brightness: ;
+    --tw-backdrop-contrast: ;
+    --tw-backdrop-grayscale: ;
+    --tw-backdrop-hue-rotate: ;
+    --tw-backdrop-invert: ;
+    --tw-backdrop-opacity: ;
+    --tw-backdrop-saturate: ;
+    --tw-backdrop-sepia: ;
   }
 
-  .md\:w-1\/3 {
-    width: 33.333333%;
+  ::backdrop {
+    --tw-border-spacing-x: 0;
+    --tw-border-spacing-y: 0;
+    --tw-translate-x: 0;
+    --tw-translate-y: 0;
+    --tw-rotate: 0;
+    --tw-skew-x: 0;
+    --tw-skew-y: 0;
+    --tw-scale-x: 1;
+    --tw-scale-y: 1;
+    --tw-pan-x: ;
+    --tw-pan-y: ;
+    --tw-pinch-zoom: ;
+    --tw-scroll-snap-strictness: proximity;
+    --tw-ordinal: ;
+    --tw-slashed-zero: ;
+    --tw-numeric-figure: ;
+    --tw-numeric-spacing: ;
+    --tw-numeric-fraction: ;
+    --tw-ring-inset: ;
+    --tw-ring-offset-width: 0px;
+    --tw-ring-offset-color: #fff;
+    --tw-ring-color: rgb(59 130 246 / 0.5);
+    --tw-ring-offset-shadow: 0 0 #0000;
+    --tw-ring-shadow: 0 0 #0000;
+    --tw-shadow: 0 0 #0000;
+    --tw-shadow-colored: 0 0 #0000;
+    --tw-blur: ;
+    --tw-brightness: ;
+    --tw-contrast: ;
+    --tw-grayscale: ;
+    --tw-hue-rotate: ;
+    --tw-invert: ;
+    --tw-saturate: ;
+    --tw-sepia: ;
+    --tw-drop-shadow: ;
+    --tw-backdrop-blur: ;
+    --tw-backdrop-brightness: ;
+    --tw-backdrop-contrast: ;
+    --tw-backdrop-grayscale: ;
+    --tw-backdrop-hue-rotate: ;
+    --tw-backdrop-invert: ;
+    --tw-backdrop-opacity: ;
+    --tw-backdrop-saturate: ;
+    --tw-backdrop-sepia: ;
   }
 
-  .md\:text-lg {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-  }
-
-  .md\:text-xl {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  @media (min-width: 768px) {
-    .lg\:md\:bg-transparent {
-      background-color: transparent;
-    }
-
-    .lg\:md\:block {
-      display: block;
-    }
-
-    .lg\:md\:bottom-4 {
-      bottom: 1rem;
-    }
-
-    .lg\:md\:h-14 {
-      height: 3.5rem;
-    }
-
-    .lg\:md\:h-5 {
-      height: 1.25rem;
-    }
-
-    .lg\:md\:hidden {
-      display: none;
-    }
-
-    .lg\:md\:max-w-full {
-      max-width: 100%;
-    }
-
-    .lg\:md\:mt-2 {
-      margin-top: 0.5rem;
-    }
-
-    .lg\:md\:rounded-none {
-      border-radius: 0px;
-    }
-
-    .lg\:md\:shadow-none {
-      --tw-shadow: 0 0 #0000;
-      --tw-shadow-colored: 0 0 #0000;
-      box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-    }
-
-    .lg\:md\:static {
-      position: static;
-    }
-
-    .lg\:md\:w-14 {
-      width: 3.5rem;
-    }
-
-    .lg\:md\:w-5 {
-      width: 1.25rem;
-    }
-  }
-
-  .lg\:mx-6 {
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
-  }
-
-  .lg\:mx-auto {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .lg\:mr-0 {
-    margin-right: 0px;
-  }
-
-  .lg\:mt-0 {
-    margin-top: 0px;
-  }
-
-  .lg\:w-1\/2 {
-    width: 50%;
-  }
-
-  .lg\:w-2\/3 {
-    width: 66.666667%;
-  }
-
-  .lg\:w-full {
+  .container {
     width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 16px;
+    padding-left: 16px;
   }
 
-  .lg\:pr-10 {
-    padding-right: 2.5rem;
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+    }
   }
 
-  .lg\:text-2xl {
-    font-size: 1.5rem;
-    line-height: 2rem;
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
   }
 
-  .lg\:text-5xl {
-    font-size: 3rem;
-    line-height: 1;
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
   }
 
-  .dark .dark\:lg\:bg-transparent {
-    background-color: transparent;
+  @media (min-width: 1320px) {
+    .container {
+      max-width: 1320px;
+    }
   }
-}
 
-@media (min-width: 1320px) {
-  .xl\:mx-8 {
+  @media (min-width: 1536px) {
+    .container {
+      max-width: 1536px;
+    }
+  }
+
+  .fixed {
+    position: fixed;
+  }
+
+  .absolute {
+    position: absolute;
+  }
+
+  .relative {
+    position: relative;
+  }
+
+  .inset-x-0 {
+    left: 0px;
+    right: 0px;
+  }
+
+  .-bottom-0 {
+    bottom: -0px;
+  }
+
+  .bottom-0 {
+    bottom: 0px;
+  }
+
+  .bottom-24 {
+    bottom: 6rem;
+  }
+
+  .left-0 {
+    left: 0px;
+  }
+
+  .left-1\/2 {
+    left: 50%;
+  }
+
+  .right-4 {
+    right: 1rem;
+  }
+
+  .top-0 {
+    top: 0px;
+  }
+
+  .top-full {
+    top: 100%;
+  }
+
+  .z-10 {
+    z-index: 10;
+  }
+
+  .z-\[9999\] {
+    z-index: 9999;
+  }
+
+  .mx-4 {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .mx-8 {
     margin-left: 2rem;
     margin-right: 2rem;
   }
 
-  .xl\:mx-auto {
+  .mx-auto {
     margin-left: auto;
     margin-right: auto;
   }
 
-  .xl\:w-1\/3 {
-    width: 33.333333%;
+  .mb-1 {
+    margin-bottom: 0.25rem;
   }
 
-  .xl\:w-10\/12 {
-    width: 83.333333%;
+  .mb-10 {
+    margin-bottom: 2.5rem;
   }
 
-  .xl\:px-56 {
-    padding-left: 14rem;
-    padding-right: 14rem;
+  .mb-12 {
+    margin-bottom: 3rem;
   }
-}
 
-  </style>
-  <body class="">
-    <!-- HEADER TOP START -->
-    <header class="fixed top-0 left-0 z-[9999] flex w-full items-center bg-transparent">
-      <div class="container">
-        <div class="relative flex items-center justify-between">
-          <div class="px-4">
-            <!-- <img src="https://muniraju2023.s3.amazonaws.com/logo1.png"> -->
-            <a href="/" class="block py-6 text-lg font-bold text-primary">FriendlyAIBots</a>
-          </div>
-          <div class="flex items-center px-4">
-            <nav id="nav-menu" class="fixed right-4 top-full hidden w-full rounded-lg bg-white py-5 shadow-lg dark:bg-dark dark:shadow-slate-500 lg:md:static lg:md:block lg:md:max-w-full lg:md:rounded-none lg:md:bg-transparent lg:md:shadow-none lg:w-full dark:lg:bg-transparent">
-              <ul class="flex items-center justify-center">
-                <li class="group">
-                  <a href="index.html" class="mx-8 flex py-2 text-base font-semibold text-dark transition duration-200 ease-in-out visited:text-primary group-hover:text-primary dark:text-white dark:visited:text-primary"> Home </a>
-                </li>
-                <li class="group">
-                  <a href="project.html" class="mx-8 flex py-2 text-base font-semibold text-dark transition duration-200 ease-in-out group-hover:text-primary dark:text-white">Project</a>
-                </li>
-                <!-- <li class="group">
+  .mb-16 {
+    margin-bottom: 4rem;
+  }
+
+  .mb-2 {
+    margin-bottom: 0.5rem;
+  }
+
+  .mb-3 {
+    margin-bottom: 0.75rem;
+  }
+
+  .mb-4 {
+    margin-bottom: 1rem;
+  }
+
+  .mb-5 {
+    margin-bottom: 1.25rem;
+  }
+
+  .mb-6 {
+    margin-bottom: 1.5rem;
+  }
+
+  .mb-7 {
+    margin-bottom: 1.75rem;
+  }
+
+  .mb-8 {
+    margin-bottom: 2rem;
+  }
+
+  .ml-2 {
+    margin-left: 0.5rem;
+  }
+
+  .mr-2 {
+    margin-right: 0.5rem;
+  }
+
+  .mt-1 {
+    margin-top: 0.25rem;
+  }
+
+  .mt-10 {
+    margin-top: 2.5rem;
+  }
+
+  .mt-2 {
+    margin-top: 0.5rem;
+  }
+
+  .mt-5 {
+    margin-top: 1.25rem;
+  }
+
+  .mt-7 {
+    margin-top: 1.75rem;
+  }
+
+  .block {
+    display: block;
+  }
+
+  .inline-block {
+    display: inline-block;
+  }
+
+  .inline {
+    display: inline;
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .h-11 {
+    height: 2.75rem;
+  }
+
+  .h-3 {
+    height: 0.75rem;
+  }
+
+  .h-32 {
+    height: 8rem;
+  }
+
+  .h-7 {
+    height: 1.75rem;
+  }
+
+  .h-9 {
+    height: 2.25rem;
+  }
+
+  .w-11 {
+    width: 2.75rem;
+  }
+
+  .w-14 {
+    width: 3.5rem;
+  }
+
+  .w-3 {
+    width: 0.75rem;
+  }
+
+  .w-7 {
+    width: 1.75rem;
+  }
+
+  .w-9 {
+    width: 2.25rem;
+  }
+
+  .w-full {
+    width: 100%;
+  }
+
+  .max-w-\[120px\] {
+    max-width: 120px;
+  }
+
+  .max-w-full {
+    max-width: 100%;
+  }
+
+  .max-w-xl {
+    max-width: 36rem;
+  }
+
+  .-translate-x-1\/2 {
+    --tw-translate-x: -50%;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  }
+
+  .rotate-45 {
+    --tw-rotate: 45deg;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  }
+
+  .transform {
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  }
+
+  .cursor-pointer {
+    cursor: pointer;
+  }
+
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+
+  .items-center {
+    align-items: center;
+  }
+
+  .justify-center {
+    justify-content: center;
+  }
+
+  .justify-between {
+    justify-content: space-between;
+  }
+
+  .self-end {
+    align-self: flex-end;
+  }
+
+  .self-center {
+    align-self: center;
+  }
+
+  .overflow-hidden {
+    overflow: hidden;
+  }
+
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
+  .truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .rounded-full {
+    border-radius: 9999px;
+  }
+
+  .rounded-lg {
+    border-radius: 0.5rem;
+  }
+
+  .rounded-md {
+    border-radius: 0.375rem;
+  }
+
+  .rounded-xl {
+    border-radius: 0.75rem;
+  }
+
+  .border {
+    border-width: 1px;
+  }
+
+  .border-l-4 {
+    border-left-width: 4px;
+  }
+
+  .border-t {
+    border-top-width: 1px;
+  }
+
+  .border-t-4 {
+    border-top-width: 4px;
+  }
+
+  .border-slate-300 {
+    --tw-border-opacity: 1;
+    border-color: rgb(203 213 225 / var(--tw-border-opacity));
+  }
+
+  .border-slate-700 {
+    --tw-border-opacity: 1;
+    border-color: rgb(51 65 85 / var(--tw-border-opacity));
+  }
+
+  .bg-coffee {
+    --tw-bg-opacity: 1;
+    background-color: rgb(217 119 6 / var(--tw-bg-opacity));
+  }
+
+  .bg-dark {
+    --tw-bg-opacity: 1;
+    background-color: rgb(15 23 42 / var(--tw-bg-opacity));
+  }
+
+  .bg-github {
+    --tw-bg-opacity: 1;
+    background-color: rgb(87 83 78 / var(--tw-bg-opacity));
+  }
+
+  .bg-netlify {
+    --tw-bg-opacity: 1;
+    background-color: rgb(37 99 235 / var(--tw-bg-opacity));
+  }
+
+  .bg-primary {
+    --tw-bg-opacity: 1;
+    background-color: rgb(20 184 166 / var(--tw-bg-opacity));
+  }
+
+  .bg-slate-100 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(241 245 249 / var(--tw-bg-opacity));
+  }
+
+  .bg-slate-200 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(226 232 240 / var(--tw-bg-opacity));
+  }
+
+  .bg-slate-500 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(100 116 139 / var(--tw-bg-opacity));
+  }
+
+  .bg-slate-800 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(30 41 59 / var(--tw-bg-opacity));
+  }
+
+  .bg-transparent {
+    background-color: transparent;
+  }
+
+  .bg-vercel {
+    --tw-bg-opacity: 1;
+    background-color: rgb(2 132 199 / var(--tw-bg-opacity));
+  }
+
+  .bg-white {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  }
+
+  .bg-kofi {
+    --tw-bg-opacity: 1;
+    background-color: rgb(219 39 119 / var(--tw-bg-opacity));
+  }
+
+  .bg-opacity-70 {
+    --tw-bg-opacity: 0.7;
+  }
+
+  .fill-current {
+    fill: currentColor;
+  }
+
+  .p-1 {
+    padding: 0.25rem;
+  }
+
+  .p-3 {
+    padding: 0.75rem;
+  }
+
+  .p-4 {
+    padding: 1rem;
+  }
+
+  .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .py-3 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .py-5 {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .py-6 {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .py-8 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .pb-1 {
+    padding-bottom: 0.25rem;
+  }
+
+  .pb-12 {
+    padding-bottom: 3rem;
+  }
+
+  .pb-16 {
+    padding-bottom: 4rem;
+  }
+
+  .pb-32 {
+    padding-bottom: 8rem;
+  }
+
+  .pl-4 {
+    padding-left: 1rem;
+  }
+
+  .pt-10 {
+    padding-top: 2.5rem;
+  }
+
+  .pt-2 {
+    padding-top: 0.5rem;
+  }
+
+  .pt-24 {
+    padding-top: 6rem;
+  }
+
+  .pt-36 {
+    padding-top: 9rem;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  .text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  .text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
+  .text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  .text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+
+  .font-bold {
+    font-weight: 700;
+  }
+
+  .font-medium {
+    font-weight: 500;
+  }
+
+  .font-semibold {
+    font-weight: 600;
+  }
+
+  .leading-relaxed {
+    line-height: 1.625;
+  }
+
+  .text-dark {
+    --tw-text-opacity: 1;
+    color: rgb(15 23 42 / var(--tw-text-opacity));
+  }
+
+  .text-primary {
+    --tw-text-opacity: 1;
+    color: rgb(20 184 166 / var(--tw-text-opacity));
+  }
+
+  .text-red-600 {
+    --tw-text-opacity: 1;
+    color: rgb(220 38 38 / var(--tw-text-opacity));
+  }
+
+  .text-secondary {
+    --tw-text-opacity: 1;
+    color: rgb(100 116 139 / var(--tw-text-opacity));
+  }
+
+  .text-sky-500 {
+    --tw-text-opacity: 1;
+    color: rgb(14 165 233 / var(--tw-text-opacity));
+  }
+
+  .text-slate-500 {
+    --tw-text-opacity: 1;
+    color: rgb(100 116 139 / var(--tw-text-opacity));
+  }
+
+  .text-white {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+  }
+
+  .opacity-60 {
+    opacity: 0.6;
+  }
+
+  .shadow {
+    --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  }
+
+  .shadow-lg {
+    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  }
+
+  .shadow-md {
+    --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  }
+
+  .grayscale {
+    --tw-grayscale: grayscale(100%);
+    filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+  }
+
+  .transition {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+
+  .duration-200 {
+    transition-duration: 200ms;
+  }
+
+  .duration-300 {
+    transition-duration: 300ms;
+  }
+
+  .ease-in-out {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  body {
+    font-family: "Inter", sans-serif;
+  }
+
+  .navbar-fixed {
+    position: fixed;
+    z-index: 9999;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    --tw-bg-opacity: 0.7;
+    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    --tw-shadow-color: #000;
+    --tw-shadow: var(--tw-shadow-colored);
+    --tw-backdrop-blur: blur(4px);
+    -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+    backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+  }
+
+  .dark .navbar-fixed {
+    background-color: rgb(15 23 42 / var(--tw-bg-opacity));
+    --tw-bg-opacity: 0.5;
+    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    --tw-shadow-color: #1e293b;
+    --tw-shadow: var(--tw-shadow-colored);
+  }
+
+  .navbar-fixed {
+    box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.15);
+  }
+
+  .navbar-bottom {
+    position: fixed;
+    z-index: 9999;
+    --tw-backdrop-blur: blur(4px);
+    -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+    backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+  }
+
+  .dark .navbar-bottom {
+    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    --tw-shadow-color: #f1f5f9;
+    --tw-shadow: var(--tw-shadow-colored);
+  }
+
+  .navbar-bottom {
+    box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.15);
+  }
+
+  .hamburger-line {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    height: 2px;
+    width: 30px;
+    --tw-bg-opacity: 1;
+    background-color: rgb(15 23 42 / var(--tw-bg-opacity));
+  }
+
+  .dark .hamburger-line {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  }
+
+  .hamburger-active>span:nth-child(1) {
+    --tw-rotate: 45deg;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  }
+
+  .hamburger-active>span:nth-child(2) {
+    --tw-scale-x: 0;
+    --tw-scale-y: 0;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  }
+
+  .hamburger-active>span:nth-child(3) {
+    --tw-rotate: -45deg;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  }
+
+  #dark-toggle:checked~label div.toggle-circle {
+    --tw-translate-x: 1.25rem;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  }
+
+  .visited\:text-primary:visited {
+    color: rgb(20 184 166);
+  }
+
+  @keyframes pulse {
+    50% {
+      opacity: .5;
+    }
+  }
+
+  .hover\:animate-pulse:hover {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .hover\:border-primary:hover {
+    --tw-border-opacity: 1;
+    border-color: rgb(20 184 166 / var(--tw-border-opacity));
+  }
+
+  .hover\:bg-primary:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(20 184 166 / var(--tw-bg-opacity));
+  }
+
+  .hover\:text-primary:hover {
+    --tw-text-opacity: 1;
+    color: rgb(20 184 166 / var(--tw-text-opacity));
+  }
+
+  .hover\:text-white:hover {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+  }
+
+  .hover\:opacity-100:hover {
+    opacity: 1;
+  }
+
+  .hover\:opacity-80:hover {
+    opacity: 0.8;
+  }
+
+  .hover\:shadow-lg:hover {
+    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  }
+
+  .hover\:grayscale-0:hover {
+    --tw-grayscale: grayscale(0);
+    filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+  }
+
+  .focus\:border-primary:focus {
+    --tw-border-opacity: 1;
+    border-color: rgb(20 184 166 / var(--tw-border-opacity));
+  }
+
+  .focus\:outline-none:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+
+  .focus\:ring-1:focus {
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  }
+
+  .focus\:ring-primary:focus {
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgb(20 184 166 / var(--tw-ring-opacity));
+  }
+
+  .group:hover .group-hover\:text-primary {
+    --tw-text-opacity: 1;
+    color: rgb(20 184 166 / var(--tw-text-opacity));
+  }
+
+  .dark .dark\:block {
+    display: block;
+  }
+
+  .dark .dark\:hidden {
+    display: none;
+  }
+
+  .dark .dark\:bg-dark {
+    --tw-bg-opacity: 1;
+    background-color: rgb(15 23 42 / var(--tw-bg-opacity));
+  }
+
+  .dark .dark\:bg-slate-300 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(203 213 225 / var(--tw-bg-opacity));
+  }
+
+  .dark .dark\:bg-slate-800 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(30 41 59 / var(--tw-bg-opacity));
+  }
+
+  .dark .dark\:bg-opacity-90 {
+    --tw-bg-opacity: 0.9;
+  }
+
+  .dark .dark\:text-dark {
+    --tw-text-opacity: 1;
+    color: rgb(15 23 42 / var(--tw-text-opacity));
+  }
+
+  .dark .dark\:text-white {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+  }
+
+  .dark .dark\:shadow-slate-500 {
+    --tw-shadow-color: #64748b;
+    --tw-shadow: var(--tw-shadow-colored);
+  }
+
+  .dark .dark\:visited\:text-primary:visited {
+    color: rgb(20 184 166);
+  }
+
+  .dark .dark\:hover\:text-primary:hover {
+    --tw-text-opacity: 1;
+    color: rgb(20 184 166 / var(--tw-text-opacity));
+  }
+
+  @media (min-width: 640px) {
+    .sm\:pr-5 {
+      padding-right: 1.25rem;
+    }
+
+    .sm\:text-4xl {
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .md\:mb-0 {
+      margin-bottom: 0px;
+    }
+
+    .md\:hidden {
+      display: none;
+    }
+
+    .md\:w-1\/2 {
+      width: 50%;
+    }
+
+    .md\:w-1\/3 {
+      width: 33.333333%;
+    }
+
+    .md\:text-lg {
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+    }
+
+    .md\:text-xl {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    @media (min-width: 768px) {
+      .lg\:md\:bg-transparent {
+        background-color: transparent;
+      }
+
+      .lg\:md\:block {
+        display: block;
+      }
+
+      .lg\:md\:bottom-4 {
+        bottom: 1rem;
+      }
+
+      .lg\:md\:h-14 {
+        height: 3.5rem;
+      }
+
+      .lg\:md\:h-5 {
+        height: 1.25rem;
+      }
+
+      .lg\:md\:hidden {
+        display: none;
+      }
+
+      .lg\:md\:max-w-full {
+        max-width: 100%;
+      }
+
+      .lg\:md\:mt-2 {
+        margin-top: 0.5rem;
+      }
+
+      .lg\:md\:rounded-none {
+        border-radius: 0px;
+      }
+
+      .lg\:md\:shadow-none {
+        --tw-shadow: 0 0 #0000;
+        --tw-shadow-colored: 0 0 #0000;
+        box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+      }
+
+      .lg\:md\:static {
+        position: static;
+      }
+
+      .lg\:md\:w-14 {
+        width: 3.5rem;
+      }
+
+      .lg\:md\:w-5 {
+        width: 1.25rem;
+      }
+    }
+
+    .lg\:mx-6 {
+      margin-left: 1.5rem;
+      margin-right: 1.5rem;
+    }
+
+    .lg\:mx-auto {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .lg\:mr-0 {
+      margin-right: 0px;
+    }
+
+    .lg\:mt-0 {
+      margin-top: 0px;
+    }
+
+    .lg\:w-1\/2 {
+      width: 50%;
+    }
+
+    .lg\:w-2\/3 {
+      width: 66.666667%;
+    }
+
+    .lg\:w-full {
+      width: 100%;
+    }
+
+    .lg\:pr-10 {
+      padding-right: 2.5rem;
+    }
+
+    .lg\:text-2xl {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+
+    .lg\:text-5xl {
+      font-size: 3rem;
+      line-height: 1;
+    }
+
+    .dark .dark\:lg\:bg-transparent {
+      background-color: transparent;
+    }
+  }
+
+  @media (min-width: 1320px) {
+    .xl\:mx-8 {
+      margin-left: 2rem;
+      margin-right: 2rem;
+    }
+
+    .xl\:mx-auto {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .xl\:w-1\/3 {
+      width: 33.333333%;
+    }
+
+    .xl\:w-10\/12 {
+      width: 83.333333%;
+    }
+
+    .xl\:px-56 {
+      padding-left: 14rem;
+      padding-right: 14rem;
+    }
+  }
+</style>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<!-- HEADER TOP START -->
+<header class="fixed flex w-full items-center bg-transparent">
+  <div class="container">
+    <div class=" flex items-center justify-content">
+      <div class="px-4 ">
+        <img src="https://muniraju2023.s3.amazonaws.com/logo1.png" style="height: 90px;margin-left: 25px;">
+        <a href="/" class="block lg:text-2xl font-bold text-primary">FriendlyAI</a>
+      </div>
+      <div class="flex items-center px-4">
+        <nav id="nav-menu" class="fixed " style="margin-left: 45%;">
+          <ul class="flex items-center ">
+            <li class="group">
+              <a href="#home"
+                class="mx-8 flex py-2 text-base font-semibold text-dark transition duration-200 ease-in-out visited:text-primary group-hover:text-primary dark:text-white dark:visited:text-primary">
+                Home </a>
+            </li>
+
+            <!-- <li class="group">
                   <a href="#clients" class="mx-8 flex py-2 text-base font-semibold text-dark transition duration-200 ease-in-out group-hover:text-primary dark:text-white">Clients</a>
                 </li> -->
-                <li class="group">
-                  <a href="http://10.0.0.181:5000/signin" class="mx-8 flex py-2 text-base font-semibold text-dark transition duration-200 ease-in-out group-hover:text-primary dark:text-white">Signin</a>
-                </li>
-                <li class="group">
-                  <a href="about.html" class="mx-8 flex py-2 text-base font-semibold text-dark transition duration-200 ease-in-out group-hover:text-primary dark:text-white">About Me</a>
-                </li>
-                <!-- <li class="group">
+            <li class="group">
+              <a href="/signin"
+                class="mx-8 flex py-2 text-base font-semibold text-dark transition duration-200 ease-in-out group-hover:text-primary dark:text-white">Signin</a>
+            </li>
+            <li class="group">
+              <a href="#about"
+                class="mx-8 flex py-2 text-base font-semibold text-dark transition duration-200 ease-in-out group-hover:text-primary dark:text-white">About
+                Us</a>
+            </li>
+            <li class="group">
+              <a href="#article"
+                class="mx-8 flex py-2 text-base font-semibold text-dark transition duration-200 ease-in-out group-hover:text-primary dark:text-white">Articles</a>
+            </li>
+            <!-- <li class="group">
                   <a href="#contact" class="mx-8 flex py-2 text-base font-semibold text-dark transition duration-200 ease-in-out group-hover:text-primary dark:text-white">Contact</a>
                 </li> -->
-              </ul>
-            </nav>
-            <li class="flex items-center pl-4 sm:pr-5 lg:pr-10">
-              <div class="flex">
-                <!-- <span class="mr-2 text-sm font-semibold text-slate-500">Light</span> -->
-                <input type="checkbox" class="hidden" id="dark-toggle" />
-                <label for="dark-toggle">
-                  <div class="flex h-9 w-14 cursor-pointer items-center rounded-full bg-slate-500 p-1">
-                    <div class="toggle-circle flex h-7 w-7 items-center justify-center rounded-full bg-white transition duration-300 ease-in-out">
-                      <svg role="img" class="dark:hidden" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="color-scheme-light">
-                        <path
-                          d="M12 18c-3.309 0-6-2.691-6-6s2.691-6 6-6 6 2.691 6 6-2.691 6-6 6zm0-10c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4zm0-4a1 1 0 0 1-1-1V1a1 1 0 0 1 2 0v2a1 1 0 0 1-1 1zm0 20a1 1 0 0 1-1-1v-2a1 1 0 1 1 2 0v2a1 1 0 0 1-1 1zM5.64 6.64a.997.997 0 0 1-.707-.293l-1.42-1.42a.999.999 0 1 1 1.414-1.414l1.42 1.42A.999.999 0 0 1 5.64 6.64zm14.139 14.139a.997.997 0 0 1-.707-.293l-1.42-1.42a.999.999 0 1 1 1.414-1.414l1.42 1.42a.999.999 0 0 1-.707 1.707zM3 13H1a1 1 0 1 1 0-2h2a1 1 0 0 1 0 2zm20 0h-2a1 1 0 1 1 0-2h2a1 1 0 1 1 0 2zM4.22 20.779a.999.999 0 0 1-.707-1.707l1.42-1.42a.999.999 0 1 1 1.414 1.414l-1.42 1.42a.993.993 0 0 1-.707.293zM18.359 6.64a.999.999 0 0 1-.707-1.707l1.42-1.42a.999.999 0 1 1 1.414 1.414l-1.42 1.42a.997.997 0 0 1-.707.293z"></path>
-                      </svg>
-                      <svg role="img" class="hidden dark:block" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="color-scheme-dark">
-                        <path
-                          d="M12.048 21.963c-.308 0-.618-.015-.93-.043-2.66-.246-5.064-1.513-6.771-3.567s-2.512-4.651-2.266-7.311a10.004 10.004 0 0 1 9.038-9.038 1 1 0 0 1 .896 1.589 6.008 6.008 0 0 0 1.258 8.392c2.078 1.536 5.055 1.536 7.133 0a1 1 0 0 1 1.591.896 9.951 9.951 0 0 1-9.949 9.082zM9.315 4.438a8.006 8.006 0 0 0-5.244 6.787 7.954 7.954 0 0 0 1.813 5.849 7.95 7.95 0 0 0 5.417 2.854 7.95 7.95 0 0 0 8.266-5.243 8.01 8.01 0 0 1-2.729.476 7.946 7.946 0 0 1-4.755-1.565C9.174 11.443 8.145 7.68 9.315 4.438z"></path>
-                      </svg>
-                    </div>
-                  </div>
-                </label>
-                <!-- <span class="ml-2 text-sm font-semibold text-slate-500">Dark</span> -->
-              </div>
-            </li>
-          </div>
-        </div>
+          </ul>
+        </nav>
+
       </div>
-    </header>
-    <!-- HEADER TOP END -->
+    </div>
+  </div>
+</header>
+<!-- HEADER TOP END -->
 
-    <!-- NAVBAR BOTTOM START -->
-    <!-- <section id="bottom-navigation" class="md:hidden block fixed inset-x-0 bottom-0 z-10 bg-white shadow"> // if shown only tablet/mobile-->
-    <section id="bottom-navigation" class="fixed inset-x-0 bottom-0 z-[9999] block bg-white bg-opacity-70 shadow-lg dark:bg-dark dark:bg-opacity-90 lg:md:hidden">
-      <div id="tabs" class="flex justify-between">
-        <a href="index.html" class="inline-block w-full justify-center pt-2 pb-1 text-center text-base font-bold text-dark transition duration-200 ease-in-out visited:text-primary hover:text-primary dark:text-white dark:visited:text-primary dark:hover:text-primary">
-          <?xml version="1.0" ?><!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'>
-          <svg width="25" height="25" class="mb-1 inline-block fill-current" id="Layer_1" style="enable-background: new 0 0 24 24" version="1.1" viewBox="0 0 16 16" width="16px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-            <path d="M15.45,7L14,5.551V2c0-0.55-0.45-1-1-1h-1c-0.55,0-1,0.45-1,1v0.553L9,0.555C8.727,0.297,8.477,0,8,0S7.273,0.297,7,0.555  L0.55,7C0.238,7.325,0,7.562,0,8c0,0.563,0.432,1,1,1h1v6c0,0.55,0.45,1,1,1h3v-5c0-0.55,0.45-1,1-1h2c0.55,0,1,0.45,1,1v5h3  c0.55,0,1-0.45,1-1V9h1c0.568,0,1-0.437,1-1C16,7.562,15.762,7.325,15.45,7z" />
-          </svg>
-          <span class="tab tab-home block text-xs">Home</span>
-        </a>
-        <a href="project.html" class="inline-block w-full justify-center pt-2 pb-1 text-center text-base font-bold text-dark transition duration-200 ease-in-out hover:text-primary dark:text-white dark:hover:text-primary">
-          <?xml version="1.0" ?><svg width="25" height="25" class="mb-1 inline-block fill-current" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M384 121.941V128H256V0h6.059c6.365 0 12.47 2.529 16.971 7.029l97.941 97.941A24.005 24.005 0 0 1 384 121.941zM248 160c-13.2 0-24-10.8-24-24V0H24C10.745 0 0 10.745 0 24v464c0 13.255 10.745 24 24 24h336c13.255 0 24-10.745 24-24V160H248zM123.206 400.505a5.4 5.4 0 0 1-7.633.246l-64.866-60.812a5.4 5.4 0 0 1 0-7.879l64.866-60.812a5.4 5.4 0 0 1 7.633.246l19.579 20.885a5.4 5.4 0 0 1-.372 7.747L101.65 336l40.763 35.874a5.4 5.4 0 0 1 .372 7.747l-19.579 20.884zm51.295 50.479l-27.453-7.97a5.402 5.402 0 0 1-3.681-6.692l61.44-211.626a5.402 5.402 0 0 1 6.692-3.681l27.452 7.97a5.4 5.4 0 0 1 3.68 6.692l-61.44 211.626a5.397 5.397 0 0 1-6.69 3.681zm160.792-111.045l-64.866 60.812a5.4 5.4 0 0 1-7.633-.246l-19.58-20.885a5.4 5.4 0 0 1 .372-7.747L284.35 336l-40.763-35.874a5.4 5.4 0 0 1-.372-7.747l19.58-20.885a5.4 5.4 0 0 1 7.633-.246l64.866 60.812a5.4 5.4 0 0 1-.001 7.879z" />
-          </svg>
-          <span class="tab tab-explore block text-xs">Project</span>
-        </a>
-        <a href="/signin" class="inline-block w-full justify-center pt-2 pb-1 text-center text-base font-bold text-dark transition duration-200 ease-in-out hover:text-primary dark:text-white dark:hover:text-primary">
-          <?xml version="1.0" ?><svg width="25" height="25" class="mb-1 inline-block fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <g id="Glyph"><path d="M9,21.62l.33-2.57a5,5,0,0,1,1.43-2.9l5.68-5.69A5,5,0,0,1,19,9.13V6a5,5,0,0,0-5-5H6A5,5,0,0,0,1,6V18a5,5,0,0,0,5,5H9.18A2.94,2.94,0,0,1,9,21.62ZM5,7h8a1,1,0,0,1,0,2H5A1,1,0,0,1,5,7Zm0,4h6a1,1,0,0,1,0,2H5a1,1,0,0,1,0-2Zm2,6H5a1,1,0,0,1,0-2H7a1,1,0,0,1,0,2Zm15.12-.88-5.69,5.69a2.93,2.93,0,0,1-1.74.85L12.13,23H12a1,1,0,0,1-1-1.13l.33-2.56a2.93,2.93,0,0,1,.85-1.74l5.69-5.69a3.08,3.08,0,0,1,4.24,0A3,3,0,0,1,22.12,16.12Z" /></g>
-          </svg>
-          <span class="tab tab-whishlist block text-xs">Signin</span>
-        </a>
-        <a href="about.html" class="inline-block w-full justify-center pt-2 pb-1 text-center text-base font-bold text-dark transition duration-200 ease-in-out hover:text-primary dark:text-white dark:hover:text-primary">
-          <?xml version="1.0" ?><svg style="enable-background: new 0 0 24 24" version="1.1" width="25" height="25" class="mb-1 inline-block fill-current" viewBox="0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-            <g id="info" />
-            <g id="icons">
-              <g id="user">
-                <ellipse cx="12" cy="8" rx="5" ry="6" />
-                <path d="M21.8,19.1c-0.9-1.8-2.6-3.3-4.8-4.2c-0.6-0.2-1.3-0.2-1.8,0.1c-1,0.6-2,0.9-3.2,0.9s-2.2-0.3-3.2-0.9    C8.3,14.8,7.6,14.7,7,15c-2.2,0.9-3.9,2.4-4.8,4.2C1.5,20.5,2.6,22,4.1,22h15.8C21.4,22,22.5,20.5,21.8,19.1z" />
-              </g>
-            </g>
-          </svg>
-          <span class="tab tab-kategori block text-xs">About Us</span>
-        </a>
+<!-- NAVBAR BOTTOM START -->
+
+<!-- NAVBAR BOTTOM START -->
+
+<!-- HERO SECTION START -->
+<section id="home" class="pt-36 dark:bg-dark">
+  <div class="container">
+    <div class="flex flex-wrap">
+      <div class="w-full self-center px-4 lg:w-1/2">
+        <h1 class="text-base font-semibold text-primary md:text-xl">
+          Hello folks 👋,
+          <span class="mt-1 block text-4xl font-bold text-dark dark:text-white lg:text-5xl">Meet Your New Best Friend:
+            The Rise of Friendly AI Bots</span>
+        </h1>
+        <h2 class="mb-5 text-lg font-medium text-secondary lg:text-2xl">AI therapist, GuienePig, German tutor</h2>
+        <p class="mb-7 font-medium leading-relaxed text-secondary">Experience our AI bots <span
+            class="font-bold text-dark dark:text-white">professional, convenient, effective, user friendly and easy
+            tool.</span></p>
+
+
+
       </div>
-    </section>
-    <!-- NAVBAR BOTTOM START -->
 
-    <!-- HERO SECTION START -->
-    <section id="home" class="pt-36 dark:bg-dark">
-      <div class="container">
-        <div class="flex flex-wrap">
-          <div class="w-full self-center px-4 lg:w-1/2">
-            <h1 class="text-base font-semibold text-primary md:text-xl">
-              Hello folks 👋, 
-              <span class="mt-1 block text-4xl font-bold text-dark dark:text-white lg:text-5xl">Meet Your New Best Friend: The Rise of Friendly AI Bots</span>
-            </h1>
-            <h2 class="mb-5 text-lg font-medium text-secondary lg:text-2xl">AI therapist, GuienePig, German tutor</h2>
-            <p class="mb-7 font-medium leading-relaxed text-secondary">Experience our AI bots <span class="font-bold text-dark dark:text-white">professional, convenient, effective, user friendly and easy tool.</span></p>
-
-
-    
-          </div>
-           
-          <div class="w-full self-end px-4 lg:w-1/2">
-            <div class="relative mt-10 lg:mt-0 lg:mr-0">
-              <img src="https://muniraju2023.s3.amazonaws.com/3d_home.png" alt="Nehemia Gueldi" class="relative z-10 mx-auto max-w-full" />
-              <!-- <span class="absolute -bottom-0 left-1/2 -translate-x-1/2">
+      <div class="w-full self-end px-4 lg:w-1/2">
+        <div class="relative mt-10 lg:mt-0 lg:mr-0">
+          <img src="https://muniraju2023.s3.amazonaws.com/3d_home.png" alt="Nehemia Gueldi"
+            class="relative z-10 mx-auto max-w-full" />
+          <!-- <span class="absolute -bottom-0 left-1/2 -translate-x-1/2">
                 <svg width="380" height="380" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                   <path fill="#14b8a6" d="M43.6,-48.7C54.7,-32.6,60.6,-16.3,62.4,1.7C64.1,19.8,61.7,39.5,50.6,51.9C39.5,64.2,19.8,69.2,2.2,67C-15.4,64.8,-30.8,55.5,-46.8,43.1C-62.9,30.8,-79.6,15.4,-80.8,-1.2C-82,-17.7,-67.6,-35.5,-51.6,-51.6C-35.5,-67.7,-17.7,-82.2,-0.7,-81.5C16.3,-80.8,32.6,-64.8,43.6,-48.7Z" transform="translate(100 100) scale(1.2)" />
                 </svg>
               </span> -->
-            </div>        
-        </div>
-          </div>
-          
         </div>
       </div>
-    </section>
-    <!-- HERO SECTION END -->
+    </div>
 
-    <!-- PORTFOLIO SECTION START -->
-    <section id="portfolio" class="bg-slate-100 pt-36 pb-16 dark:bg-slate-800">
-      <div class="container">
-        <div class="w-full px-4">
-          <div class="mx-auto mb-16 max-w-xl text-center">
-            <h4 class="mb-2 text-lg font-semibold text-primary">Portfolio</h4>
-            <h2 class="mb-4 text-sm font-bold text-dark dark:text-white sm:text-4xl lg:text-5xl">"Friendly AI bots are revolutionizing user experiences by utilizing advanced natural language processing and machine learning to offer human-like interactions. These bots serve not just as tools, but as companions that can understand context, interpret emotions, and assist in tasks like customer service, healthcare, etc.,"</h4>
-            <p class="text-md font-medium text-secondary md:text-lg">Is there anything specific you would like to know or discuss about.</p>
-          </div>
-        </div>
-        <div class="flex w-full flex-wrap justify-center px-4 xl:mx-auto xl:w-10/12">
-          <div class="mb-12 p-4 md:w-1/2">
-            <div class="overflow-hidden rounded-md shadow-md">
-              <img src="dist/img/portfolio/happywork.png" alt="Happy Work" width="w-full" />
-            </div>
-            <h3 class="mt-5 mb-3 text-xl font-semibold text-dark dark:text-white">Happy Work</h3>
-            <p class="mb-5 text-base font-medium text-secondary">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores architecto qui saepe!</p>
-            <div class="flex">
-              <a href="https://nehemiagueldi.github.io/HappyWork/" target="_blank" class="mr-2 flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 text-secondary transition duration-200 ease-in-out hover:border-primary hover:bg-primary hover:text-white">
-                <?xml version="1.0" ?><svg fill="none" height="24" viewBox="0 0 24 24" width="24" class="fill-current" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M6.25 4.5C5.2835 4.5 4.5 5.2835 4.5 6.25V12H9.25C10.7688 12 12 13.2312 12 14.75V19.5H17.75C18.7165 19.5 19.5 18.7165 19.5 17.75V13.75C19.5 13.3358 19.8358 13 20.25 13C20.6642 13 21 13.3358 21 13.75V17.75C21 19.5449 19.5449 21 17.75 21L6.75 21.0002L6.71603 21H6.25C4.45507 21 3 19.5449 3 17.75V6.25C3 4.45507 4.45507 3 6.25 3H10.25C10.6642 3 11 3.33579 11 3.75C11 4.16421 10.6642 4.5 10.25 4.5H6.25ZM13 3.75C13 3.33579 13.3358 3 13.75 3H20.2505C20.6647 3 21.0005 3.33579 21.0005 3.75V10.25C21.0005 10.6642 20.6647 11 20.2505 11C19.8362 11 19.5005 10.6642 19.5005 10.25V5.56074L14.2803 10.7804C13.9874 11.0732 13.5125 11.0732 13.2196 10.7803C12.9268 10.4874 12.9268 10.0125 13.2197 9.71964L18.4399 4.5H13.75C13.3358 4.5 13 4.16421 13 3.75Z" />
-                </svg>
-              </a>
-              <a href="https://github.com/nehemiagueldi" target="_blank" class="mr-2 flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 text-secondary transition duration-200 ease-in-out hover:border-primary hover:bg-primary hover:text-white">
-                <svg role="img" width="24" class="fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <title>GitHub</title>
-                  <path
-                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                </svg>
-              </a>
-            </div>
-          </div>
-          <div class="mb-12 p-4 md:w-1/2">
-            <div class="overflow-hidden rounded-md shadow-md">
-              <img src="dist/img/portfolio/kotabogor.jpg" alt="Kota Bogor" width="w-full" />
-            </div>
-            <h3 class="mt-5 mb-3 text-xl font-semibold text-dark dark:text-white">Kota Bogor</h3>
-            <p class="mb-5 text-base font-medium text-secondary">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores architecto qui saepe!</p>
-            <div class="flex">
-              <a href="https://nehemiagueldi.github.io/Kota-Bogor/" target="_blank" class="mr-2 flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 text-secondary transition duration-200 ease-in-out hover:border-primary hover:bg-primary hover:text-white">
-                <?xml version="1.0" ?><svg fill="none" height="24" viewBox="0 0 24 24" width="24" class="fill-current" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M6.25 4.5C5.2835 4.5 4.5 5.2835 4.5 6.25V12H9.25C10.7688 12 12 13.2312 12 14.75V19.5H17.75C18.7165 19.5 19.5 18.7165 19.5 17.75V13.75C19.5 13.3358 19.8358 13 20.25 13C20.6642 13 21 13.3358 21 13.75V17.75C21 19.5449 19.5449 21 17.75 21L6.75 21.0002L6.71603 21H6.25C4.45507 21 3 19.5449 3 17.75V6.25C3 4.45507 4.45507 3 6.25 3H10.25C10.6642 3 11 3.33579 11 3.75C11 4.16421 10.6642 4.5 10.25 4.5H6.25ZM13 3.75C13 3.33579 13.3358 3 13.75 3H20.2505C20.6647 3 21.0005 3.33579 21.0005 3.75V10.25C21.0005 10.6642 20.6647 11 20.2505 11C19.8362 11 19.5005 10.6642 19.5005 10.25V5.56074L14.2803 10.7804C13.9874 11.0732 13.5125 11.0732 13.2196 10.7803C12.9268 10.4874 12.9268 10.0125 13.2197 9.71964L18.4399 4.5H13.75C13.3358 4.5 13 4.16421 13 3.75Z" />
-                </svg>
-              </a>
-              <a href="https://github.com/nehemiagueldi" target="_blank" class="mr-2 flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 text-secondary transition duration-200 ease-in-out hover:border-primary hover:bg-primary hover:text-white">
-                <svg role="img" width="24" class="fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <title>GitHub</title>
-                  <path
-                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                </svg>
-              </a>
-            </div>
-          </div>
-          <div class="mb-12 p-4 md:w-1/2">
-            <div class="overflow-hidden rounded-md shadow-md">
-              <img src="dist/img/portfolio/gercepnet.png" alt="Gercep Net" width="w-full" />
-            </div>
-            <h3 class="mt-5 mb-3 text-xl font-semibold text-dark dark:text-white">Gercep Net</h3>
-            <p class="mb-5 text-base font-medium text-secondary">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores architecto qui saepe!</p>
-            <div class="flex">
-              <a href="https://gercepnetz.000webhostapp.com/" target="_blank" class="mr-2 flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 text-secondary transition duration-200 ease-in-out hover:border-primary hover:bg-primary hover:text-white">
-                <?xml version="1.0" ?><svg fill="none" height="24" viewBox="0 0 24 24" width="24" class="fill-current" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M6.25 4.5C5.2835 4.5 4.5 5.2835 4.5 6.25V12H9.25C10.7688 12 12 13.2312 12 14.75V19.5H17.75C18.7165 19.5 19.5 18.7165 19.5 17.75V13.75C19.5 13.3358 19.8358 13 20.25 13C20.6642 13 21 13.3358 21 13.75V17.75C21 19.5449 19.5449 21 17.75 21L6.75 21.0002L6.71603 21H6.25C4.45507 21 3 19.5449 3 17.75V6.25C3 4.45507 4.45507 3 6.25 3H10.25C10.6642 3 11 3.33579 11 3.75C11 4.16421 10.6642 4.5 10.25 4.5H6.25ZM13 3.75C13 3.33579 13.3358 3 13.75 3H20.2505C20.6647 3 21.0005 3.33579 21.0005 3.75V10.25C21.0005 10.6642 20.6647 11 20.2505 11C19.8362 11 19.5005 10.6642 19.5005 10.25V5.56074L14.2803 10.7804C13.9874 11.0732 13.5125 11.0732 13.2196 10.7803C12.9268 10.4874 12.9268 10.0125 13.2197 9.71964L18.4399 4.5H13.75C13.3358 4.5 13 4.16421 13 3.75Z" />
-                </svg>
-              </a>
-              <a href="https://github.com/nehemiagueldi" target="_blank" class="mr-2 flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 text-secondary transition duration-200 ease-in-out hover:border-primary hover:bg-primary hover:text-white">
-                <svg role="img" width="24" class="fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <title>GitHub</title>
-                  <path
-                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                </svg>
-              </a>
-            </div>
-          </div>
-          <div class="mb-12 p-4 md:w-1/2">
-            <div class="overflow-hidden rounded-md shadow-md">
-              <img src="dist/img/portfolio/dico4.png" alt="Dico4" width="w-full" />
-            </div>
-            <h3 class="mt-5 mb-3 text-xl font-semibold text-dark dark:text-white">Dico4</h3>
-            <p class="mb-5 text-base font-medium text-secondary">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores architecto qui saepe!</p>
-            <div class="flex">
-              <a href="https://dico-4.000webhostapp.com/" target="_blank" class="mr-2 flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 text-secondary transition duration-200 ease-in-out hover:border-primary hover:bg-primary hover:text-white">
-                <?xml version="1.0" ?><svg fill="none" height="24" viewBox="0 0 24 24" width="24" class="fill-current" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M6.25 4.5C5.2835 4.5 4.5 5.2835 4.5 6.25V12H9.25C10.7688 12 12 13.2312 12 14.75V19.5H17.75C18.7165 19.5 19.5 18.7165 19.5 17.75V13.75C19.5 13.3358 19.8358 13 20.25 13C20.6642 13 21 13.3358 21 13.75V17.75C21 19.5449 19.5449 21 17.75 21L6.75 21.0002L6.71603 21H6.25C4.45507 21 3 19.5449 3 17.75V6.25C3 4.45507 4.45507 3 6.25 3H10.25C10.6642 3 11 3.33579 11 3.75C11 4.16421 10.6642 4.5 10.25 4.5H6.25ZM13 3.75C13 3.33579 13.3358 3 13.75 3H20.2505C20.6647 3 21.0005 3.33579 21.0005 3.75V10.25C21.0005 10.6642 20.6647 11 20.2505 11C19.8362 11 19.5005 10.6642 19.5005 10.25V5.56074L14.2803 10.7804C13.9874 11.0732 13.5125 11.0732 13.2196 10.7803C12.9268 10.4874 12.9268 10.0125 13.2197 9.71964L18.4399 4.5H13.75C13.3358 4.5 13 4.16421 13 3.75Z" />
-                </svg>
-              </a>
-              <a href="https://github.com/nehemiagueldi" target="_blank" class="mr-2 flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 text-secondary transition duration-200 ease-in-out hover:border-primary hover:bg-primary hover:text-white">
-                <svg role="img" width="24" class="fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <title>GitHub</title>
-                  <path
-                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                </svg>
-              </a>
+  </div>
+  </div>
+</section>
+<!-- HERO SECTION END -->
+<!-- PORTFOLIO SECTION END -->
+
+<!-- CLIENTS SECTION START -->
+<section id="about" class="bg-slate-100 pt-36 pb-32 dark:bg-gray-300">
+  <div class="container">
+    <div class="w-full px-4">
+      <div class="mx-auto mb-16 max-w-xl text-center">
+        <h2 class="mb-4 text-3xl font-bold dark:text-dark sm:text-4xl lg:text-5xl font-semibold text-primary">About Us
+        </h2>
+        <p class="text-lg leading-relaxed m-4 text-gray-600">
+          A diverse team of master's students is collaborating to fuse AI and VR technologies, crafting a cutting-edge
+          virtual assistant that offers immersive, personalized experiences.
+        </p>
+      </div>
+    </div>
+    <div class="flex justify-center text-center mb-24">
+      <div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
+        <div class="px-6">
+          <img alt="..." src="https://muniraju2023.s3.amazonaws.com/nihar.png"
+            class="shadow-lg rounded-full max-w-full mx-auto" style="max-width: 120px;">
+          <div class="pt-6 text-center">
+            <h5 class="text-xl font-bold">Nihar M Raju</h5>
+            <p class="mt-1 text-sm text-gray-500 uppercase font-semibold">
+              MS Computer Science
+            </p>
+            <div class="mt-6">
+              <button class="bg-blue-400 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                onclick="window.location.href = 'https://www.linkedin.com/in/nihar-muniraju-a02132ba'" type="button"><i
+                  class="fa-brands fa-linkedin"></i></button>
+              <button class="bg-red-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                type="button"><i class="fa-regular fa-envelope-open"></i></button>
+              <button class="bg-pink-500 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                type="button"> <i class="fa-brands fa-github"></i></button>
+
+
             </div>
           </div>
         </div>
       </div>
-    </section>
-    <!-- PORTFOLIO SECTION END -->
-
-    <!-- CLIENTS SECTION START -->
-    <section id="clients" class="bg-slate-800 pt-36 pb-32 dark:bg-slate-300">
-      <div class="container">
-        <div class="w-full px-4">
-          <div class="mx-auto mb-16 text-center">
-            <h4 class="mb-2 text-lg font-semibold text-primary">About Us</h4>
-            <h2 class="mb-4 text-3xl font-bold text-white dark:text-dark sm:text-4xl lg:text-5xl">Who have worked together</h2>
-            <p class="text-md font-medium text-secondary md:text-lg">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga placeat inventore veritatis?</p>
-          </div>
-        </div>
-        <div class="w-full px-4">
-          <div class="flex flex-wrap items-center justify-center">
-            <a href="#" class="mx-4 max-w-[120px] py-4 opacity-60 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0 lg:mx-6 xl:mx-8">
-              <img src="dist/img/clients/Google.png" alt="Google" />
-            </a>
-            <a href="#" class="mx-4 max-w-[120px] py-4 opacity-60 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0 lg:mx-6 xl:mx-8">
-              <img src="dist/img/clients/Gojek.png" alt="Gojek" />
-            </a>
-            <a href="#" class="mx-4 max-w-[120px] py-4 opacity-60 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0 lg:mx-6 xl:mx-8">
-              <img src="dist/img/clients/Tokopedia.png" alt="Tokopedia" />
-            </a>
-            <a href="#" class="mx-4 max-w-[120px] py-4 opacity-60 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0 lg:mx-6 xl:mx-8">
-              <img src="dist/img/clients/traveloka.png" alt="Traveloka" />
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- CLIENTS SECTION END -->
-
-    <!-- BLOG SECTION START -->
-    <section id="article" class="bg-slate-100 pt-36 pb-32 dark:bg-dark">
-      <div class="container">
-        <div class="w-full px-4">
-          <div class="mx-auto mb-16 max-w-xl text-center">
-            <h4 class="mb-2 text-lg font-semibold text-primary">Article</h4>
-            <h2 class="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl lg:text-5xl">Recent posts</h2>
-            <p class="text-md font-medium text-secondary md:text-lg">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore quae ducimus aperiam eius.</p>
-          </div>
-        </div>
-        <div class="flex flex-wrap">
-          <div class="w-full px-4 lg:w-1/2 xl:w-1/3">
-            <div class="mb-10 overflow-hidden rounded-xl bg-white shadow-lg dark:bg-slate-800">
-              <img src="https://source.unsplash.com/360x200?programming" alt="Programming" class="w-full" />
-              <div class="py-8 px-6">
-                <h3>
-                  <a href="#" class="mb-3 block truncate text-xl font-semibold text-dark transition duration-300 ease-in-out hover:text-primary dark:text-white dark:hover:text-primary">Learn Programming Tips</a>
-                </h3>
-                <p class="mb-6 text-base font-medium text-secondary">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui, provident!</p>
-                <a href="#" class="rounded-lg bg-primary py-2 px-4 text-sm font-medium text-white transition duration-300 ease-in-out hover:opacity-80">Read More</a>
-              </div>
-            </div>
-          </div>
-          <div class="w-full px-4 lg:w-1/2 xl:w-1/3">
-            <div class="mb-10 overflow-hidden rounded-xl bg-white shadow-lg dark:bg-slate-800">
-              <img src="https://source.unsplash.com/360x200?lifestyle" alt="Lifestyle" class="w-full" />
-              <div class="py-8 px-6">
-                <h3>
-                  <a href="#" class="mb-3 block truncate text-xl font-semibold text-dark transition duration-300 ease-in-out hover:text-primary dark:text-white dark:hover:text-primary">Lifestyle</a>
-                </h3>
-                <p class="mb-6 text-base font-medium text-secondary">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui, provident!</p>
-                <a href="#" class="rounded-lg bg-primary py-2 px-4 text-sm font-medium text-white transition duration-300 ease-in-out hover:opacity-80">Read More</a>
-              </div>
-            </div>
-          </div>
-          <div class="w-full px-4 lg:w-1/2 xl:w-1/3">
-            <div class="mb-10 overflow-hidden rounded-xl bg-white shadow-lg dark:bg-slate-800">
-              <img src="https://source.unsplash.com/360x200?coffee" alt="Coffee" class="w-full" />
-              <div class="py-8 px-6">
-                <h3>
-                  <a href="#" class="mb-3 block truncate text-xl font-semibold text-dark transition duration-300 ease-in-out hover:text-primary dark:text-white dark:hover:text-primary">Enjoying a Cup of Coffee</a>
-                </h3>
-                <p class="mb-6 text-base font-medium text-secondary">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui, provident!</p>
-                <a href="#" class="rounded-lg bg-primary py-2 px-4 text-sm font-medium text-white transition duration-300 ease-in-out hover:opacity-80">Read More</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="w-full items-center justify-center px-4 text-center">
-          <div class="mb-10 overflow-hidden rounded-xl">
-            <div class="py-8 px-6">
-              <h3>
-                <a href="/portfolio-html-tailwindcss-nehemiagueldi/articles.html" class="block truncate text-xl font-semibold text-dark transition duration-300 ease-in-out hover:text-primary dark:text-white dark:hover:text-primary">Read Another Article</a>
-              </h3>
-              <!-- <p class="mb-6 text-base font-medium text-secondary">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui, provident!</p> -->
-              <!-- <a href="#" class="rounded-lg bg-primary py-2 px-4 text-sm font-medium text-white transition duration-300 ease-in-out hover:opacity-80">Read More</a> -->
+      <div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
+        <div class="px-6">
+          <img alt="..." src="https://muniraju2023.s3.amazonaws.com/signin.png"
+            class="shadow-lg rounded-full max-w-full mx-auto" style="max-width: 120px;">
+          <div class="pt-6 text-center">
+            <h5 class="text-xl font-bold">Dylan Neal</h5>
+            <p class="mt-1 text-sm text-gray-500 uppercase font-semibold">
+              MS Software Engineering
+            </p>
+            <div class="mt-6">
+              <button class="bg-blue-400 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                type="button">
+                <i class="fa-regular fa-envelope-open"></i></button><button
+                class="bg-blue-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                type="button">
+                <i class="fa-brands fa-github"></i></button><button
+                class="bg-pink-500 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                type="button">
+                <i class="fa-brands fa-linkedin"></i>
+              </button>
             </div>
           </div>
         </div>
       </div>
-    </section>
-    <!-- BLOG SECTION END -->
-
-    <!-- CONTACT SECTION START -->
-    <section id="contact" class="pt-36 pb-32 dark:bg-slate-800">
-      <div class="container">
-        <div class="w-full px-4">
-          <div class="mx-auto mb-16 max-w-xl text-center">
-            <h4 class="mb-2 text-lg font-semibold text-primary">Contact</h4>
-            <h2 class="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl lg:text-5xl">Get In Touch</h2>
-            <p class="text-md font-medium text-secondary md:text-lg">Is there anything specific you would like to know or discuss about.</p>
-          </div>
-        </div>
-        <form>
-          <div class="w-full lg:mx-auto lg:w-2/3">
-            <div class="mb-8 w-full px-4">
-              <label for="name" class="text-base font-bold text-primary">Name</label>
-              <input type="text" id="name" class="w-full rounded-md bg-slate-200 p-3 text-dark transition duration-200 ease-in-out focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" />
-            </div>
-            <div class="mb-8 w-full px-4">
-              <label for="email" class="text-base font-bold text-primary">Email</label>
-              <input type="text" id="email" class="w-full rounded-md bg-slate-200 p-3 text-dark transition duration-200 ease-in-out focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" />
-            </div>
-            <div class="mb-8 w-full px-4">
-              <label for="message" class="text-base font-bold text-primary">Message</label>
-              <textarea type="text" id="message" class="h-32 w-full rounded-md bg-slate-200 p-3 text-dark transition duration-200 ease-in-out focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"></textarea>
-            </div>
-            <div class="w-full px-4">
-              <button class="w-full rounded-full bg-primary py-3 px-8 text-base font-semibold text-white transition duration-300 hover:opacity-80 hover:shadow-lg">Send</button>
+      <div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
+        <div class="px-6">
+          <img alt="..." src="https://muniraju2023.s3.amazonaws.com/signin.png"
+            class="shadow-lg rounded-full max-w-full mx-auto" style="max-width: 120px;">
+          <div class="pt-6 text-center">
+            <h5 class="text-xl font-bold">Vaidhyaraj Kunchum</h5>
+            <p class="mt-1 text-sm text-gray-500 uppercase font-semibold">
+              MS Computer Science
+            </p>
+            <div class="mt-6">
+              <button class="bg-blue-400 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                type="button">
+                <i class="fa-regular fa-envelope-open"></i></button><button
+                class="bg-blue-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                type="button">
+                <i class="fa-brands fa-github"></i></button><button
+                class="bg-pink-500 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                type="button">
+                <i class="fa-brands fa-linkedin"></i>
+              </button>
             </div>
           </div>
-        </form>
-      </div>
-    </section>
-    <!-- CONTACT SECTION END -->
-
-    <!-- FOOTER SECTION START -->
-    <footer class="bg-dark pt-24 pb-12">
-      <div class="container">
-        <div class="flex flex-wrap">
-          <div class="mb-12 w-full px-4 md:w-1/3"></div>
-          <div class="mb-12 w-full px-4 md:w-1/3"></div>
-          <div class="mb-12 w-full px-4 md:w-1/3"></div>
-        </div>
-        <div class="w-full border-t border-slate-700 pt-10">
-          <!-- SOCIAL MEDIA START-->
-
-          <!-- SOCIAL MEDIA END-->
-          <p class="text-center text-sm font-medium text-slate-500">
-            <script>
-              document.write(new Date().getFullYear());
-            </script>
-            | Made with <span class="text-red-600">❤️</span> by <a href="#" class="font-bold text-primary">FriendlyAIBots</a>, use <a href="https://tailwindcss.com/" target="_blank" class="font-bold text-sky-500">Tailwind CSS</a>
-          </p>
         </div>
       </div>
-    </footer>
-    <!-- FOOTER SECTION END -->
+      <div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
+        <div class="px-6">
+          <img alt="..." src="https://avatars.githubusercontent.com/u/33469593?v=4"
+            class="shadow-lg rounded-full max-w-full mx-auto" style="max-width: 120px;">
+          <div class="pt-6 text-center">
+            <h5 class="text-xl font-bold">Chase Jones</h5>
+            <p class="mt-1 text-sm text-gray-500 uppercase font-semibold">
+              MFA Game Design
+            </p>
+            <div class="mt-6">
+              <button class="bg-blue-400 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                type="button">
+                <i class="fa-regular fa-envelope-open"></i></button><button
+                class="bg-blue-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                type="button">
+                <i class="fa-brands fa-github"></i></button><button
+                class="bg-pink-500 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                type="button">
+                <i class="fa-brands fa-linkedin"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+<!-- CLIENTS SECTION END -->
 
-    <!-- BACK TO TOP START -->
-    <a href="#home" class="fixed right-4 bottom-24 z-[9999] hidden h-11 w-11 items-center justify-center rounded-full bg-primary p-4 hover:animate-pulse lg:md:h-14 lg:md:w-14 lg:md:bottom-4" id="to-top">
-      <span class="mt-1 block h-3 w-3 rotate-45 border-t-4 border-l-4 lg:md:mt-2 lg:md:h-5 lg:md:w-5"></span>
-    </a>
-    <!-- BACK TO TOP END -->
+<!-- BLOG SECTION START -->
+<section id="article" class="bg-slate-100 pt-36 pb-32 dark:bg-dark">
+  <div class="container">
+    <div class="w-full px-4">
+      <div class="mx-auto mb-16 max-w-xl text-center">
+        <h4 class="mb-2 text-lg font-semibold text-primary">Article</h4>
+        <h2 class="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl lg:text-5xl">Recent Articles</h2>
+        <p class="text-md font-medium text-secondary md:text-lg"></p>
+      </div>
+    </div>
+    <div class="flex flex-wrap">
+      <div class="w-full px-4 lg:w-1/2 xl:w-1/3">
+        <div class="mb-10 overflow-hidden rounded-xl bg-white shadow-lg dark:bg-slate-800">
+          <img
+            src="https://hai.stanford.edu/sites/default/files/styles/media/public/2023-06/Brain%20maze.jpg?itok=L57xKjBD"
+            alt="Programming" class="w-full" />
+          <div class="py-8 px-6">
+            <h3>
+              <a href="#"
+                class="mb-3 block truncate text-xl font-semibold text-dark transition duration-300 ease-in-out hover:text-primary dark:text-white dark:hover:text-primary">Learn
+                Programming Tips</a>
+            </h3>
+            <p class="mb-6 text-base font-medium text-secondary">A Blueprint for Using AI in Psychotherapy</p>
+            <a href="https://hai.stanford.edu/news/blueprint-using-ai-psychotherapy"
+              class="rounded-lg bg-primary py-2 px-4 text-sm font-medium text-white transition duration-300 ease-in-out hover:opacity-80">Read
+              More</a>
+          </div>
+        </div>
+      </div>
+      <div class="w-full px-4 lg:w-1/2 xl:w-1/3">
+        <div class="mb-10 overflow-hidden rounded-xl bg-white shadow-lg dark:bg-slate-800">
+          <img
+            src="https://media.npr.org/assets/img/2023/01/19/chatbot-therapy_wide-b667f0335dfdad70b6cf6bfa40d9b392f61833c8-s900-c85.webp"
+            alt="Lifestyle" class="w-full" />
+          <div class="py-8 px-6">
+            <h3>
+              <a href="#"
+                class="mb-3 block truncate text-xl font-semibold text-dark transition duration-300 ease-in-out hover:text-primary dark:text-white dark:hover:text-primary">Lifestyle</a>
+            </h3>
+            <p class="mb-6 text-base font-medium text-secondary">Therapy by chatbot? The promise and challenges in using
+              AI for mental health</p>
+            <a href=" https://www.npr.org/sections/health-shots/2023/01/19/1147081115/therapy-by-chatbot-the-promise-and-challenges-in-using-ai-for-mental-health"
+              class="rounded-lg bg-primary py-2 px-4 text-sm font-medium text-white transition duration-300 ease-in-out hover:opacity-80">Read
+              More</a>
+          </div>
+        </div>
+      </div>
+      <div class="w-full px-4 lg:w-1/2 xl:w-1/3">
+        <div class="mb-10 overflow-hidden rounded-xl bg-white shadow-lg dark:bg-slate-800">
+          <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/40B4/production/_130046561_image.christine..jpg.webp"
+            alt="Coffee" class="w-full" />
+          <div class="py-8 px-6">
+            <h3>
+              <a href="#"
+                class="mb-3 block truncate text-xl font-semibold text-dark transition duration-300 ease-in-out hover:text-primary dark:text-white dark:hover:text-primary">Enjoying
+                a Cup of Coffee</a>
+            </h3>
+            <p class="mb-6 text-base font-medium text-secondary">Students switch to AI to learn languages</p>
+            <a href="https://www.bbc.com/news/business-65849104"
+              class="rounded-lg bg-primary py-2 px-4 text-sm font-medium text-white transition duration-300 ease-in-out hover:opacity-80">Read
+              More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-full items-center justify-center px-4 text-center">
+      <div class="mb-10 overflow-hidden rounded-xl">
+        <div class="py-8 px-6">
+          <h3>
+            <a href="/portfolio-html-tailwindcss-nehemiagueldi/articles.html"
+              class="block truncate text-xl font-semibold text-dark transition duration-300 ease-in-out hover:text-primary dark:text-white dark:hover:text-primary">Read
+              Another Article</a>
+          </h3>
+          <!-- <p class="mb-6 text-base font-medium text-secondary">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui, provident!</p> -->
+          <!-- <a href="#" class="rounded-lg bg-primary py-2 px-4 text-sm font-medium text-white transition duration-300 ease-in-out hover:opacity-80">Read More</a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- BLOG SECTION END -->
 
-    <!-- SCRIPTS START -->
-    <script src="dist/js/script.js"></script>
-    <!-- SCRIPTS END -->
-  </body>
+<!-- CONTACT SECTION START -->
+<!-- CONTACT SECTION END -->
+
+<!-- FOOTER SECTION START -->
+<footer class="bg-dark pt-24 pb-12">
+  <div class="container">
+    <div class="flex flex-wrap">
+      <div class="mb-12 w-full px-4 md:w-1/3"></div>
+      <div class="mb-12 w-full px-4 md:w-1/3"></div>
+      <div class="mb-12 w-full px-4 md:w-1/3"></div>
+    </div>
+    <div class="w-full border-t border-slate-700 pt-10">
+      <!-- SOCIAL MEDIA START-->
+
+      <!-- SOCIAL MEDIA END-->
+      <p class="text-center text-sm font-medium text-slate-500">
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        | <a href="#" class="font-bold text-primary">FriendlyAI</a> <a href="https://tailwindcss.com/" target="_blank"
+          class="font-bold text-sky-500"></a>
+      </p>
+    </div>
+  </div>
+</footer>
+<!-- FOOTER SECTION END -->
+
+<!-- BACK TO TOP START -->
+<a href="#home"
+  class="fixed right-4 bottom-24 z-[9999] hidden h-11 w-11 items-center justify-center rounded-full bg-primary p-4 hover:animate-pulse lg:md:h-14 lg:md:w-14 lg:md:bottom-4"
+  id="to-top">
+  <span class="mt-1 block h-3 w-3 rotate-45 border-t-4 border-l-4 lg:md:mt-2 lg:md:h-5 lg:md:w-5"></span>
+</a>
+<!-- BACK TO TOP END -->
+
+<!-- SCRIPTS START -->
+<script src="https://muniraju2023.s3.amazonaws.com/tailwind.config.js"></script>
+<!-- SCRIPTS END -->
+</body>
+
 </html>
