@@ -17,7 +17,6 @@ service_region = os.getenv("AZURE_REGION")
 
 
 app = Flask(__name__)
-CORS(app, supports_credentials=True,origins=["http://localhost:5000"])  # Enable CORS for all routes with support for credentials
 
 bcrypt = Bcrypt(app)
 client = MongoClient('mongodb+srv://niharmuniraju4:wfhK2TVsJiOCMgcs@goku.jrdvw1f.mongodb.net/')
@@ -58,6 +57,8 @@ def verify_jwt():
         return  # Skip JWT verification for login route
     if request.endpoint == 'signup':
         return  # Skip JWT verification for login route
+    if request.endpoint == 'website':
+        return  # Skip JWT verification for login route
     token = request.cookies.get('token')
     if not token:
         return "Missing token", 401
@@ -66,7 +67,7 @@ def verify_jwt():
         data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
         
     except jwt.ExpiredSignatureError:
-        return render_template('signin.html')
+        return render_template('website.html')
     except jwt.InvalidTokenError:
         return "Invalid token", 401
 
@@ -94,7 +95,8 @@ def converse1():
                 "$gte": start_time,
                 "$lte": end_time
             },
-            "email": email
+            "email": email,
+            "Mode":"1"
         }
         results = conversations_collection.find(query)
         if(results):
@@ -111,13 +113,15 @@ def converse1():
             'email':email,
             'questions': question,
             'response': response_text,
-            'timestamp': datetime.now()
+            'timestamp': datetime.now(),
+            "Mode":"1"
         }
         conversations_collection.insert_one(record)
         return jsonify({"message": response_text}), 200
 
     except Exception as e:
         # Handle errors and return an error response
+        print(e)
         error_message = str(e)
         return "error 1"+error_message
 
@@ -139,7 +143,8 @@ def converse2():
                 "$gte": start_time,
                 "$lte": end_time
             },
-            "email": email
+            "email": email,
+            "Mode":"2"
         }
         results = conversations_collection.find(query)
         if(results):
@@ -156,13 +161,15 @@ def converse2():
             'email':email,
             'questions': question,
             'response': response_text,
-            'timestamp': datetime.now()
+            'timestamp': datetime.now(),
+            "Mode":"2"
         }
         conversations_collection.insert_one(record)
         return jsonify({"message": response_text}), 200
 
     except Exception as e:
         # Handle errors and return an error response
+        print(e)
         error_message = str(e)
         return "error 1"+error_message
 
@@ -185,7 +192,9 @@ def converse3():
                 "$gte": start_time,
                 "$lte": end_time
             },
-            "email": email
+            "email": email,
+            "Mode":"3"
+
         }
         results = conversations_collection.find(query)
         if(results):
@@ -202,7 +211,8 @@ def converse3():
             'email':email,
             'questions': question,
             'response': response_text,
-            'timestamp': datetime.now()
+            'timestamp': datetime.now(),
+            "Mode":"3"
         }
         conversations_collection.insert_one(record)
         return jsonify({"message": response_text}), 200
@@ -274,6 +284,9 @@ def reply2():
 @app.route('/reply3')
 def reply3():
      return render_template('reply3.html')
+@app.route('/website')
+def website():
+     return render_template('website.html')
 @app.route('/home')
 def home():
     return "Welcome to Home"
