@@ -1,4 +1,4 @@
-from flask import Flask, request, send_file, jsonify, abort, render_template,make_response,redirect, url_for, flash,Response
+from flask import Flask, request, send_file, jsonify, abort, render_template,make_response,redirect, url_for, flash
 import openai
 import io
 import os
@@ -8,9 +8,7 @@ from pymongo import MongoClient
 from flask_bcrypt import Bcrypt
 import datetime
 from datetime import datetime,timedelta
-
-
-
+from flask_cors import CORS
 # Set your Azure Speech Service credentials
 speech_key = os.getenv("AZURE_SPEECH_KEY")
 service_region = os.getenv("AZURE_REGION")
@@ -19,7 +17,7 @@ service_region = os.getenv("AZURE_REGION")
 
 
 app = Flask(__name__)
-
+CORS(app, supports_credentials=True,origins=["http://localhost:5000"])  # Enable CORS for all routes with support for credentials
 
 bcrypt = Bcrypt(app)
 client = MongoClient('mongodb+srv://niharmuniraju4:wfhK2TVsJiOCMgcs@goku.jrdvw1f.mongodb.net/')
@@ -56,12 +54,9 @@ def set_referrer_policy(response):
 
 @app.before_request
 def verify_jwt():
-    print(request.endpoint)
     if request.endpoint == 'signin':
         return  # Skip JWT verification for login route
     if request.endpoint == 'signup':
-        return  # Skip JWT verification for login route
-    if request.endpoint is None:
         return  # Skip JWT verification for login route
     token = request.cookies.get('token')
     if not token:
@@ -71,7 +66,7 @@ def verify_jwt():
         data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
         
     except jwt.ExpiredSignatureError:
-        return render_template('website.html')
+        return render_template('signin.html')
     except jwt.InvalidTokenError:
         return "Invalid token", 401
 
@@ -90,13 +85,10 @@ def converse1():
         messages=[
             {"role": "system", "content": prompt01}
             ]
-        
-        data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
-        email = data['user']
-        print(f"Decoded email: {email}") # Debugging
-
         end_time = datetime.now()
         start_time = end_time - timedelta(minutes=20)
+        data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+        email = data['user']
         query = {
             "timestamp": {
                 "$gte": start_time,
@@ -104,8 +96,6 @@ def converse1():
             },
             "email": email
         }
-        print(f"Query: {query}") # Debugging
-
         results = conversations_collection.find(query)
         if(results):
             for result in results: # Adjust the range as needed
@@ -124,18 +114,7 @@ def converse1():
             'timestamp': datetime.now()
         }
         conversations_collection.insert_one(record)
-            
-        response = polly_client.synthesize_speech(
-            VoiceId='Joanna',  # You can change the voice ID as needed
-            OutputFormat='mp3',
-            Text=response_text
-        )
-
-        return Response(
-            response['AudioStream'].read(),
-            content_type='audio/mp3'
-        )
-        # return jsonify({"message": response_text}), 200
+        return jsonify({"message": response_text}), 200
 
     except Exception as e:
         # Handle errors and return an error response
@@ -282,10 +261,6 @@ def dashboard():
 
     return render_template('dashboard.html')
 
-@app.route('/')
-def website():
-    print('hi')
-    return render_template('website.html')
 
 @app.route('/reply1')
 def reply1():
@@ -307,5 +282,5 @@ if __name__ == "__main__":
 
 @app.route('/logout', methods=['POST'])
 def logout():
-    # Add your session termination logic here, if needed ,ssl_context=("cert.pem","key.pem")
+    # Add your session termination logic here, if needed
     return jsonify({'status': 'success'})
