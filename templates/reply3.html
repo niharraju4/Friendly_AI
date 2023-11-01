@@ -27,6 +27,25 @@
         /* Adjust right position */
 
     }
+    #iconai {
+        margin: 10px;
+        /* Add margin for spacing */
+        /* Red color for demonstration */
+        color: #fff;
+        /* White text color */
+        padding: 10px 15px;
+        /* Padding for better visual appearance */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        position: fixed;
+        /* Fixed position */
+        top: 10px;
+        /* Adjust top position */
+        left: 10px;
+        /* Adjust right position */
+
+    }
 
     body {
             display: flex;
@@ -45,13 +64,15 @@
     }
 
     .card {
-        max-width: 600px;
-        width: 100%;
+        max-width: 1200px;
+        width:90%;
+        min-height: 600px;
+        height: 60%;
         background-color: #fff;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         padding: 20px;
         border-radius: 8px;
-        margin-bottom: 20px;
+        margin-right: 20px;
     }
 
     h1 {
@@ -71,6 +92,7 @@
         padding: 10px;
         border-radius: 8px;
         margin-bottom: 20px;
+        
     }
 
     video {
@@ -95,8 +117,9 @@
     .text-boxes {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         width: 100%;
+        margin-bottom: 5px;
     }
 
     .text-box {
@@ -109,25 +132,36 @@
     }
 </style>
 
+    
 <body class="flex items-center justify-center h-screen bg-gray-100">
+    <div>
     <button id="logoutButton" onclick="logout()">Logout</button>
+    </div>
     <div class="card">
-        <h1>German Tutor</h1>
-        <p>Teaching u how to communiacte in German language..</p>
-
-        <div class="video-container" id="videoContainer">
+    <div >
+        <h1 style="justify-content: center;display: flex; margin-top: 20px;">German Tutor</h1>
+        <p style="justify-content: center;display: flex; margin-bottom: 40px; ">Teaching u how to communiacte in German language..</p>
+    </div>
+<div style="width: 100%;display: flex;">
+    <div style="width: 100%;height: 100%;object-fit: cover;display: block;min-width: 50%;margin-right: 20px;">
+        <div class="video-container" id="videoContainer" >
 
             <video id="videoStream" autoplay></video>
         </div>
-        <button id="startButton">Start Camera</button>
-        <button id="stopButton">Stop</button>
+        <div style="justify-content: center;display: flex; ">
+            <button id="startButton" style="margin-right: 10px;">Start Camera</button>
+        <button id="stopButton" style="margin-right: 10px;">Stop</button>
         <button id="PauseButton">Pause</button>
-        <div class="text-boxes">
-            <label for="infoTextBox">Additional Information:</label>
+        </div>
+        
+    </div>
+    <div style="display: inline-block;width: 100%;">
+        <div class="text-boxes" style="justify-content: center;display: flex; ">
+            <label for="infoTextBox" style="margin-bottom: 5px;margin-top: 10px;">Additional Information:</label>
             <textarea id="infoTextBox" class="text-box"></textarea>
         </div>
         <div class="text-boxes">
-            <label for="GermanQuestionTextArea">Translation in German:</label>
+            <label for="GermanQuestionTextArea"style="margin-bottom: 5px;">Translation in German:</label>
             <textarea id="GermanQuestionTextArea" class="text-box"></textarea>
         </div>
         <div class="text-boxes">
@@ -138,7 +172,8 @@
             <label for="GermanAnswerTextArea">Reply in German:</label>
             <textarea id="GermanAnswerTextArea" class="text-box"></textarea>
         </div>
-        
+    </div>
+    </div>
 
         <p id="output"></p>
     </div>
