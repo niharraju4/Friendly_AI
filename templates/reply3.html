@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voice to Text</title>
+    <title>German Tutor</title>
 </head>
 <style>
     #logoutButton {
@@ -29,12 +29,13 @@
     }
 
     body {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        margin: 0;
-        background-color: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+    background-color: #353B3F;
+    font-family: "Roboto", sans-serif;
     }
 
     .container {
@@ -56,12 +57,12 @@
     h1 {
         font-size: 1.5rem;
         font-weight: bold;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
     }
 
     p {
         color: #555;
-        margin-bottom: 20px;
+        margin-bottom: 5px;
     }
 
     .video-container {
@@ -86,7 +87,7 @@
     .output {
         background-color: #fff;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        padding: 20px;
+        padding: 10px;
         border-radius: 8px;
         margin-bottom: 20px;
     }
@@ -100,8 +101,8 @@
 
     .text-box {
         width: 100%;
-        padding: 10px;
-        margin-bottom: 15px;
+        padding: 5px;
+        margin-bottom: 5px;
         box-sizing: border-box;
         border: 1px solid #ccc;
         border-radius: 4px;
@@ -111,8 +112,8 @@
 <body class="flex items-center justify-center h-screen bg-gray-100">
     <button id="logoutButton" onclick="logout()">Logout</button>
     <div class="card">
-        <h1>Ai finance managemener</h1>
-        <p>offering insights into spending patterns and budgeting is what i am known for..</p>
+        <h1>German Tutor</h1>
+        <p>Teaching u how to communiacte in German language..</p>
 
         <div class="video-container" id="videoContainer">
 
@@ -122,12 +123,23 @@
         <button id="stopButton">Stop</button>
         <button id="PauseButton">Pause</button>
         <div class="text-boxes">
-            <label for="replyTextBox">Reply:</label>
-            <textarea id="replyTextBox" class="text-box"></textarea>
-
             <label for="infoTextBox">Additional Information:</label>
             <textarea id="infoTextBox" class="text-box"></textarea>
         </div>
+        <div class="text-boxes">
+            <label for="GermanQuestionTextArea">Translation in German:</label>
+            <textarea id="GermanQuestionTextArea" class="text-box"></textarea>
+        </div>
+        <div class="text-boxes">
+            <label for="EnglishAnswerTextArea">Reply in English:</label>
+            <textarea id="EnglishAnswerTextArea" class="text-box"></textarea>
+        </div>
+        <div class="text-boxes">
+            <label for="GermanAnswerTextArea">Reply in German:</label>
+            <textarea id="GermanAnswerTextArea" class="text-box"></textarea>
+        </div>
+        
+
         <p id="output"></p>
     </div>
 
@@ -141,8 +153,10 @@
         const startButton = document.getElementById("startButton");
         const stopButton = document.getElementById("stopButton");
         const PauseButton = document.getElementById("PauseButton");
-        const replyTextArea = document.getElementById('replyTextBox');
         const infoTextArea = document.getElementById('infoTextBox');
+        const EnglishAnswerTextArea = document.getElementById('replyTextBox');
+        const GermanQuestionTextArea = document.getElementById('replyTextBox');
+        const GermanAnswerTextArea = document.getElementById('replyTextBox');
 
         if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
             const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
@@ -174,13 +188,6 @@
                     if (!response.ok) {
                         throw new Error(`Server returned status: ${response.status}`);
                     }
-                    window.speechSynthesis.onvoiceschanged = function() {
-                        const voices = window.speechSynthesis.getVoices();
-                        console.log('Total voices available:', voices.length);
-                        voices.forEach(voice => {
-                            console.log('Voice Name:', voice.name, 'Language:', voice.lang);
-                        });
-                    };
                     const data = await response.json();
                     if (data && data.message) {
                         console.log(data.message);

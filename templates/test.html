@@ -1,101 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Available Voices and Languages</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px 12px;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-    </style>
+    <title>Text-to-Speech Demo</title>
 </head>
 <body>
+    <h1>Text-to-Speech Demo</h1>
 
-<h2>Available Voices and Languages</h2>
+    <h2>Available Voices</h2>
+    <table id="voiceTable">
+        <thead>
+            <tr>
+                <th>Language</th>
+                <th>Voice</th>
+                <th>Test Voice</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 
-<table>
-    <thead>
-        <tr>
-            <th>Voice Name</th>
-            <th>Language</th>
-        </tr>
-    </thead>
-    <tbody id="voiceList">
-        <!-- Voices will be populated here -->
-    </tbody>
-</table>
+    <script>
+        // Check if the browser supports the Web Speech API
+        if ('speechSynthesis' in window) {
+            const synth = window.speechSynthesis;
+            const voiceTable = document.getElementById('voiceTable');
 
-<h2>Test Speech Synthesis</h2>
+            // Function to populate the voiceTable with available voices
+            function populateVoices() {
+                const voices = synth.getVoices();
+                const tbody = voiceTable.querySelector('tbody');
+                tbody.innerHTML = '';
 
-<label for="voiceSelect">Select Voice:</label>
-<select id="voiceSelect"></select>
-<br><br>
-<label for="testLang">Enter Language Code (e.g. en-US, de-DE):</label>
-<input type="text" id="testLang">
-<br><br>
-<button onclick="testVoice()">Test Voice</button>
+                voices.forEach(voice => {
+                    const row = document.createElement('tr');
+                    const languageCell = document.createElement('td');
+                    const voiceCell = document.createElement('td');
+                    const testButtonCell = document.createElement('td');
+                    const testButton = document.createElement('button');
 
-<script>
-    function populateVoiceList() {
-        const voiceList = document.getElementById('voiceList');
-        const voiceSelect = document.getElementById('voiceSelect');
-        const voices = window.speechSynthesis.getVoices();
+                    languageCell.textContent = voice.lang;
+                    voiceCell.textContent = voice.name;
+                    testButton.textContent = 'Test';
 
-        voices.forEach(voice => {
-            const row = document.createElement('tr');
-            const voiceNameCell = document.createElement('td');
-            const voiceLangCell = document.createElement('td');
+                    testButton.addEventListener('click', () => {
+                        const utterance = new SpeechSynthesisUtterance('how are u?');
+                        utterance.voice = voice;
+                        synth.speak(utterance);
+                    });
 
-            voiceNameCell.textContent = voice.name;
-            voiceLangCell.textContent = voice.lang;
+                    row.appendChild(languageCell);
+                    row.appendChild(voiceCell);
+                    testButtonCell.appendChild(testButton);
+                    row.appendChild(testButtonCell);
+                    tbody.appendChild(row);
+                });
+            }
 
-            row.appendChild(voiceNameCell);
-            row.appendChild(voiceLangCell);
+            // Add event listener for the 'voiceschanged' event
+            synth.addEventListener('voiceschanged', populateVoices);
 
-            voiceList.appendChild(row);
-
-            // Populate voice dropdown
-            const option = document.createElement('option');
-            option.textContent = voice.name;
-            option.value = voice.name;
-            voiceSelect.appendChild(option);
-        });
-    }
-
-    function testVoice() {
-        const utterance = new SpeechSynthesisUtterance("This is a test message.");
-        const selectedVoice = document.getElementById('voiceSelect').value;
-        const lang = document.getElementById('testLang').value;
-
-        utterance.voice = window.speechSynthesis.getVoices().find(voice => voice.name === selectedVoice);
-        utterance.lang = lang;
-
-        window.speechSynthesis.speak(utterance);
-    }
-
-    window.speechSynthesis.onvoiceschanged = function() {
-        populateVoiceList();
-    };
-
-    // Initial call in case voices are already loaded
-    populateVoiceList();
-</script>
-
+            // Initial population of voices
+            populateVoices();
+        } else {
+            alert('Sorry, your browser does not support the Web Speech API.');
+        }
+    </script>
 </body>
 </html>

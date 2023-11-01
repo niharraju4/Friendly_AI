@@ -1,84 +1,172 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cards with Icons</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* Main Background */
-        body {
-            background: #5d5c61;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Canvas style for full-screen background */
-        canvas#neuralCanvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Container for all cards */
-        .main-container {
-             background: rgba(85, 85, 112, 0.3);
-             padding: 100px;
-             border-radius: 25px;
-             margin: 100px;
-             overflow: auto;
-             height: 200vh; /* Added this line to double the height */
-    }
-
-        /* Card Styling */
-        .card {
-            width: 90%;
-            height: 20%;
-            border-radius: 50px;
-            margin: 60px auto;
-            text-align: center;
-            background: rgba(129, 120, 120, 0.399);
-            box-shadow: 0 12px 8px rgba(198, 194, 194, 0.896);
-            transition: all 0.3s ease;
-        }
-
-        .flex-container {
-            display: flex;
-            justify-content: space-between;
-            height: 600%; /* Increased from 200% to 400% */
-        }
-
-        /* Different colors for each card */
-        .card:nth-child(1) { background: #7395ae; }
-        .card:nth-child(2) { background: #7395ae; }
-        .card:nth-child(3) { background: #7395ae; }
-
-        .flex-container {
-            display: flex;
-            justify-content: space-between;
-            height: 200%;
-        }
-
-        .flex-item {
-            flex: 1;
-            padding: 10px;
-            text-align: center;
-            opacity: 0;
-            left: -100%; /* Initially off-screen */
-            position: relative;
-            transition: all 1s ease; /* Transition effect */
-        }
-
-        .flex-item.show {
-            opacity: 1;
-            left: 0;
-        }
-
-        /* Logout Button */
-        #logoutButton {
+    
+    <title>Dashboard</title>
+  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    
+    
+  <style>
+  @import url(https://fonts.googleapis.com/css?family=Roboto);
+  /*Just the background stuff*/
+  span.s1 {
+    position: absolute;
+    top: 0;
+    font-size: 15rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #3C4447;
+  }
+  
+  span.s2 {
+    font-weight: 800;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 15rem;
+    text-transform: uppercase;
+    color: #3C4447;
+  }
+  
+  /*My hum... body.. yeah..*/
+  body {
+    background-color: #353B3F;
+    font-family: "Roboto", sans-serif;
+  }
+  
+  /* The card */
+  .card {
+    position: relative;
+    height: 450px;
+    width: 900px;
+    margin: 120px auto;
+    background-color: #FFF;
+    -webkit-box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
+  }
+  
+  /* Image on the left side */
+  .thumbnail {
+    float: left;
+    position: relative;
+    left: 30px;
+    top: -30px;
+    height: 320px;
+    width: 530px;
+    -webkit-box-shadow: 10px 10px 60px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 60px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 60px 0px rgba(0, 0, 0, 0.75);
+    overflow: hidden;
+  }
+  
+  /*object-fit: cover;*/
+  /*object-position: center;*/
+  img.left {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: auto;
+    width: 100%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+  
+  /* Right side of the card */
+  .right {
+    margin-left: 590px;
+    margin-right: 20px;
+  }
+  
+  h1 {
+    padding-top: 15px;
+    font-size: 1.3rem;
+    color: #4B4B4B;
+  }
+  
+  .author {
+    background-color: #9ECAFF;
+    height: 30px;
+    width: 110px;
+    border-radius: 20px;
+  }
+  
+  .author > img {
+    padding-top: 5px;
+    margin-left: 10px;
+    float: left;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+  }
+  
+  h2 {
+    padding-top: 8px;
+    margin-right: 6px;
+    text-align: right;
+    font-size: 0.8rem;
+  }
+  .separator {
+    margin-top: 10px;
+    border: 1px solid #C3C3C3;
+  }
+  
+  p {
+    text-align: justify;
+    padding-top: 10px;
+    font-size: 0.95rem;
+    line-height: 150%;
+    color: #4B4B4B;
+  }
+  
+  /* DATE of release*/
+  h5 {
+    position: absolute;
+    left: 30px;
+    bottom: -120px;
+    font-size: 6rem;
+    color: #C3C3C3;
+  }
+  
+  h6 {
+    position: absolute;
+    left: 30px;
+    bottom: -55px;
+    font-size: 2rem;
+    color: #C3C3C3;
+  }
+  
+  /* Those futur buttons */
+  ul {
+    margin-left: 250px;
+  }
+  
+  li {
+    display: inline;
+    list-style: none;
+    padding-right: 40px;
+    color: #7B7B7B;
+  }
+  
+  /* Floating action button */
+  .fab {
+    position: absolute;
+    right: 50px;
+    bottom: -40px;
+    box-sizing: border-box;
+    padding-top: 18px;
+    background-color: #1875D0;
+    width: 80px;
+    height: 80px;
+    color: white;
+    text-align: center;
+    border-radius: 50%;
+    -webkit-box-shadow: 10px 10px 50px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 50px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 50px 0px rgba(0, 0, 0, 0.75);
+  }
+  #logoutButton {
             margin: 10px;
             background-color: #b1a296;
             color: white;
@@ -94,184 +182,74 @@
         #logoutButton:hover {
             background-color: #617b8f;
         }
-    </style>
-</head>
-<body>
-    <canvas id="neuralCanvas"></canvas>
-
-    <button id="logoutButton" onclick="logout()">Logout</button>
-
-    <div class="main-container">
-        <!-- AI Therapist Card -->
-        <div class="card">
-            <div class="flex-container">
-                <div class="flex-item">
-                    <a href="/reply1">
-                        <img src="https://counseling.northwestern.edu/wp-content/uploads/sites/83/2021/02/AICulturalCompetence-hero.jpg?w=1024" style="height:100px;">
-                        <p>Ai Therapist</p>
-                    </a>
-                </div>
-                <div class="flex-item">
-                    <a>
-                        <p>An AI therapist is a computer program...</p>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- AI Guinea Pig Card -->
-        <div class="card">
-            <div class="flex-container">
-                <div class="flex-item">
-                    <a href="/reply2">
-                        <img src="https://counseling.northwestern.edu/wp-content/uploads/sites/83/2021/02/AICulturalCompetence-hero.jpg?w=1024" style="height:100px;">
-                        <p>Ai Guinea Pig</p>
-                    </a>
-                </div>
-                <div class="flex-item">
-                    <a>
-                        <p>An AI guinea pig generally refers...</p>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- AI German Tutor Card -->
-        <div class="card">
-            <div class="flex-container">
-                <div class="flex-item">
-                    <a href="/reply3">
-                        <img src="https://counseling.northwestern.edu/wp-content/uploads/sites/83/2021/02/AICulturalCompetence-hero.jpg?w=1024" style="height:100px;">
-                        <p>Ai German Tutor</p>
-                    </a>
-                </div>
-                <div class="flex-item">
-                    <a>
-                        <p>An AI German tutor is a specialized...</p>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
+  </style>
+  
     <script>
-        // Neural Network Canvas JavaScript
-        const canvas = document.getElementById("neuralCanvas");
-        const ctx = canvas.getContext("2d");
-
-        let nodes = [];
-        const nodesToAddEachSecond = 10;
-
-        class Node {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.dx = (Math.random() - 0.5) * 2;
-                this.dy = (Math.random() - 0.5) * 2;
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, 2, 0, Math.PI * 2, false);
-                ctx.fillStyle = "white";
-                ctx.fill();
-
-                nodes.forEach(node => {
-                    if (distance(this, node) < 100) {
-                        ctx.beginPath();
-                        ctx.moveTo(this.x, this.y);
-                        ctx.lineTo(node.x, node.y);
-                        ctx.strokeStyle = "white";
-                        ctx.stroke();
-                    }
-                });
-            }
-
-            update() {
-                if (this.x > canvas.width || this.x < 0) {
-                    this.dx = -this.dx;
-                }
-
-                if (this.y > canvas.height || this.y < 0) {
-                    this.dy = -this.dy;
-                }
-
-                this.x += this.dx;
-                this.y += this.dy;
-
-                this.draw();
-            }
-        }
-
-        function distance(node1, node2) {
-            const xDist = node2.x - node1.x;
-            const yDist = node2.y - node1.y;
-
-            return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
-        }
-
-        function addNodes() {
-            for (let i = 0; i < nodesToAddEachSecond; i++) {
-                nodes.push(new Node());
-            }
-        }
-
-        function init() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
-            nodes = [];
-
-            for (let i = 0; i < 100; i++) {
-                nodes.push(new Node());
-            }
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            nodes.forEach(node => {
-                node.update();
-            });
-        }
-
-        init();
-        animate();
-        setInterval(addNodes, 1000000);
-        window.addEventListener('resize', init);
-
-        // Hover Effect JavaScript
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('mouseover', function() {
-                this.querySelectorAll('.flex-item').forEach(item => {
-                    item.classList.add('show');
-                });
-            });
-
-            card.addEventListener('mouseout', function() {
-                this.querySelectorAll('.flex-item').forEach(item => {
-                    item.classList.remove('show');
-                });
-            });
-        });
-
-    </script>
-</body>
-</html>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  var logoutButton = document.getElementById("logoutButton");
-  logoutButton.addEventListener("click", function() {
-    fetch("/logout", {
-      method: "POST"
-    }).then(function(response) {
-      if (response.ok) {
-        window.location.href = "/signin";
-      }
-    });
-  });
-});
-</script>
+    window.console = window.console || function(t) {};
+  </script>
+  
+    
+    
+  </head>
+  
+  <body translate="no">
+    <div class="">
+        <img src="https://muniraju2023.s3.amazonaws.com/logo1.png" style="height: 90px;margin-left: 25px;">
+        
+    <button id="logoutButton" onclick="logout()">Logout</button>
+      </div>
+    
+  <div class="card">
+    <div class="thumbnail"><img class="left" src="https://img.freepik.com/premium-photo/robotic-ai-therapist-engaging-with-human-patient-calm-serene-therapy-room-reflecting_891336-21549.jpg"></div>
+    <div class="right">
+      <h1>Ai Therapist</h1>
+     
+      <div class="separator"></div>
+      <p>A therapist is a trained professional who specializes in providing psychological and emotional support to individuals, couples, or groups.Therapists employ various therapeutic techniques to help clients address and manage mental health issues, emotional challenges, and personal growth goals.Therapists can include clinical psychologists, social workers, counselors, and psychiatrists, each offering unique expertise and approaches to improve their clients' well-being.</p>
+    </div>
+    <ul>
+      <li><i class="fa fa-eye fa-2x"></i></li>
+      <li><i class="fa fa-heart-o fa-2x"></i></li>
+      <li><i class="fa fa-envelope-o fa-2x"></i></li>
+      <li><i class="fa fa-share-alt fa-2x"></i></li>
+    </ul>
+    <div class="fab"><i class="fa fa-arrow-right fa-3x" href="/reply1"> </i></div>
+  </div>
+  <div class="card">
+    <div class="thumbnail"><img class="left" src="https://www.daysoftheyear.com/cdn-cgi/image/dpr=1%2Cf=auto%2Cfit=cover%2Cheight=650%2Cq=40%2Csharpen=1%2Cwidth=956/wp-content/uploads/guinea-pig-appreciation-day.jpg"></div>
+    <div class="right">
+      <h1>GiniPig</h1>
+     
+      <div class="separator"></div>
+      <p>Magnesium is one of the six essential macro-minerals that is required by the body for energy production and synthesis of protein and enzymes. It contributes to the development of bones and most importantly it is responsible for synthesis of your DNA and RNA. A new report that has appeared in theBritish Journal of Cancer, gives you another reason to add more magnesium to your diet...</p>
+    </div>
+    <ul>
+      <li><i class="fa fa-eye fa-2x"></i></li>
+      <li><i class="fa fa-heart-o fa-2x"></i></li>
+      <li><i class="fa fa-envelope-o fa-2x"></i></li>
+      <li><i class="fa fa-share-alt fa-2x"></i></li>
+    </ul>
+    <div class="fab"><i class="fa fa-arrow-right fa-3x" href="/reply2"> </i></div>
+  </div>
+  <div class="card">
+    <div class="thumbnail"><img class="left" src="https://media.licdn.com/dms/image/D5612AQGAiZ5jPMEMuQ/article-cover_image-shrink_600_2000/0/1681812674198?e=2147483647&v=beta&t=CLaj2d433Wo23CO4SWtQaIIaksAQ2fIuDBRxjh6Lsg8"></div>
+    <div class="right">
+      <h1>Ai German Tutor</h1>
+     
+      <div class="separator"></div>
+      <p>Magnesium is one of the six essential macro-minerals that is required by the body for energy production and synthesis of protein and enzymes. It contributes to the development of bones and most importantly it is responsible for synthesis of your DNA and RNA. A new report that has appeared in theBritish Journal of Cancer, gives you another reason to add more magnesium to your diet...</p>
+    </div>
+    <ul>
+      <li><i class="fa fa-eye fa-2x"></i></li>
+      <li><i class="fa fa-heart-o fa-2x"></i></li>
+      <li><i class="fa fa-envelope-o fa-2x"></i></li>
+      <li><i class="fa fa-share-alt fa-2x"></i></li>
+    </ul>
+    <div class="fab"><a href="/reply3"><i class="fa fa-arrow-right fa-3x" > </i></a></div>
+  </div>
+  
+    
+  
+  
+  
+  </body></html>

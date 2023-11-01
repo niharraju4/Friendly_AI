@@ -8,8 +8,6 @@ from pymongo import MongoClient
 from flask_bcrypt import Bcrypt
 import datetime
 from datetime import datetime,timedelta
-from flask_cors import CORS
-from azure.cognitiveservices.speech import SpeechConfig, SpeechSynthesizer, AudioConfig
 # Set your Azure Speech Service credentials
 speech_key = os.getenv("AZURE_SPEECH_KEY")
 service_region = os.getenv("AZURE_REGION")
