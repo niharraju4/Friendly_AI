@@ -6,7 +6,7 @@
     <title>Voice to Text</title>
 </head>
 <style>
-    
+
     #iconai {
         margin: 10px;
         /* Add margin for spacing */
@@ -103,7 +103,7 @@
             border-radius: 8px;
             margin-bottom: 20px;
         }
-        
+
         .text-boxes {
             display: flex;
             flex-direction: column;
@@ -120,7 +120,7 @@
         border: 1px solid #ccc;
         border-radius: 4px;
     }
-        
+
 </style>
 
 <body class="flex items-center justify-center h-screen bg-gray-100">
@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const PauseButton = document.getElementById("PauseButton");
     const replyTextArea = document.getElementById('replyTextBox');
     const infoTextArea = document.getElementById('infoTextBox');
-    
+
     if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
         const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
         const synth = window.speechSynthesis;
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function () {
             recognition.stop();  // Stop recognition to process this phrase
 
             const transcript = event.results[event.results.length - 1][0].transcript;
-            
+
             try {
         const response = await fetch(`http://localhost:5000/converse1?user_message=${encodeURIComponent(transcript)}`, {
             method: 'POST',
@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 recognition.start();  // Restart recognition
 };
             synth.speak(utterance);
-            
+
             // Wait for 1 minute before next interaction
         } else {
             infoTextArea.value ="Can u please ask me again";
@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let tracks = stream.getTracks();
             tracks.forEach(function(track) {
                 track.stop();
-            }); 
+            });
             videoElement.srcObject = null;
             location.reload();
 
@@ -279,9 +279,9 @@ function logout() {
                 let eqPos = cookie.indexOf("=");
                 let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
                 document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
-                
+
             }
-            window.location.href('/signin')
+        window.location.href='/signin';
 
         }
 </script>

@@ -96,6 +96,7 @@
         margin-bottom: 20px;
         border-radius: 40px;
         
+
     }
 
     video {
@@ -135,7 +136,7 @@
     }
 </style>
 
-    
+
 <body class="flex items-center justify-center h-screen bg-gray-100">
     <div>
     <button id="logoutButton" onclick="logout()">Logout</button>
@@ -156,7 +157,7 @@
         <button id="stopButton" style="margin-right: 10px;">Stop</button>
         <button id="PauseButton">Pause</button>
         </div>
-        
+
     </div>
     <div style="display: inline-block;width: 100%;">
         <div class="text-boxes" style="justify-content: center;display: flex; ">
@@ -193,10 +194,10 @@
         const PauseButton = document.getElementById("PauseButton");
         const infoTextArea = document.getElementById('infoTextBox');
         const EnglishAnswerTextArea = document.getElementById('EnglishAnswerTextArea');
-        
+
         const GermanQuestionTextArea = document.getElementById('GermanQuestionTextArea');
         const GermanAnswerTextArea = document.getElementById('GermanAnswerTextArea');
-        
+
         if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
             const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
             const synth = window.speechSynthesis;
@@ -234,11 +235,11 @@
                         GermanAnswerTextArea.value = data.message['ans-gm'];
                         // convert to german
                         if (data.message['qn-gm']) {
-                            
+
                             const utterance1 = new SpeechSynthesisUtterance(data.message['qn-gm']);
                             utterance1.onend = function () {
                                 if (data.message['ans-en']) {
-                                    
+
                                     const utterance2 = new SpeechSynthesisUtterance(data.message['ans-en']);
                                     utterance2.onend = function () {
                                         if (data.message['ans-gm']) {
@@ -327,6 +328,7 @@
 
         }
         
+        window.location.href='/signin';
 
     }
 </script>
