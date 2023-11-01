@@ -44,8 +44,9 @@
                     testButton.textContent = 'Test';
 
                     testButton.addEventListener('click', () => {
-                        const utterance = new SpeechSynthesisUtterance('how are u?');
+                        const utterance = new SpeechSynthesisUtterance('Wie gehtes Ihen');
                         utterance.voice = voice;
+                        console.log(voice)
                         synth.speak(utterance);
                     });
 
