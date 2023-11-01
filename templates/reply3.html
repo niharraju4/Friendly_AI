@@ -1,103 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voice to Text</title>
 </head>
 <style>
-    
     #logoutButton {
-            margin: 10px; /* Add margin for spacing */
-            background-color: #ff0000; /* Red color for demonstration */
-            color: #fff; /* White text color */
-            padding: 10px 15px; /* Padding for better visual appearance */
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            position: fixed; /* Fixed position */
-            top: 10px; /* Adjust top position */
-            right: 10px; /* Adjust right position */
+        margin: 10px;
+        /* Add margin for spacing */
+        background-color: #ff0000;
+        /* Red color for demonstration */
+        color: #fff;
+        /* White text color */
+        padding: 10px 15px;
+        /* Padding for better visual appearance */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        position: fixed;
+        /* Fixed position */
+        top: 10px;
+        /* Adjust top position */
+        right: 10px;
+        /* Adjust right position */
 
-        }
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f3f4f6;
-        }
+    }
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f3f4f6;
+    }
 
-        .card {
-            max-width: 600px;
-            width: 100%;
-            background-color: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-        h1 {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
+    .card {
+        max-width: 600px;
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
 
-        p {
-            color: #555;
-            margin-bottom: 20px;
-        }
+    h1 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
 
-        .video-container {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
+    p {
+        color: #555;
+        margin-bottom: 20px;
+    }
 
-        video {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
+    .video-container {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
 
-        .output-column {
-            width: 100%;
-            max-width: 400px;
-        }
+    video {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
 
-        .output {
-            background-color: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        
-        .text-boxes {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            width: 100%;
-        }
+    .output-column {
+        width: 100%;
+        max-width: 400px;
+    }
 
-        .text-box {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+    .output {
+        background-color: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .text-boxes {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .text-box {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
 </style>
 
 <body class="flex items-center justify-center h-screen bg-gray-100">
@@ -107,7 +115,7 @@
         <p>offering insights into spending patterns and budgeting is what i am known for..</p>
 
         <div class="video-container" id="videoContainer">
-            
+
             <video id="videoStream" autoplay></video>
         </div>
         <button id="startButton">Start Camera</button>
@@ -122,149 +130,155 @@
         </div>
         <p id="output"></p>
     </div>
-    
-    
+
+
 </body>
 <script>
-let timeout;  // Declare timeout variable
+    let timeout;  // Declare timeout variable
 
-document.addEventListener('DOMContentLoaded', function () {
-    const output = document.getElementById('output');
-    const startButton = document.getElementById("startButton");
-    const stopButton = document.getElementById("stopButton");
-    const PauseButton = document.getElementById("PauseButton");
-    const replyTextArea = document.getElementById('replyTextBox');
-    const infoTextArea = document.getElementById('infoTextBox');
-    
-    if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
-        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-        const synth = window.speechSynthesis;
-        document.getElementById('PauseButton').addEventListener('click', () => {
-            synth.cancel();
-        });
+    document.addEventListener('DOMContentLoaded', function () {
+        const output = document.getElementById('output');
+        const startButton = document.getElementById("startButton");
+        const stopButton = document.getElementById("stopButton");
+        const PauseButton = document.getElementById("PauseButton");
+        const replyTextArea = document.getElementById('replyTextBox');
+        const infoTextArea = document.getElementById('infoTextBox');
 
-        recognition.continuous = true;  // Keep it true for continuous listening
+        if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            const synth = window.speechSynthesis;
+            document.getElementById('PauseButton').addEventListener('click', () => {
+                synth.cancel();
+            });
 
-        recognition.onstart = function () {
-            infoTextArea.value = 'Listening...';
-        };
+            recognition.continuous = true;  // Keep it true for continuous listening
 
-        recognition.onresult = async function (event) {
-            recognition.stop();  // Stop recognition to process this phrase
-
-            const transcript = event.results[event.results.length - 1][0].transcript;
-            
-            try {
-        const response = await fetch(`http://127.0.0.1:5000/converse3?user_message=${encodeURIComponent(transcript)}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include',
-        });
-
-        if (!response.ok) {
-            throw new Error(`Server returned status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        if (data && data.message) {
-            console.log(data.message)
-            replyTextArea.value = data.message;
-            // convert to german
-            if(data.message.qn-gm){
-            const utterance1 = new SpeechSynthesisUtterance(data.message.qn-gm);
-            utterance.onend = function () {
-                if(data.message.ans-en){
-            const utterance2 = new SpeechSynthesisUtterance(data.message.ans-en);
-            utterance.onend = function () {
-                if(data.message.ans-gm){
-            const utterance3 = new SpeechSynthesisUtterance(data.message.ans-gm);
-            utterance.onend = function () {
-            infoTextArea.value = 'You can speak now.';
-            recognition.start();  // Restart recognition
+            recognition.onstart = function () {
+                infoTextArea.value = 'Listening...';
             };
-            synth.speak(utterance3);
-            }
+
+            recognition.onresult = async function (event) {
+                recognition.stop();  // Stop recognition to process this phrase
+
+                const transcript = event.results[event.results.length - 1][0].transcript;
+
+                try {
+                    const response = await fetch(`http://127.0.0.1:5000/converse3?user_message=${encodeURIComponent(transcript)}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        credentials: 'include',
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`Server returned status: ${response.status}`);
+                    }
+                    window.speechSynthesis.onvoiceschanged = function() {
+                        const voices = window.speechSynthesis.getVoices();
+                        console.log('Total voices available:', voices.length);
+                        voices.forEach(voice => {
+                            console.log('Voice Name:', voice.name, 'Language:', voice.lang);
+                        });
+                    };
+                    const data = await response.json();
+                    if (data && data.message) {
+                        console.log(data.message);
+                        replyTextArea.value = data.message;
+
+                        // convert to german
+                        if (data.message['qn-gm']) {
+                            const utterance1 = new SpeechSynthesisUtterance(data.message['qn-gm']);
+                            utterance1.onend = function () {
+                                if (data.message['ans-en']) {
+                                    const utterance2 = new SpeechSynthesisUtterance(data.message['ans-en']);
+                                    utterance2.onend = function () {
+                                        if (data.message['ans-gm']) {
+                                            const utterance3 = new SpeechSynthesisUtterance(data.message['ans-gm']);
+                                            utterance3.onend = function () {
+                                                infoTextArea.value = 'You can speak now.';
+                                                recognition.start();  // Restart recognition
+                                            };
+                                            synth.speak(utterance3);
+                                        }
+                                    };
+                                    utterance2.lang = 'de-DE';
+                                    synth.speak(utterance2);
+                                }
+                            };
+                            utterance1.lang = 'de-DE';
+                            synth.speak(utterance1);
+                        }
+
+                        // Wait for 1 minute before next interaction
+                    } else {
+                        infoTextArea.value = "Can you please ask me again?";
+                        throw new Error('Invalid or missing data in the server response.');
+                    }
+
+
+                } catch (error) {
+                    console.error('There was a problem with the fetch operation:', error);
+                    // Handle the error gracefully, for example, display an error message to the user.
+                }
             };
-            synth.speak(utterance2);
-            }
+
+            recognition.onerror = function (event) {
+                infoTextArea.value = 'Error occurred: ' + event.error;
             };
-            synth.speak(utterance1);
-            }
-            // print english and german
-            
-            // read german
-            
-            
-            // Wait for 1 minute before next interaction
+
+            recognition.onend = function () {
+                infoTextArea.value = 'Please wait....';
+            };
+
+            startButton.addEventListener("click", function () {
+                recognition.start();
+            });
         } else {
-            infoTextArea.value ="Can u please ask me again";
-            throw new Error('Invalid or missing data in the server response.');
+            infoTextArea.value = 'Speech recognition is not supported in this browser.';
         }
 
-    } catch (error) {
-        console.error('There was a problem with the fetch operation:', error);
-        // Handle the error gracefully, for example, display an error message to the user.
-    }
-        };
+        // Original camera code
+        let videoElement = document.getElementById("videoStream");
+        let stream;
 
-        recognition.onerror = function (event) {
-            infoTextArea.value = 'Error occurred: ' + event.error;
-        };
-
-        recognition.onend = function () {
-            infoTextArea.value = 'Please wait....';
-        };
-
-        startButton.addEventListener("click", function() {
-            recognition.start();
+        startButton.addEventListener("click", function () {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (mediaStream) {
+                    videoElement.srcObject = mediaStream;
+                    stream = mediaStream;
+                })
+                .catch(function (err) {
+                    console.log("An error occurred: " + err);
+                });
         });
-    } else {
-        infoTextArea.value = 'Speech recognition is not supported in this browser.';
-    }
 
-    // Original camera code
-    let videoElement = document.getElementById("videoStream");
-    let stream;
+        stopButton.addEventListener("click", function () {
+            if (stream) {
+                let tracks = stream.getTracks();
+                tracks.forEach(function (track) {
+                    track.stop();
+                });
+                videoElement.srcObject = null;
+                location.reload();
 
-    startButton.addEventListener("click", function() {
-        navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function(mediaStream) {
-            videoElement.srcObject = mediaStream;
-            stream = mediaStream;
-        })
-        .catch(function(err) {
-            console.log("An error occurred: " + err);
-        });
-    });
-
-    stopButton.addEventListener("click", function() {
-        if(stream) {
-            let tracks = stream.getTracks();
-            tracks.forEach(function(track) {
-                track.stop();
-            }); 
-            videoElement.srcObject = null;
-            location.reload();
-
-        }
-    });
-});
-function logout() {
-            localStorage.removeItem('token');
-            const cookies = document.cookie.split(";");
-
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i];
-                let eqPos = cookie.indexOf("=");
-                let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
-                
             }
-            window.location.href('/signin')
+        });
+    });
+    function logout() {
+        localStorage.removeItem('token');
+        const cookies = document.cookie.split(";");
+
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i];
+            let eqPos = cookie.indexOf("=");
+            let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
 
         }
+        window.location.href('/signin')
+
+    }
 </script>
 
 </html>
