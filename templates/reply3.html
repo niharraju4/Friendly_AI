@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const transcript = event.results[event.results.length - 1][0].transcript;
             
             try {
-        const response = await fetch(`http://localhost:5000/converse3?user_message=${encodeURIComponent(transcript)}`, {
+        const response = await fetch(`http://127.0.0.1:5000/converse3?user_message=${encodeURIComponent(transcript)}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -169,13 +169,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const data = await response.json();
         if (data && data.message) {
+            console.log(data.message)
             replyTextArea.value = data.message;
-            const utterance = new SpeechSynthesisUtterance(data.message);
+            // convert to german
+            if(data.message.qn-gm){
+            const utterance1 = new SpeechSynthesisUtterance(data.message.qn-gm);
             utterance.onend = function () {
-                infoTextArea.value = 'You can speak now.';
-                recognition.start();  // Restart recognition
-};
-            synth.speak(utterance);
+                if(data.message.ans-en){
+            const utterance2 = new SpeechSynthesisUtterance(data.message.ans-en);
+            utterance.onend = function () {
+                if(data.message.ans-gm){
+            const utterance3 = new SpeechSynthesisUtterance(data.message.ans-gm);
+            utterance.onend = function () {
+            infoTextArea.value = 'You can speak now.';
+            recognition.start();  // Restart recognition
+            };
+            synth.speak(utterance3);
+            }
+            };
+            synth.speak(utterance2);
+            }
+            };
+            synth.speak(utterance1);
+            }
+            // print english and german
+            
+            // read german
+            
             
             // Wait for 1 minute before next interaction
         } else {

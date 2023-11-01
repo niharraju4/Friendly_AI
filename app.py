@@ -1,4 +1,4 @@
-from flask import Flask, request, send_file, jsonify, abort, render_template,make_response,redirect, url_for, flash
+from flask import Flask, request, send_file, jsonify, abort, render_template,make_response,redirect, url_for, flash,Response
 import openai
 import io
 import os
@@ -9,6 +9,7 @@ from flask_bcrypt import Bcrypt
 import datetime
 from datetime import datetime,timedelta
 from flask_cors import CORS
+from azure.cognitiveservices.speech import SpeechConfig, SpeechSynthesizer, AudioConfig
 # Set your Azure Speech Service credentials
 speech_key = os.getenv("AZURE_SPEECH_KEY")
 service_region = os.getenv("AZURE_REGION")
@@ -180,45 +181,54 @@ def converse3():
         prompt03 = os.getenv("PROMPT03")
         token = request.cookies.get('token')
         question = request.args.get('user_message')
-        messages=[
-            {"role": "system", "content": prompt03}
-            ]
-        end_time = datetime.now()
-        start_time = end_time - timedelta(minutes=20)
         data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
         email = data['user']
-        query = {
-            "timestamp": {
-                "$gte": start_time,
-                "$lte": end_time
-            },
-            "email": email,
-            "Mode":"3"
+        # messages=[
+        #     {"role": "system", "content": prompt03}
+        #     ]
+        # end_time = datetime.now()
+        # start_time = end_time - timedelta(minutes=20)
+        
+        # query = {
+        #     "timestamp": {
+        #         "$gte": start_time,
+        #         "$lte": end_time
+        #     },
+        #     "email": email,
+        #     "Mode":"3"
 
-        }
-        results = conversations_collection.find(query)
-        if(results):
-            for result in results: # Adjust the range as needed
+        # }
+        # results = conversations_collection.find(query)
+        # if(results):
+        #     for result in results: # Adjust the range as needed
                 
-                messages.append({"role": "user", "content": result.get('questions', 'N/A')})
+        #         messages.append({"role": "user", "content": result.get('questions', 'N/A')})
 
-                # Simulate the assistant's response (you might replace this with actual logic)
-                messages.append({"role": "assistant", "content": result.get('response', 'N/A')})
-        messages.append({"role": "user", "content": question})
-        response_text = get_gpt_response3(messages)
+        #         # Simulate the assistant's response (you might replace this with actual logic)
+        #         messages.append({"role": "assistant", "content": result.get('response', 'N/A')})
+        # messages.append({"role": "user", "content": question})
+        response_text_en = get_gpt_response_german(question)
         # Current date and time
-        record = {
-            'email':email,
-            'questions': question,
-            'response': response_text,
-            'timestamp': datetime.now(),
-            "Mode":"3"
-        }
-        conversations_collection.insert_one(record)
-        return jsonify({"message": response_text}), 200
+        
+        # record = {
+        #     'email':email,
+        #     'questions': question,
+        #     'response': response_text_en,
+        #     'timestamp': datetime.now(),
+        #     "Mode":"4"
+        # }
+        question_text_gm =get_gpt_convert_german(question)
+        response_text_gm =get_gpt_convert_german(response_text_en)
+        response_text_en = response_text_en.replace('"','')
+        response_text_gm = response_text_gm.replace('"','')
+        question_text_gm = question_text_gm.replace('"','')
+        response_lang ={"qn-gm":question_text_gm,"ans-en":response_text_en,"ans-gm":response_text_gm}
+        print(response_lang)
+        return jsonify({"message": response_lang}), 200
 
     except Exception as e:
         # Handle errors and return an error response
+        print(e)
         error_message = str(e)
         return "error 1"+error_message
         
@@ -232,19 +242,40 @@ def get_gpt_response1(prompt):
     print(response)
     # Let's add Maple's personal touch to every response
     return response['choices'][0]['message']['content'].strip()
-        
+
+def get_gpt_convert_german(prompt):
+    openai.api_key = os.getenv("OPENAI_KEY")
+    prompt = f"translate ''{prompt}'' in german"
+    response = openai.Completion.create(engine="text-davinci-003", prompt=prompt, max_tokens=80)
+    # Let's add Maple's personal touch to every response
+    return response.choices[0].text.strip()
+
+def get_gpt_response_german(prompt):
+    openai.api_key = os.getenv("OPENAI_KEY")
+    prompt = f"'{prompt}' answer less than 8 words"
+    response = openai.Completion.create(engine="text-davinci-003", prompt=prompt, max_tokens=80)
+    # Let's add Maple's personal touch to every response
+    return response.choices[0].text.strip()
+
 def get_gpt_response2(prompt):
     openai.api_key = os.getenv("OPENAI_KEY")
-    prompt = f"Imagine you're an AI therapist, who loves to help people with counselling on thought Patterns, Emotional Regulation, Decision-Making, Mood Swings, Facing Fears, Relationships, Self-Esteem, Sleep Issues, Sexuality and Identity, Goal Setting, Academic Stress, Mindfulness, Career Choices, Eating Habits, Breakups, Digital Wellbeing, Imposter Syndrome, Pet Loss, Global Concerns, Communication Skills, Physical Health, Financial Stress, Parenting, Addictions, Grief, loss and you should make them feel good by the end of each converstation. Respond with humor to: '{prompt}'"
-    response = openai.Completion.create(engine="text-davinci-003", prompt=prompt, max_tokens=80)
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=prompt
+    )
+    print(response)
     # Let's add Maple's personal touch to every response
-    return response.choices[0].text.strip()
+    return response['choices'][0]['message']['content'].strip()
+
 def get_gpt_response3(prompt):
     openai.api_key = os.getenv("OPENAI_KEY")
-    prompt = f"Imagine you're an AI therapist, who loves to help people with counselling on thought Patterns, Emotional Regulation, Decision-Making, Mood Swings, Facing Fears, Relationships, Self-Esteem, Sleep Issues, Sexuality and Identity, Goal Setting, Academic Stress, Mindfulness, Career Choices, Eating Habits, Breakups, Digital Wellbeing, Imposter Syndrome, Pet Loss, Global Concerns, Communication Skills, Physical Health, Financial Stress, Parenting, Addictions, Grief, loss and you should make them feel good by the end of each converstation. Respond with humor to: '{prompt}'"
-    response = openai.Completion.create(engine="text-davinci-003", prompt=prompt, max_tokens=80)
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=prompt
+    )
+    print(response)
     # Let's add Maple's personal touch to every response
-    return response.choices[0].text.strip()
+    return response['choices'][0]['message']['content'].strip()
 
 @app.route('/signin', methods=['GET', 'POST'])
 def signin():
