@@ -190,14 +190,16 @@
                     }
                     const data = await response.json();
                     if (data && data.message) {
-                        console.log(data.message);
-                        replyTextArea.value = data.message;
-
+                        GermanQuestionTextArea.value = data.message['qn-gm'];
+                        EnglishAnswerTextArea.value = data.message['ans-en'];
+                        GermanAnswerTextArea.value = data.message['ans-gm'];
                         // convert to german
                         if (data.message['qn-gm']) {
+                            
                             const utterance1 = new SpeechSynthesisUtterance(data.message['qn-gm']);
                             utterance1.onend = function () {
                                 if (data.message['ans-en']) {
+                                    
                                     const utterance2 = new SpeechSynthesisUtterance(data.message['ans-en']);
                                     utterance2.onend = function () {
                                         if (data.message['ans-gm']) {
