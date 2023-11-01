@@ -41,7 +41,7 @@
     width: 1100px;
     margin: 220px auto;
     background-color: #FFF;
-    border-radius: 20px;
+    border-radius: 40px;
     -webkit-box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
     box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
@@ -49,7 +49,7 @@
   
   /* Image on the left side */
   .thumbnail {
-    border-radius: 20px;
+    border-radius: 40px;
     float: left;
     position: relative;
     left: 30px;
@@ -60,8 +60,13 @@
     -moz-box-shadow: 10px 10px 60px 0px rgba(0, 0, 0, 0.75);
     box-shadow: 10px 10px 60px 0px rgba(0, 0, 0, 0.75);
     overflow: hidden;
+    transform: translateX(-40%);
+    
   }
-  
+  .thumbnail, .right {
+    flex: 1;
+    transition: transform 1s;
+}
   /*object-fit: cover;*/
   /*object-position: center;*/
   img.left {
@@ -73,14 +78,19 @@
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    
   }
   
   /* Right side of the card */
   .right {
     margin-left: 590px;
     margin-right: 20px;
+    transform: translateX(-40%);
   }
-  
+  .card:hover .thumbnail,
+.card:hover .right {
+    transform: translateX(0);
+}
   h1 {
     padding-top: 15px;
     font-size: 1.3rem;
@@ -210,7 +220,7 @@
       <p>The AI therapist leverages (LLMs) to continually adapt to each patient's emotional needs. Through real-time analysis of speech and text, it offers personalized therapeutic interventions for immediate emotional support. This cutting-edge approach makes users feel understood and uplifted, bridging the gap between technology and mental well-being.</p>
     </div>
 
-    <div class="fab"><i class="fa fa-arrow-right fa-3x" href="/reply1"> </i></div>
+    <div class="fab"><a href="/reply1"><i class="fa fa-arrow-right fa-3x" > </i></a></div>
   </div>
   <div class="card">
     <div class="thumbnail"><img class="left" src="https://muniraju2023.s3.amazonaws.com/2_reply.png"></div>
@@ -221,7 +231,7 @@
       <p>The AI Guinea pig, powered by (LLMs), has a voracious appetite for both food and engaging conversations. With its advanced natural language processing abilities, it offers delightful chatter while it munches away on its favorite treats. This unique blend of AI and LLM technologies makes it an endlessly entertaining companion, bridging the gap between the animal kingdom and the digital world.</p>
     </div>
 
-    <div class="fab"><i class="fa fa-arrow-right fa-3x" href="/reply2"> </i></div>
+    <div class="fab"><a href="/reply2"><i class="fa fa-arrow-right fa-3x" > </i></a></div>
   </div>
   <div class="card">
     <div class="thumbnail"><img class="left" src="https://muniraju2023.s3.amazonaws.com/3_reply.png"></div>
