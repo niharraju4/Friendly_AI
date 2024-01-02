@@ -107,7 +107,7 @@ def converse1():
                 messages.append({"role": "assistant", "content": result.get('response', 'N/A')})
         messages.append({"role": "user", "content": question})
         response_text = get_gpt_response1(messages)
-        # Current date and time
+        # Current date and timer
         record = {
             'email':email,
             'questions': question,
@@ -234,7 +234,7 @@ def get_gpt_response1(prompt):
     openai.api_key = os.getenv("OPENAI_KEY")
     print("hi",prompt)
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4",
         messages=prompt
     )
     print(response)
