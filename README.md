@@ -1,7 +1,7 @@
 # Friendly_AI
  
 
-Friendly AI BotsFriendly AI Bots
+Friendly AI Bots
 Jun 2023 - Nov 2023Jun 2023 - Nov 2023
 
 Associated with PUSH StudioAssociated with PUSH Studio
