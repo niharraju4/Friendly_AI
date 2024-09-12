@@ -5,6 +5,8 @@ Friendly AI BotsFriendly AI Bots
 Jun 2023 - Nov 2023Jun 2023 - Nov 2023
 
 Associated with PUSH StudioAssociated with PUSH Studio
+
+
 🚀 Built a RAG Conversational AI App with OpenAI GPT, MongoDB & JWT Authentication!
 I'm excited to share a project that integrates OpenAI GPT models for dynamic, multi-mode conversations. The app features secure user authentication, multi-language support, and we had designed AI Therapist, Maple the Guinea Pig, German tutor.
 
